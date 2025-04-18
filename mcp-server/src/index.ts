@@ -1,13 +1,17 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import axios from "axios";
 
-import * as delivery from "./api/umbraco/delivery/umbracoDeliveryAPI.js";
-import * as deliverySchemas from "./api/umbraco/delivery/schemas/index.js";
+import * as deliveryClient from "./api/umbraco/delivery/content/content.client.js";
+
+// import * as delivery from "./api/umbraco/delivery/umbracoDeliveryAPI.js";
+import * as deliverySchemas from "./api/umbraco/delivery/content/content.zod.js";
+import axios from "axios";
 
 // import * as management from "./api/umbraco/management/umbracoManagementAPI.js";
 // import * as managementSchemas from "./api/umbraco/management/schemas/index.js";
+
+axios.defaults.baseURL = "http://localhost:56472/";
 
 const server = new McpServer({
   name: "umbraco-api-server",
@@ -17,20 +21,19 @@ const server = new McpServer({
   },
 });
 
+const client = deliveryClient.getContent();
+
 server.tool(
   "get_content",
-  "Get content all content items",
-  { input: delivery.getContent20QueryParams },
+  "Gets content item(s) from a query",
+  { input: deliverySchemas.getContent20QueryParams },
   async ({ input }) => {
     try {
-      var parsed = delivery.getContent20QueryParams.parse(input);
+      var parsed = deliverySchemas.getContent20QueryParams.parse(input);
       console.info("callTool", parsed);
-      const response = await axios.get(
-        `http://localhost:56472/umbraco/delivery/api/v2/content/`,
-        { params: parsed }
-      );
-      var data = delivery.getContent20Response.parse(response.data);
-      console.info("response", data);
+
+      const response = await client.getContent20(parsed);
+      console.log(response);
       return {
         content: [
           { type: "text", text: `Content: ${JSON.stringify(response.data)}` },

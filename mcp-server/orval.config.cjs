@@ -27,7 +27,7 @@ const fixApiFile = (file) => {
 
   // Fix TypeScript errors by ensuring proper type annotations and imports
   const fixedContent = content.replace(
-    /from\s+['"](\.\/schemas)['"]/g,
+    /from\s+['"](\.\.\/\.\/schemas)['"]/g,
     "from '$1/index.js'"
   );
 
@@ -35,6 +35,7 @@ const fixApiFile = (file) => {
 };
 
 const importFixer = (files) => {
+  console.log(files);
   files.forEach((file) => {
     if (fs.lstatSync(file).isDirectory()) {
       fixSchemaDirectory(file);
@@ -43,53 +44,67 @@ const importFixer = (files) => {
 };
 
 module.exports = {
-  "umbraco-managment-api": {
-    input: {
-      target: "http://localhost:56472/umbraco/swagger/management/swagger.json",
-      validation: false,
-    },
-    output: {
-      mode: "split",
-      clean: true,
-      target: "./src/api/umbraco/management",
-      schemas: "./src/api/umbraco/management/schemas",
-      client: "zod",
-      override: {
-        zod: {
-          dateTimeOptions: {
-            local: true,
-          },
-        },
-      },
-    },
-    hooks: {
-      afterAllFilesWrite: (files) => {
-        importFixer(files);
-      },
-    },
-  },
+  // "umbraco-managment-api": {
+  //   input: {
+  //     target: "http://localhost:56472/umbraco/swagger/management/swagger.json",
+  //     validation: false,
+  //   },
+  //   output: {
+  //     mode: "split",
+  //     clean: true,
+  //     target: "./src/api/umbraco/management",
+  //     schemas: "./src/api/umbraco/management/schemas",
+  //     client: "zod",
+  //     override: {
+  //       zod: {
+  //         dateTimeOptions: {
+  //           local: true,
+  //         },
+  //       },
+  //     },
+  //   },
+  //   hooks: {
+  //     afterAllFilesWrite: (files) => {
+  //       importFixer(files);
+  //     },
+  //   },
+  // },
   "umbraco-delivery-api": {
     input: {
       target: "http://localhost:56472/umbraco/swagger/delivery/swagger.json",
       validation: false,
     },
     output: {
-      mode: "split",
+      mode: "tags-split",
       clean: true,
       target: "./src/api/umbraco/delivery",
       schemas: "./src/api/umbraco/delivery/schemas",
+      client: "axios",
+      fileExtension: ".client.ts",
+    },
+
+    hooks: {
+      afterAllFilesWrite: (files) => {
+        importFixer(files);
+      },
+    },
+  },
+  "umbraco-delivery-apiZod": {
+    input: {
+      target: "http://localhost:56472/umbraco/swagger/delivery/swagger.json",
+      validation: false,
+    },
+    output: {
+      mode: "tags-split",
+      target: "./src/api/umbraco/delivery",
       client: "zod",
+      fileExtension: ".zod.ts",
       override: {
         zod: {
           dateTimeOptions: {
             local: true,
           },
         },
-      },
-    },
-    hooks: {
-      afterAllFilesWrite: (files) => {
-        importFixer(files);
       },
     },
   },
