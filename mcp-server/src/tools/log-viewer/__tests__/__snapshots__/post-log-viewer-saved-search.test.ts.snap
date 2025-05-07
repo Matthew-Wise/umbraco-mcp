@@ -11,13 +11,6 @@ exports[`post-log-viewer-saved-search should create a saved search 1`] = `
 }
 `;
 
-exports[`post-log-viewer-saved-search should create a saved search 2`] = `
-{
-  "name": "_Test Saved Search",
-  "query": "level:Error",
-}
-`;
-
 exports[`post-log-viewer-saved-search should create a saved search with complex query 1`] = `
 {
   "content": [
@@ -26,13 +19,6 @@ exports[`post-log-viewer-saved-search should create a saved search with complex 
       "type": "text",
     },
   ],
-}
-`;
-
-exports[`post-log-viewer-saved-search should create a saved search with complex query 2`] = `
-{
-  "name": "_Test Saved Search",
-  "query": "level:Error AND message:test",
 }
 `;
 

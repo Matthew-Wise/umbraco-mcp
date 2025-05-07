@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-type-by-id should get a media type by id 1`] = `
+{
+  "content": [
+    {
+      "text": "{"allowedMediaTypes":[],"compositions":[],"isDeletable":true,"aliasCanBeChanged":true,"id":"PLACEHOLDER_ID","alias":"testmediatype","name":"_Test Media Type","description":"Test media type description","icon":"icon-folder","allowedAsRoot":true,"variesByCulture":false,"variesBySegment":false,"collection":null,"isElement":false,"properties":[],"containers":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-media-type-by-id should handle non-existent media type 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;
