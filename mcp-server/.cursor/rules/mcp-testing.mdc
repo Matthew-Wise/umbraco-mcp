@@ -16,6 +16,8 @@ You are an expert in TypeScript and Jest and testing Model Context Protocol impl
     - create tests for test helpers so we are sure they work
 - create a single test file per area of testing per feature e.g create, delete, find, get and move. The only exception to this is with trees, where ancestor, tree and root can be grouped together. This is because they are just tree manipulation of hierarchical content
 - testing should be minimal per feature, we just want to smoke test the api calls to Umbraco. Not test Umbraco
+- all strings used in builders should be a constant at the head of the test
+- all created object should be deleted / cleaned up in the after test hook
 
 ## Inside test rules
 

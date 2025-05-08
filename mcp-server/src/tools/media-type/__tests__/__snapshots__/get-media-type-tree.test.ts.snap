@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`media-type-tree ancestors should get ancestor items 1`] = `
+{
+  "content": [
+    {
+      "text": "[{"icon":"","isDeletable":false,"isFolder":true,"name":"_Test Folder MediaType","id":"00000000-0000-0000-0000-000000000000","parent":null,"hasChildren":true},{"icon":"","isDeletable":false,"isFolder":false,"name":"_Test Child MediaType","id":"00000000-0000-0000-0000-000000000000","parent":{"id":"00000000-0000-0000-0000-000000000000"},"hasChildren":false}]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-tree ancestors should handle non-existent item 1`] = `
+{
+  "content": [
+    {
+      "text": "[]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-tree children should get child items 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":1,"items":[{"icon":"icon-folder","isDeletable":true,"isFolder":false,"name":"_Test Child MediaType","id":"00000000-0000-0000-0000-000000000000","parent":{"id":"00000000-0000-0000-0000-000000000000"},"hasChildren":false}]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-tree children should handle non-existent parent 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":0,"items":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;
