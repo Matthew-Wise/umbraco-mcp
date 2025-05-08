@@ -58,6 +58,28 @@ export class MediaTypeBuilder {
     return this;
   }
 
+  withAllowedMediaType(mediaTypeId: string): MediaTypeBuilder {
+    if (!this.model.allowedMediaTypes) {
+      this.model.allowedMediaTypes = [];
+    }
+    this.model.allowedMediaTypes.push({
+      mediaType: { id: mediaTypeId },
+      sortOrder: this.model.allowedMediaTypes.length
+    });
+    return this;
+  }
+
+  withComposition(compositionId: string): MediaTypeBuilder {
+    if (!this.model.compositions) {
+      this.model.compositions = [];
+    }
+    this.model.compositions.push({
+      mediaType: { id: compositionId },
+      compositionType: "Composition"
+    });
+    return this;
+  }
+
   async create(): Promise<MediaTypeBuilder> {
     const client = UmbracoManagementClient.getClient();
     const validatedModel = postMediaTypeBody.parse(this.model);

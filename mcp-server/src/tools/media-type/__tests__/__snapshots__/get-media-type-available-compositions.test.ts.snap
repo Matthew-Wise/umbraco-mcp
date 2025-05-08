@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-type-available-compositions should get available compositions for a media type 1`] = `
+{
+  "folderPath": [],
+  "icon": "icon-folder",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "isCompatible": true,
+  "name": "_Test Available Composition",
+}
+`;

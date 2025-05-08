@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`allowed-media-type get allowed should filter by file extension 1`] = `
+{
+  "content": [
+    {
+      "text": "{"items":[{"icon":"icon-picture","name":"Image","id":"00000000-0000-0000-0000-000000000000"}],"total":1}",
+      "type": "text",
+    },
+  ],
+}
+`;

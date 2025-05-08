@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-type-allowed-at-root should get media types allowed at root 1`] = `
+{
+  "description": null,
+  "icon": "icon-folder",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "name": "_Test MediaType Root",
+}
+`;

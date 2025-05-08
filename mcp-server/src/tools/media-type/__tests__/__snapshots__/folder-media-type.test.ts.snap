@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`media-type-folder create should create a folder 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-folder create should create a folder with parent 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-folder delete should delete a folder 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-folder delete should handle non-existent folder 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-folder update should handle non-existent folder 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-type-folder update should update a folder name 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
