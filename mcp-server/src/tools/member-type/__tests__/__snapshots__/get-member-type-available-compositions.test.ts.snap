@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-member-type-available-compositions should get available compositions for a member type 1`] = `
+{
+  "folderPath": [],
+  "icon": "icon-user",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "isCompatible": true,
+  "name": "_Test Available Composition",
+}
+`;

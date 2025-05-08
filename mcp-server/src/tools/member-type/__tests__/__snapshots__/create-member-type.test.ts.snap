@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-member-type should create a member type 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-member-type should handle invalid member type data 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 400",
+      "type": "text",
+    },
+  ],
+}
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-member-type-composition-references should get composition references for a member type 1`] = `
+{
+  "content": [
+    {
+      "text": "[{"id":"00000000-0000-0000-0000-000000000000","name":"_Test MemberType Composition","icon":"icon-user"}]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-member-type-composition-references should handle member type with no composition references 1`] = `
+{
+  "content": [
+    {
+      "text": "[]",
+      "type": "text",
+    },
+  ],
+}
+`;
