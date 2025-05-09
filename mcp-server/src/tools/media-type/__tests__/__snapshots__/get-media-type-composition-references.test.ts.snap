@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-type-composition-references should get composition references for a media type 1`] = `
+{
+  "content": [
+    {
+      "text": "[{"id":"00000000-0000-0000-0000-000000000000","name":"_Test MediaType Composition","icon":"icon-folder"}]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-media-type-composition-references should handle media type with no composition references 1`] = `
+{
+  "content": [
+    {
+      "text": "[]",
+      "type": "text",
+    },
+  ],
+}
+`;

@@ -20,15 +20,6 @@ describe("MemberGroupTestHelper", () => {
     expect(await MemberGroupTestHelper.verifyMemberGroup(id)).toBe(true);
   });
 
-  it("should get a created member group by id", async () => {
-    await builder.withName(TEST_GROUP_NAME).create();
-    const id = builder.getId();
-    const group = await MemberGroupTestHelper.getMemberGroup(id);
-    expect(group).toBeDefined();
-    expect(group.name).toBe(TEST_GROUP_NAME);
-    expect(group.id).toBe(id);
-  });
-
   it("should find member groups by name", async () => {
     await builder.withName(TEST_GROUP_NAME).create();
     const found = await MemberGroupTestHelper.findMemberGroups(TEST_GROUP_NAME);

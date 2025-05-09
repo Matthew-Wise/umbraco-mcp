@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-member-types-by-id-array should get multiple member types by ID 1`] = `
+[
+  {
+    "icon": "icon-user",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item MemberType",
+  },
+  {
+    "icon": "icon-user",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item MemberType2",
+  },
+]
+`;
+
+exports[`get-member-types-by-id-array should get no member types for empty request 1`] = `[]`;
+
+exports[`get-member-types-by-id-array should get single member type by ID 1`] = `
+[
+  {
+    "icon": "icon-user",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item MemberType",
+  },
+]
+`;

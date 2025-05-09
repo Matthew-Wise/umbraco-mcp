@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`update-media-type should handle non-existent media type 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`update-media-type should update a media type 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;

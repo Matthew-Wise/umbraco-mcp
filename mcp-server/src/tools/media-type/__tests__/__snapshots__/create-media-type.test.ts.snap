@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-media-type should create a media type 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-media-type should handle invalid media type data 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 400",
+      "type": "text",
+    },
+  ],
+}
+`;

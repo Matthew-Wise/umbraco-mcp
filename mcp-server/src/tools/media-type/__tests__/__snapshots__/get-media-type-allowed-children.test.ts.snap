@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-type-allowed-children should get allowed children for a media type 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":1,"items":[{"id":"00000000-0000-0000-0000-000000000000","name":"_Test Child MediaType","description":null,"icon":"icon-picture"}]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-media-type-allowed-children should handle media type with no allowed children 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":0,"items":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-media-type-allowed-children should handle non-existent media type 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;

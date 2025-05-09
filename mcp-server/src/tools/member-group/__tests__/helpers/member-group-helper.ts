@@ -12,12 +12,6 @@ export class MemberGroupTestHelper {
     }
   }
 
-  static async getMemberGroup(id: string) {
-    const client = UmbracoManagementClient.getClient();
-    const response = await client.getMemberGroupById(id);
-    return getMemberGroupByIdResponse.parse(response);
-  }
-
   static async findMemberGroups(name: string) {
     const client = UmbracoManagementClient.getClient();
     const response = await client.getMemberGroup({ skip: 0, take: 100 });

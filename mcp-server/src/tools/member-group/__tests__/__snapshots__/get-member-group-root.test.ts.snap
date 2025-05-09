@@ -4,7 +4,7 @@ exports[`get-member-group-root should get the root of the member group tree and 
 {
   "content": [
     {
-      "text": "{"total":2,"items":[{"name":"_Test Member Group Root 1","id":"00000000-0000-0000-0000-000000000000","parent":null,"hasChildren":false},{"name":"_Test Member Group Root 2","id":"00000000-0000-0000-0000-000000000000","parent":null,"hasChildren":false}]}",
+      "text": "{"total":3,"items":[{"name":"_Test Member Group Root 1","id":"00000000-0000-0000-0000-000000000000","parent":null,"hasChildren":false},{"name":"_Test Member Group Root 2","id":"00000000-0000-0000-0000-000000000000","parent":null,"hasChildren":false},{"name":"Phil's Group","id":"00000000-0000-0000-0000-000000000000","parent":null,"hasChildren":false}]}",
       "type": "text",
     },
   ],

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-member-type should get a member type by id 1`] = `
+{
+  "content": [
+    {
+      "text": "{"compositions":[],"id":"PLACEHOLDER_ID","alias":"testmembertype","name":"_Test Member Type","description":"Test member type description","icon":"icon-user","allowedAsRoot":true,"variesByCulture":false,"variesBySegment":false,"collection":null,"isElement":false,"properties":[],"containers":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-member-type should handle non-existent member type 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;
