@@ -2,3 +2,4 @@ node_modules
 build/**
 mcp-server/coverage
 mcp-server/build
+test-site/MCPTestSite/appsettings.Local.json
