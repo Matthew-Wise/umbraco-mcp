@@ -7,7 +7,6 @@ import { DocumentTypeTools } from "./document-type/index.js";
 import { DocumentBlueprintTools } from "./document-blueprint/index.js";
 import { DocumentTools } from "./document/index.js";
 import { MemberGroupTools } from "./member-group/index.js";
-import { MemberTools } from "./member/index.js";
 import { LogViewerTools } from "./log-viewer/index.js";
 import { LanguageTools } from "./language/index.js";
 import { PropertyTypeTools } from "./property-type/index.js";
@@ -32,9 +31,6 @@ export function ToolFactory(server: McpServer) {
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
   MemberGroupTools.map((tool) => tool()).forEach((tool) =>
-    server.tool(tool.name, tool.description, tool.schema, tool.handler)
-  );
-  MemberTools.map((tool) => tool()).forEach((tool) =>
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
   LogViewerTools.map((tool) => tool()).forEach((tool) =>
