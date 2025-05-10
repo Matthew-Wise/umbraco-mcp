@@ -12,6 +12,7 @@ import { LanguageTools } from "./language/index.js";
 import { PropertyTypeTools } from "./property-type/index.js";
 import { MediaTypeTools } from "./media-type/index.js";
 import { MemberTypeTools } from "./member-type/index.js";
+import { WebhookTools } from "./webhook/index.js";
 
 export function ToolFactory(server: McpServer) {
   CultureTools.map((tool) => tool()).forEach((tool) =>
@@ -48,6 +49,9 @@ export function ToolFactory(server: McpServer) {
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
   MemberTypeTools.map((tool) => tool()).forEach((tool) =>
+    server.tool(tool.name, tool.description, tool.schema, tool.handler)
+  );
+  WebhookTools.map((tool) => tool()).forEach((tool) =>
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
 }

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-webhook-by-id should get a webhook by id 1`] = `
+{
+  "content": [
+    {
+      "text": "{"id":"PLACEHOLDER_ID","events":[{"eventName":"content.deleted","eventType":"Other","alias":"content.deleted"},{"eventName":"content.published","eventType":"Other","alias":"content.published"}],"enabled":true,"name":"_Test Webhook","description":null,"url":"https://example.com/webhook","contentTypeKeys":[],"headers":{}}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-webhook-by-id should handle non-existent webhook 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;
