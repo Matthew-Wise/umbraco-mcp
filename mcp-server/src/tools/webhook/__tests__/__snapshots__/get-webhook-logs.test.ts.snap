@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-webhook-logs should get logs for a webhook 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":0,"items":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;

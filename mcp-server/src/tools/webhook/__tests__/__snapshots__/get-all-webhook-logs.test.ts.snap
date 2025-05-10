@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-all-webhook-logs should get logs for all webhooks 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":0,"items":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-all-webhook-logs should handle pagination parameters 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":0,"items":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;

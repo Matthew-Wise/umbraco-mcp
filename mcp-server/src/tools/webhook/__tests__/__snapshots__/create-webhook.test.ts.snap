@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-webhook should create a webhook 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-webhook should handle invalid webhook data 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 400",
+      "type": "text",
+    },
+  ],
+}
+`;

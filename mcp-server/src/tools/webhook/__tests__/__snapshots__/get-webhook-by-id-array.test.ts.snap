@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-webhook-item should get multiple webhooks by ID 1`] = `
+[
+  {
+    "enabled": true,
+    "events": "content.published",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item Webhook",
+    "types": "",
+    "url": "https://example.com/webhook1",
+  },
+  {
+    "enabled": true,
+    "events": "content.deleted",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item Webhook2",
+    "types": "",
+    "url": "https://example.com/webhook2",
+  },
+]
+`;
+
+exports[`get-webhook-item should get no webhooks for empty request 1`] = `[]`;
+
+exports[`get-webhook-item should get single webhook by ID 1`] = `
+[
+  {
+    "enabled": true,
+    "events": "content.published",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item Webhook",
+    "types": "",
+    "url": "https://example.com/webhook",
+  },
+]
+`;
+
+exports[`get-webhooks-by-id-array should get multiple webhooks by ID 1`] = `
+[
+  {
+    "contentTypeKeys": [],
+    "description": null,
+    "enabled": true,
+    "events": [
+      {
+        "alias": "content.published",
+        "eventName": "content.published",
+        "eventType": "Other",
+      },
+    ],
+    "headers": {},
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item Webhook",
+    "url": "https://example.com/webhook1",
+  },
+  {
+    "contentTypeKeys": [],
+    "description": null,
+    "enabled": true,
+    "events": [
+      {
+        "alias": "content.deleted",
+        "eventName": "content.deleted",
+        "eventType": "Other",
+      },
+    ],
+    "headers": {},
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item Webhook2",
+    "url": "https://example.com/webhook2",
+  },
+]
+`;
+
+exports[`get-webhooks-by-id-array should get no webhooks for empty array 1`] = `[]`;
+
+exports[`get-webhooks-by-id-array should get single webhook by ID 1`] = `
+[
+  {
+    "contentTypeKeys": [],
+    "description": null,
+    "enabled": true,
+    "events": [
+      {
+        "alias": "content.published",
+        "eventName": "content.published",
+        "eventType": "Other",
+      },
+    ],
+    "headers": {},
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "_Test Item Webhook",
+    "url": "https://example.com/webhook",
+  },
+]
+`;
