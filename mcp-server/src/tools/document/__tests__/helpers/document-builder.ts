@@ -3,7 +3,6 @@ import { CreateDocumentRequestModel } from "@/umb-management-api/schemas/index.j
 import { postDocumentBody } from "@/umb-management-api/umbracoManagementAPI.zod.js";
 import { DocumentTestHelper } from "./document-test-helper.js";
 import { CONTENT_DOCUMENT_TYPE_ID, ROOT_DOCUMENT_TYPE_ID } from "../../../constants.js";
-import PostDocumentPublicAccessTool from "../../post/post-document-public-access.js";
 
 export const TEST_DOMAIN = { domainName: "example.com", isoCode: "en-US" };
 
@@ -15,6 +14,7 @@ export class DocumentBuilder {
     template: null
     // documentType is not set by default
   };
+
   private createdItem: any = null;
 
   withName(name: string): DocumentBuilder {
@@ -111,6 +111,7 @@ export class DocumentBuilder {
     }
     const client = UmbracoManagementClient.getClient();
     await client.putDocumentByIdPublish(this.createdItem.id, { publishSchedules: [{culture: null}] });
+
     return this;
   }
 
@@ -137,4 +138,18 @@ export class DocumentBuilder {
     return this;
   }
 
+  async updateName(newName: string): Promise<DocumentBuilder> {
+
+    const client = UmbracoManagementClient.getClient();
+
+    this.createdItem.variants[0].name = newName;  
+
+    await client.putDocumentById(this.createdItem.id, {
+      template: this.createdItem.template,
+      values: this.createdItem.values,
+      variants: this.createdItem.variants
+    }); 
+    
+    return this;
+  }
 } 

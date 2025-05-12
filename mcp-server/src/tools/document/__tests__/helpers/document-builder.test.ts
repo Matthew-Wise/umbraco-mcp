@@ -13,6 +13,8 @@ const TEST_PUBLISHED_DOCUMENT_NAME = "_Test DocumentBuilder Published";
 const TEST_DOMAINS_DOCUMENT_NAME = "_Test DocumentBuilder Domains";
 const TEST_PUBLIC_ACCESS_DOCUMENT_NAME = "_Test DocumentBuilder PublicAccess";
 const TEST_MEMBER_GROUP_NAME = "_Test Builder PublicAccess MemberGroup";
+const TEST_UPDATE_DOCUMENT_NAME = "_Test Document Builder Update";
+const TEST_UPDATED_DOCUMENT_NAME = "_Test Document Builder Updated";
 
 describe("DocumentBuilder", () => {
   let originalConsoleError: typeof console.error;
@@ -30,6 +32,8 @@ describe("DocumentBuilder", () => {
     await DocumentTestHelper.cleanup(TEST_DOMAINS_DOCUMENT_NAME);
     await DocumentTestHelper.cleanup(TEST_PUBLIC_ACCESS_DOCUMENT_NAME);
     await MemberGroupTestHelper.cleanup(TEST_MEMBER_GROUP_NAME);
+    await DocumentTestHelper.cleanup(TEST_UPDATE_DOCUMENT_NAME);
+    await DocumentTestHelper.cleanup(TEST_UPDATED_DOCUMENT_NAME);
   });
 
   it("should create a document and find it by name", async () => {
@@ -128,4 +132,23 @@ describe("DocumentBuilder", () => {
     }
     expect(response).toMatchSnapshot();
   });
+
+  it("should update a document", async () => {
+    const builder = await new DocumentBuilder()
+      .withName(TEST_UPDATE_DOCUMENT_NAME)
+      .withRootDocumentType()
+      .create();
+
+    await builder.publish();
+    await builder.updateName(TEST_UPDATED_DOCUMENT_NAME);
+    await builder.publish();
+
+    const item = builder.getCreatedItem();
+    expect(item).toBeDefined();
+    expect(DocumentTestHelper.getNameFromItem(item)).toBe(TEST_UPDATED_DOCUMENT_NAME);
+
+    const foundNormal = await DocumentTestHelper.findDocument(TEST_RECYCLE_BIN_DOCUMENT_NAME);
+    expect(foundNormal).toBeUndefined();
+  });
+
 }); 

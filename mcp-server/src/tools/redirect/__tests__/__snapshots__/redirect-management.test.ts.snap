@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Redirect Management Tools DeleteRedirectTool should delete a redirect 1`] = `
+{
+  "content": [
+    {
+      "text": "Redirect deleted successfully",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`Redirect Management Tools DeleteRedirectTool should delete a redirect 2`] = `
+{
+  "content": [
+    {
+      "text": "{"total":0,"items":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`Redirect Management Tools GetRedirectByIdTool should get a redirect by ID 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":1,"items":[{"id":"00000000-0000-0000-0000-000000000000","originalUrl":"/_test-redirect-document/","destinationUrl":"/_test-redirect-document-renamed/","created":"NORMALIZED_DATE","document":{"id":"00000000-0000-0000-0000-000000000000"},"culture":""}]}",
+      "type": "text",
+    },
+  ],
+}
+`;
