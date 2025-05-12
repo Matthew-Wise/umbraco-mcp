@@ -6,7 +6,9 @@
  * OpenAPI spec version: Latest
  */
 
+import { ReadStream } from "fs";
+
 export type PostTemporaryFileBody = {
   Id: string;
-  File: Blob;
+  File: ReadStream;
 };

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-temporary-file should create a temporary file 1`] = `
+{
+  "content": [
+    {
+      "text": "{"id":"00000000-0000-0000-0000-000000000000"}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-temporary-file should create a temporary file 2`] = `
+[
+  {
+    "availableUntil": "NORMALIZED_DATE",
+    "fileName": "example.jpg",
+    "id": "NORMALIZED_ID",
+  },
+]
+`;
+
+exports[`create-temporary-file should handle file not found 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: Error: ENOENT: no such file or directory, open 'nonexistent.jpg'",
+      "type": "text",
+    },
+  ],
+}
+`;

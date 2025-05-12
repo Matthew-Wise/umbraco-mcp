@@ -34,6 +34,9 @@ export function createSnapshotResult(result: any, idToReplace?: string) {
             if (parsed.createDate) {
               parsed.createDate = "NORMALIZED_DATE";
             }
+            if (parsed.availableUntil) {
+              parsed.availableUntil = "NORMALIZED_DATE";
+            }
             if (parsed.publishDate) {
               parsed.publishDate = "NORMALIZED_DATE";
             }

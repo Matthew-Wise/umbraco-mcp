@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`delete-temporary-file should delete a temporary file 1`] = `
+{
+  "content": [
+    {
+      "text": "{"id":"00000000-0000-0000-0000-000000000000"}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`delete-temporary-file should handle non-existent temporary file 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;

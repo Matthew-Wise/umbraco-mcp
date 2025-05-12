@@ -5,6 +5,7 @@
  * This shows all APIs available in this version of Umbraco - including all the legacy apis that are available for backward compatibility
  * OpenAPI spec version: Latest
  */
+import { ReadStream } from "fs";
 import {
   z as zod
 } from 'zod';
@@ -5544,7 +5545,7 @@ export const getTreeTemplateRootResponse = zod.object({
 
 export const postTemporaryFileBody = zod.object({
   "Id": zod.string().uuid(),
-  "File": zod.instanceof(FileLike)
+  "File": zod.instanceof(ReadStream)
 })
 
 

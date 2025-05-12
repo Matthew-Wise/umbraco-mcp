@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-temporary-file should get a temporary file by id 1`] = `
+{
+  "content": [
+    {
+      "text": "{"id":"00000000-0000-0000-0000-000000000000","availableUntil":"NORMALIZED_DATE","fileName":"example.jpg"}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-temporary-file should handle non-existent temporary file 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;

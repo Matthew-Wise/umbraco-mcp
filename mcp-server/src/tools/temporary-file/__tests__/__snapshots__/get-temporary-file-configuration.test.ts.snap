@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-temporary-file-configuration should get the global temporary file configuration 1`] = `
+{
+  "allowedUploadedFileExtensions": [],
+  "disallowedUploadedFilesExtensions": [
+    "ashx",
+    "aspx",
+    "ascx",
+    "config",
+    "cshtml",
+    "vbhtml",
+    "asmx",
+    "air",
+    "axd",
+    "xamlx",
+  ],
+  "imageFileTypes": [
+    "png",
+    "apng",
+    "jpg",
+    "jpeg",
+    "jfif",
+    "gif",
+    "bm",
+    "bmp",
+    "dip",
+    "ppm",
+    "pbm",
+    "pgm",
+    "tga",
+    "vda",
+    "icb",
+    "vst",
+    "tiff",
+    "tif",
+    "webp",
+    "qoi",
+  ],
+  "maxFileSize": null,
+}
+`;

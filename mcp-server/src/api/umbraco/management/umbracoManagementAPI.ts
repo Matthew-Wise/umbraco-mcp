@@ -421,7 +421,8 @@ import type {
   VerifyResetPasswordTokenRequestModel,
   WebhookItemResponseModel,
   WebhookResponseModel
-} from './schemas';
+} from './schemas/index.js';
+import FormData from 'form-data';
 
 import { UmbracoManagementClient } from '../clients/umbraco-management-client.js';
 
@@ -3828,14 +3829,20 @@ const getTreeTemplateRoot = (
   
 const postTemporaryFile = (
     postTemporaryFileBody: PostTemporaryFileBody,
- options?: SecondParameter<typeof UmbracoManagementClient>,) => {const formData = new FormData();
-formData.append('Id', postTemporaryFileBody.Id)
-formData.append('File', postTemporaryFileBody.File)
+ options?: SecondParameter<typeof UmbracoManagementClient>,) => {
+      const formData = new FormData();
+      formData.append('Id', postTemporaryFileBody.Id)
+      formData.append('File', postTemporaryFileBody.File)
+
+      const headers = {
+        ...formData.getHeaders(),
+        ...options?.headers,
+      };
 
       return UmbracoManagementClient<void>(
       {url: `/umbraco/management/api/v1/temporary-file`, method: 'POST',
-      headers: {'Content-Type': 'multipart/form-data', },
-       data: formData
+       headers: headers,
+       data: formData,
     },
       options);
     }
