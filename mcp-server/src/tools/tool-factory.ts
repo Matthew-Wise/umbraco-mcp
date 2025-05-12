@@ -14,6 +14,7 @@ import { MediaTypeTools } from "./media-type/index.js";
 import { MemberTypeTools } from "./member-type/index.js";
 import { WebhookTools } from "./webhook/index.js";
 import { ServerTools } from "./server/index.js";
+import { RedirectTools } from "./redirect/index.js";
 
 export function ToolFactory(server: McpServer) {
   CultureTools.map((tool) => tool()).forEach((tool) =>
@@ -56,6 +57,9 @@ export function ToolFactory(server: McpServer) {
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
   ServerTools.map((tool) => tool()).forEach((tool) =>
+    server.tool(tool.name, tool.description, tool.schema, tool.handler)
+  );
+  RedirectTools.map((tool) => tool()).forEach((tool) =>
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
 }
