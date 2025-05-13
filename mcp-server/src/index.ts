@@ -10,7 +10,7 @@ const main = async () => {
   const server = UmbracoMcpServer.GetServer();
 
   ResourceFactory(server);
-  ToolFactory(server);
+  await ToolFactory(server);
 
   // Start receiving messages on stdin and sending messages on stdout
   const transport = new StdioServerTransport();
