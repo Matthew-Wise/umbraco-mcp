@@ -16,11 +16,11 @@ describe("delete-user-groups", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     // Clean up any remaining groups
     for (const builder of builders) {
       await builder.cleanup();
     }
+    console.error = originalConsoleError;
   });
 
   it("should delete multiple user groups", async () => {

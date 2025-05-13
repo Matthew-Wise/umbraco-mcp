@@ -15,10 +15,10 @@ describe("get-log-viewer-saved-search", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     // Clean up any test saved searches
     await LogViewerTestHelper.cleanup(TEST_SEARCH_NAME);
     await LogViewerTestHelper.cleanup(TEST_SEARCH_NAME_2);
+    console.error = originalConsoleError;
   });
 
   it("should get saved searches with default parameters", async () => {

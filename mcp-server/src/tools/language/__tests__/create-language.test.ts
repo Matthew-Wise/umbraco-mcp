@@ -26,9 +26,9 @@ describe("create-language", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await LanguageTestHelper.cleanup(TEST_LANGUAGE_ISO);
     await LanguageTestHelper.cleanup(EXISTING_LANGUAGE_ISO);
+    console.error = originalConsoleError;
   });
 
   it("should create a language", async () => {

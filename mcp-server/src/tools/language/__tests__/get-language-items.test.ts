@@ -16,9 +16,9 @@ describe("get-language-items", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await builder.cleanup();
     await LanguageTestHelper.cleanup(TEST_LANGUAGE_ISO);
+    console.error = originalConsoleError;
   });
 
   it("should get language item by isoCode", async () => {

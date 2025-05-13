@@ -13,8 +13,8 @@ describe("LogViewerTestHelper", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await LogViewerTestHelper.cleanup(TEST_SAVED_SEARCH_NAME);
+    console.error = originalConsoleError;
   });
 
   describe("findSavedSearch", () => {

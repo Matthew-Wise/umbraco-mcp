@@ -16,9 +16,9 @@ describe("delete-language", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await builder.cleanup();
     await LanguageTestHelper.cleanup(TEST_LANGUAGE_ISO);
+    console.error = originalConsoleError;
   });
 
   it("should delete a language", async () => {

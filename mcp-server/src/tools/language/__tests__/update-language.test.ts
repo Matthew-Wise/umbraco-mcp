@@ -26,9 +26,9 @@ describe("update-language", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await builder.cleanup();
     await LanguageTestHelper.cleanup(TEST_LANGUAGE_ISO);
+    console.error = originalConsoleError;
   });
 
   it("should update an existing language", async () => {

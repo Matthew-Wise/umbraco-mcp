@@ -15,9 +15,9 @@ describe('LanguageTestHelper', () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await LanguageTestHelper.cleanup(TEST_LANGUAGE_ISO);
     await LanguageTestHelper.cleanup(TEST_FALLBACK_ISO);
+    console.error = originalConsoleError;
   });
 
   describe('verifyLanguage', () => {

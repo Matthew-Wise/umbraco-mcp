@@ -18,8 +18,8 @@ describe("create-temporary-file", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await TemporaryFileTestHelper.cleanup(testId);
+    console.error = originalConsoleError;
   });
 
   it("should create a temporary file", async () => {

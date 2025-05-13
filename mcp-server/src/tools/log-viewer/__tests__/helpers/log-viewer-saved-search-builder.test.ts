@@ -12,8 +12,8 @@ describe("LogViewerSavedSearchBuilder", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     await LogViewerTestHelper.cleanup(TEST_SEARCH_NAME);
+    console.error = originalConsoleError;
   });
 
   describe("construction", () => {

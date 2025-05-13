@@ -14,9 +14,9 @@ describe("delete-log-viewer-saved-search-by-name", () => {
   });
 
   afterEach(async () => {
-    console.error = originalConsoleError;
     // Clean up any test saved searches
     await LogViewerTestHelper.cleanup(TEST_SEARCH_NAME);
+    console.error = originalConsoleError;
   });
 
   it("should delete a saved search by name", async () => {

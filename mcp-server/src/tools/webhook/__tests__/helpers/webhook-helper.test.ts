@@ -7,13 +7,17 @@ describe("webhook-helper", () => {
   const TEST_WEBHOOK_NAME = "_Test Webhook";
   const TEST_WEBHOOK_URL = "https://example.com/webhook";
   let builder: WebhookBuilder;
+  let originalConsoleError: typeof console.error;
 
   beforeEach(() => {
+    originalConsoleError = console.error;
+    console.error = jest.fn();
     builder = new WebhookBuilder();
   });
 
   afterEach(async () => {
     await builder.cleanup();
+    console.error = originalConsoleError;
   });
 
   describe("findWebhook", () => {
