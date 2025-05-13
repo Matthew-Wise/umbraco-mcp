@@ -85,35 +85,34 @@ export async function ToolFactory(server: McpServer) {
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
 
-  /* Need more complex logic to handle these */
   DocumentBlueprintTools.map((tool) => tool()).forEach((tool) => {
-    if (readonly && tool.name.startsWith("get-")) {
+    if (!readonly || tool.name.startsWith("get-")) {
       server.tool(tool.name, tool.description, tool.schema, tool.handler);
     }
   });
   LanguageTools.map((tool) => tool()).forEach((tool) => {
-    if (readonly && tool.name.startsWith("get-")) {
+    if (!readonly || tool.name.startsWith("get-")) {
       server.tool(tool.name, tool.description, tool.schema, tool.handler);
     }
   });
   MemberTypeTools.map((tool) => tool()).forEach((tool) => {
-    if (readonly && tool.name.startsWith("get-")) {
+    if (!readonly || tool.name.startsWith("get-")) {
       server.tool(tool.name, tool.description, tool.schema, tool.handler);
     }
   });
   DataTypeTools.map((tool) => tool()).forEach((tool) => {
-    if (readonly && tool.name.startsWith("get-")) {
+    if (!readonly || tool.name.startsWith("get-")) {
       server.tool(tool.name, tool.description, tool.schema, tool.handler);
     }
   });
   DocumentTypeTools.map((tool) => tool()).forEach((tool) => {
-    if (readonly && tool.name.startsWith("get-")) {
+    if (!readonly || tool.name.startsWith("get-")) {
       server.tool(tool.name, tool.description, tool.schema, tool.handler);
     }
   });
 
   MediaTypeTools.map((tool) => tool()).forEach((tool) => {
-    if (readonly && tool.name.startsWith("get-")) {
+    if (!readonly || tool.name.startsWith("get-")) {
       server.tool(tool.name, tool.description, tool.schema, tool.handler);
     }
   });
