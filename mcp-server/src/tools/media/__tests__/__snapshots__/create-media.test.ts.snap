@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-media should create a media item 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-media should create a media item 2`] = `
+{
+  "createDate": "<normalized>",
+  "hasChildren": false,
+  "id": "00000000-0000-0000-0000-000000000000",
+  "isTrashed": false,
+  "mediaType": {
+    "collection": null,
+    "icon": "icon-picture",
+    "id": "cc07b313-0843-4aa8-bbda-871c8da728c8",
+  },
+  "noAccess": false,
+  "parent": null,
+  "variants": [
+    {
+      "culture": null,
+      "name": "_Test Media Created",
+    },
+  ],
+}
+`;
+
+exports[`create-media should create a media item with parent 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-media should handle invalid temporary file id 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-urls should get media URLs 1`] = `
+{
+  "content": [
+    {
+      "text": "[{"id":"00000000-0000-0000-0000-000000000000","urlInfos":[]}]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-media-urls should handle non-existent media 1`] = `
+{
+  "content": [
+    {
+      "text": "[]",
+      "type": "text",
+    },
+  ],
+}
+`;

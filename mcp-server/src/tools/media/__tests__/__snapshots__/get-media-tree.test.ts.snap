@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`media-tree ancestors should get ancestor items 1`] = `
+{
+  "content": [
+    {
+      "text": "[{"mediaType":{"id":"f38bd2d7-65d0-48e6-95dc-87ce06ec2d3d","icon":"icon-folder","collection":{"id":"3a0156c4-3b8c-4803-bdc1-6871faa83fff"}},"variants":[{"name":"_Test Root Media","culture":null}],"noAccess":false,"isTrashed":false,"id":"00000000-0000-0000-0000-000000000000","createDate":"NORMALIZED_DATE","parent":null,"hasChildren":true},{"mediaType":{"id":"cc07b313-0843-4aa8-bbda-871c8da728c8","icon":"icon-picture","collection":null},"variants":[{"name":"_Test Child Media","culture":null}],"noAccess":false,"isTrashed":false,"id":"00000000-0000-0000-0000-000000000000","createDate":"NORMALIZED_DATE","parent":{"id":"00000000-0000-0000-0000-000000000000"},"hasChildren":false}]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-tree ancestors should handle non-existent item 1`] = `
+{
+  "content": [
+    {
+      "text": "[]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-tree children should get child items 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":1,"items":[{"mediaType":{"id":"cc07b313-0843-4aa8-bbda-871c8da728c8","icon":"icon-picture","collection":null},"variants":[{"name":"_Test Child Media","culture":null}],"noAccess":false,"isTrashed":false,"id":"00000000-0000-0000-0000-000000000000","createDate":"NORMALIZED_DATE","parent":{"id":"00000000-0000-0000-0000-000000000000"},"hasChildren":false}]}",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`media-tree children should handle non-existent parent 1`] = `
+{
+  "content": [
+    {
+      "text": "{"total":0,"items":[]}",
+      "type": "text",
+    },
+  ],
+}
+`;

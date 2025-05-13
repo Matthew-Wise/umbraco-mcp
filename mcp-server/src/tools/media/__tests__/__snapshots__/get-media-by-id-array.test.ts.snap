@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-by-id-array should get media items by id array 1`] = `
+{
+  "content": [
+    {
+      "text": "[{"isTrashed":false,"parent":null,"hasChildren":false,"mediaType":{"id":"cc07b313-0843-4aa8-bbda-871c8da728c8","icon":"icon-picture","collection":null},"variants":[{"name":"_Test Media","culture":null}],"id":"00000000-0000-0000-0000-000000000000"}]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-media-by-id-array should handle empty id array 1`] = `
+{
+  "content": [
+    {
+      "text": "[]",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`get-media-by-id-array should handle non-existent media 1`] = `
+{
+  "content": [
+    {
+      "text": "[]",
+      "type": "text",
+    },
+  ],
+}
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`delete-media-from-recycle-bin should delete a media item from recycle bin 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`delete-media-from-recycle-bin should handle non-existent media 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;

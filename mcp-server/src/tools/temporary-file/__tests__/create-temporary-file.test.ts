@@ -5,6 +5,7 @@ import { jest } from "@jest/globals";
 import { createReadStream } from "fs";
 import { join } from "path";
 import { v4 as uuidv4 } from 'uuid';
+import { EXAMPLE_IMAGE_PATH } from "../../constants.js";
 
 describe("create-temporary-file", () => {
   let originalConsoleError: typeof console.error;
@@ -23,7 +24,7 @@ describe("create-temporary-file", () => {
 
   it("should create a temporary file", async () => {
 
-    const fileStream = createReadStream(join(process.cwd(), "/src/tools/temporary-file/__tests__/helpers/example.jpg"));
+    const fileStream = createReadStream(join(process.cwd(), EXAMPLE_IMAGE_PATH));
     const result = await CreateTemporaryFileTool().handler({
       Id: testId,
       File: fileStream

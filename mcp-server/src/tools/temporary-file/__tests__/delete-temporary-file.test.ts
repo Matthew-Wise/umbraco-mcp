@@ -3,12 +3,12 @@ import { TemporaryFileBuilder } from "./helpers/temporary-file-builder.js";
 import { TemporaryFileTestHelper } from "./helpers/temporary-file-helper.js";
 import { jest } from "@jest/globals";
 import { BLANK_UUID } from "../../constants.js";
-import { createReadStream } from "fs";
-import { join } from "path";
 import { createSnapshotResult } from "@/helpers/test-utils.js";
 
 describe("delete-temporary-file", () => {
+
   let originalConsoleError: typeof console.error;
+  const builder = new TemporaryFileBuilder();
 
   beforeEach(() => {
     originalConsoleError = console.error;
@@ -20,9 +20,9 @@ describe("delete-temporary-file", () => {
   });
 
   it("should delete a temporary file", async () => {
-    const builder = new TemporaryFileBuilder();
-    const fileStream = createReadStream(join(process.cwd(), "/src/tools/temporary-file/__tests__/helpers/example.jpg"));
-    await builder.withFile(fileStream).create();
+    await builder
+      .withExampleFile()
+      .create();
 
     const result = await DeleteTemporaryFileTool().handler({
       id: builder.getId()

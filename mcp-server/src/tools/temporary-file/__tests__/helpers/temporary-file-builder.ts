@@ -3,6 +3,9 @@ import { PostTemporaryFileBody } from "@/umb-management-api/schemas/index.js";
 import { postTemporaryFileBody } from "@/umb-management-api/umbracoManagementAPI.zod.js";
 import { ReadStream } from "fs";
 import { v4 as uuidv4 } from 'uuid';
+import { createReadStream } from "fs";
+import { join } from "path";
+import { EXAMPLE_IMAGE_PATH } from "../../../constants.js";
 
 export class TemporaryFileBuilder {
   private model: Partial<PostTemporaryFileBody> = {
@@ -18,6 +21,11 @@ export class TemporaryFileBuilder {
 
   withFile(file: ReadStream): TemporaryFileBuilder {
     this.model.File = file;
+    return this;
+  }
+
+  withExampleFile(): TemporaryFileBuilder {
+    this.model.File = createReadStream(join(process.cwd(), EXAMPLE_IMAGE_PATH));
     return this;
   }
 

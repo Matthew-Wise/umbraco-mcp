@@ -1,4 +1,4 @@
-import GetDocumentAuditLogTool from "../tools/get-document-audit-log.js";
+import GetDocumentAuditLogTool from "../get/get-document-audit-log.js";
 import { DocumentBuilder } from "./helpers/document-builder.js";
 import { DocumentTestHelper } from "./helpers/document-test-helper.js";
 import { jest } from "@jest/globals";

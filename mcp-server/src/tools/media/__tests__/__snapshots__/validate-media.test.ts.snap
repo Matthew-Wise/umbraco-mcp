@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validate-media should handle invalid media model 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 400",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`validate-media should validate a valid media 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;

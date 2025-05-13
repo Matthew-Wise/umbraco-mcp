@@ -5,6 +5,7 @@ import { createSnapshotResult } from "@/helpers/test-utils.js";
 import { jest } from "@jest/globals";
 import { BLANK_UUID } from "../../constants.js";
 import { createReadStream } from "fs";
+import { EXAMPLE_IMAGE_PATH } from "../../constants.js";
 import { join } from "path";
 
 describe("get-temporary-file", () => {
@@ -23,9 +24,10 @@ describe("get-temporary-file", () => {
   });
 
   it("should get a temporary file by id", async () => {
-    const fileStream = createReadStream(join(process.cwd(), "/src/tools/temporary-file/__tests__/helpers/example.jpg"));
-    await builder.withFile(fileStream).create();
-    
+    await builder
+      .withExampleFile()
+      .create();
+
     const params = getTemporaryFileByIdParams.parse({ id: builder.getId() });
     const result = await GetTemporaryFileTool().handler(params, { signal: new AbortController().signal });
 

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-media-configuration should get media configuration 1`] = `
+{
+  "content": [
+    {
+      "text": "{"disableDeleteWhenReferenced":false,"disableUnpublishWhenReferenced":false,"reservedFieldNames":["ContentType","Key","Properties","Id","Name","UrlSegment","SortOrder","Level","Path","TemplateId","CreatorId","CreateDate","WriterId","UpdateDate","Cultures","ItemType","Parent","Children","get_ContentType","get_Key","get_Properties","GetProperty","get_Id","get_Name","get_UrlSegment","get_SortOrder","get_Level","get_Path","get_TemplateId","get_CreatorId","get_CreateDate","get_WriterId","get_UpdateDate","get_Cultures","get_ItemType","get_Parent","IsDraft","IsPublished","get_Children"]}",
+      "type": "text",
+    },
+  ],
+}
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get-recycle-bin-media-root should get root items from recycle bin 1`] = `
+{
+  "items": [
+    {
+      "createDate": "normalized-date",
+      "hasChildren": false,
+      "id": "normalized-id",
+      "mediaType": {
+        "collection": null,
+        "icon": "icon-picture",
+        "id": "cc07b313-0843-4aa8-bbda-871c8da728c8",
+      },
+      "parent": null,
+      "variants": [
+        {
+          "culture": null,
+          "name": "_Test Media Root",
+        },
+      ],
+    },
+  ],
+  "total": 1,
+}
+`;

@@ -17,6 +17,7 @@ import { ServerTools } from "./server/index.js";
 import { RedirectTools } from "./redirect/index.js";
 import { UserGroupTools } from "./user-group/index.js";
 import { TemporaryFileTools } from "./temporary-file/index.js";
+import { MediaTools } from "./media/index.js";
 
 export function ToolFactory(server: McpServer) {
   CultureTools.map((tool) => tool()).forEach((tool) =>
@@ -68,6 +69,9 @@ export function ToolFactory(server: McpServer) {
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
   TemporaryFileTools.map((tool) => tool()).forEach((tool) =>
+    server.tool(tool.name, tool.description, tool.schema, tool.handler)
+  );
+  MediaTools.map((tool) => tool()).forEach((tool) =>
     server.tool(tool.name, tool.description, tool.schema, tool.handler)
   );
 }

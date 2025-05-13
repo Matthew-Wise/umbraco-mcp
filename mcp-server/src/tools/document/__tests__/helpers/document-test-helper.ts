@@ -3,7 +3,6 @@ import type { DocumentTreeItemResponseModel } from "../../../../api/umbraco/mana
 import type { DocumentVariantItemResponseModel } from "../../../../api/umbraco/management/schemas/documentVariantItemResponseModel.js";
 import { BLANK_UUID } from "../../../constants.js";
 import { DocumentRecycleBinItemResponseModel } from "@/umb-management-api/schemas/documentRecycleBinItemResponseModel.js";
-import { DocumentBuilder } from "./document-builder.js";
 
 export class DocumentTestHelper {
   private static findByName(items: DocumentTreeItemResponseModel[], name: string): DocumentTreeItemResponseModel | undefined {
