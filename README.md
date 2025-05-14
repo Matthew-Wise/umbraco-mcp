@@ -8,12 +8,14 @@ it provides access to key parts of the Management API enabling you to do back of
 The list below shows which endpoints are covered by group,
 if you want to see individual endpoints please refer to your sites swagger definition `<domain>/umbraco/swagger/index.html?urls.primaryName=Umbraco+Management+API`
 
-|                       |                  |                 |
-| --------------------- | ---------------- | --------------- |
-| ✅ Culture            | ✅ Data Type     | ✅ Dictionary   |
-| ✅ Document Blueprint | ✅ Document Type | ✅ Document     |
-| ✅ Language           | ✅ Log Viewer    | ✅ Member Group |
-| ✅ Property Type      |
+|                       |                  |                  |
+| --------------------- | ---------------- | ---------------- |
+| ✅ Culture            | ✅ Data Type     | ✅ Dictionary    |
+| ✅ Document Blueprint | ✅ Document Type | ✅ Document      |
+| ✅ Language           | ✅ Log Viewer    | ✅ Media Type    |
+| ✅ Media              | ✅ Member Group  | ✅ Member Type   |
+| ✅ Member             | ✅ Property Type | ✅ Redirect      |
+| ✅ Temporary File     |   
 
 ## Configuration
 
