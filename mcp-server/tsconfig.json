@@ -14,7 +14,8 @@
     "paths": {
       "@/clients/*": ["./clients/*"],
       "@/helpers/*": ["./helpers/*"],
-      "@/umb-management-api/*": ["./api/umbraco/management/*"]
+      "@/umb-management-api/*": ["./api/umbraco/management/*"],
+      "@/umb-workflow-api/*": ["./api/umbraco/workflow/*"]
     }
   },
   "files": ["global.d.ts"],
