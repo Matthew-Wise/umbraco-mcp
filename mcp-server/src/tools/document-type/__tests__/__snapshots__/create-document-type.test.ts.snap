@@ -50,7 +50,17 @@ exports[`create-document-type should handle existing document type 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error creating document type:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate alias",
+    "status": 400,
+    "detail": "The specified document type alias is already in use",
+    "operationStatus": "DuplicateAlias"
+  }
+}",
       "type": "text",
     },
   ],

@@ -1,0 +1,1 @@
+export default 'Mock markdown content for testing'; 

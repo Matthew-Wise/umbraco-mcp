@@ -14,7 +14,8 @@
     "paths": {
       "@/clients/*": ["./clients/*"],
       "@/helpers/*": ["./helpers/*"],
-      "@/umb-management-api/*": ["./api/umbraco/management/*"]
+      "@/umb-management-api/*": ["./api/umbraco/management/*"],
+      "@/constants/*": ["./constants/*"]
     }
   },
   "files": ["global.d.ts"],
