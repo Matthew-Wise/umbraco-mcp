@@ -7,29 +7,17 @@ const GetAllWebhookLogsTool = CreateUmbracoTool(
   "Gets logs for all webhooks",
   getWebhookLogsQueryParams.shape,
   async (params: { skip?: number; take?: number }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getWebhookLogs(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getWebhookLogs(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting webhook logs:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

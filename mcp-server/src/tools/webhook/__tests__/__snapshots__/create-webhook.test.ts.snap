@@ -15,7 +15,21 @@ exports[`create-webhook should handle invalid webhook data 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using create-webhook:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+    "title": "One or more validation errors occurred.",
+    "status": 400,
+    "errors": {
+      "Url": [
+        "The Url field is required."
+      ]
+    },
+    "traceId": "normalized-trace-id"
+  }
+}",
       "type": "text",
     },
   ],

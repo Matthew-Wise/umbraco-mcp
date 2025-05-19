@@ -7,29 +7,17 @@ const GetWebhookItemTool = CreateUmbracoTool(
   "Gets webhooks by IDs (or empty array if no IDs are provided)",
   getItemWebhookQueryParams.shape,
   async (params: { id?: string[] }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemWebhook(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemWebhook(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting item webhooks:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

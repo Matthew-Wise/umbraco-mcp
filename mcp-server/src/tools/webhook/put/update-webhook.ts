@@ -15,29 +15,17 @@ const UpdateWebhookTool = CreateUmbracoTool(
     data: z.object(putWebhookByIdBody.shape),
   },
   async (model: { id: string; data: UpdateWebhookRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putWebhookById(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putWebhookById(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating webhook:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
