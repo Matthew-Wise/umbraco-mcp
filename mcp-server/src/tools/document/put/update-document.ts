@@ -13,28 +13,16 @@ const UpdateDocumentTool = CreateUmbracoTool(
     data: z.object(putDocumentByIdBody.shape),
   },
   async (model: { id: string; data: any }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentById(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating document:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentById(model.id, model.data);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

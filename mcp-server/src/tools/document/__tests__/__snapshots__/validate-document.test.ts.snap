@@ -4,7 +4,24 @@ exports[`validate-document should handle invalid document model 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using validate-document:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+    "title": "One or more validation errors occurred.",
+    "status": 400,
+    "errors": {
+      "$": [
+        "JSON deserialization for type 'Umbraco.Cms.Api.Management.ViewModels.Document.CreateDocumentRequestModel' was missing required properties including: 'documentType'."
+      ],
+      "requestModel": [
+        "The requestModel field is required."
+      ]
+    },
+    "traceId": "normalized-trace-id"
+  }
+}",
       "type": "text",
     },
   ],

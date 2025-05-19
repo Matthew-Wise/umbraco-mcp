@@ -1,9 +1,9 @@
 import { DocumentTestHelper } from "./document-test-helper.js";
 import { DocumentBuilder } from "./document-builder.js";
 import { jest } from "@jest/globals";
-import type { DocumentTreeItemResponseModel } from "../../../../api/umbraco/management/schemas/documentTreeItemResponseModel.js";
+import type { DocumentTreeItemResponseModel } from "@/umb-management-api/schemas/documentTreeItemResponseModel.js";
 import { BLANK_UUID } from "../../../constants.js";
-import { UmbracoManagementClient } from "@/clients/umbraco-management-client.js";
+import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 const TEST_DOCUMENT_NAME = "_Test DocumentHelper";
 const TEST_RECYCLE_BIN_DOCUMENT_NAME = "_Test DocumentHelper RecycleBin";
@@ -25,12 +25,16 @@ describe("DocumentTestHelper", () => {
   it("normaliseIds should blank out id for single and array", async () => {
     const builder = await new DocumentBuilder()
       .withName(TEST_DOCUMENT_NAME)
-      .withRootDocumentType()   
+      .withRootDocumentType()
       .create();
     const item = builder.getCreatedItem();
-    const normSingle = DocumentTestHelper.normaliseIds(item) as DocumentTreeItemResponseModel;
+    const normSingle = DocumentTestHelper.normaliseIds(
+      item
+    ) as DocumentTreeItemResponseModel;
     expect(normSingle.id).toBe(BLANK_UUID);
-    const normArray = DocumentTestHelper.normaliseIds([item]) as DocumentTreeItemResponseModel[];
+    const normArray = DocumentTestHelper.normaliseIds([
+      item,
+    ]) as DocumentTreeItemResponseModel[];
     expect(normArray[0].id).toBe(BLANK_UUID);
   });
 
@@ -77,16 +81,24 @@ describe("DocumentTestHelper", () => {
     await builder.moveToRecycleBin();
 
     // Should not be found in normal tree
-    const foundNormal = await DocumentTestHelper.findDocument(TEST_RECYCLE_BIN_DOCUMENT_NAME);
+    const foundNormal = await DocumentTestHelper.findDocument(
+      TEST_RECYCLE_BIN_DOCUMENT_NAME
+    );
     expect(foundNormal).toBeUndefined();
     // Should be found in recycle bin
-    const foundRecycleBin = await DocumentTestHelper.findDocumentInRecycleBin(TEST_RECYCLE_BIN_DOCUMENT_NAME);
+    const foundRecycleBin = await DocumentTestHelper.findDocumentInRecycleBin(
+      TEST_RECYCLE_BIN_DOCUMENT_NAME
+    );
     expect(foundRecycleBin).toBeDefined();
-    expect(foundRecycleBin!.variants[0].name).toBe(TEST_RECYCLE_BIN_DOCUMENT_NAME);
+    expect(foundRecycleBin!.variants[0].name).toBe(
+      TEST_RECYCLE_BIN_DOCUMENT_NAME
+    );
   });
 
   it("findDocumentInRecycleBin should return undefined for non-existent document", async () => {
-    const found = await DocumentTestHelper.findDocumentInRecycleBin("NonExistentRecycleBinDoc");
+    const found = await DocumentTestHelper.findDocumentInRecycleBin(
+      "NonExistentRecycleBinDoc"
+    );
     expect(found).toBeUndefined();
   });
 
@@ -99,20 +111,27 @@ describe("DocumentTestHelper", () => {
     await builder.moveToRecycleBin();
 
     // Should be found in recycle bin
-    let found = await DocumentTestHelper.findDocumentInRecycleBin("_Test EmptyRecycleBin");
+    let found = await DocumentTestHelper.findDocumentInRecycleBin(
+      "_Test EmptyRecycleBin"
+    );
     expect(found).toBeDefined();
 
     // Empty the recycle bin
     await DocumentTestHelper.emptyRecycleBin();
 
     // Should not be found after emptying
-    found = await DocumentTestHelper.findDocumentInRecycleBin("_Test EmptyRecycleBin");
+    found = await DocumentTestHelper.findDocumentInRecycleBin(
+      "_Test EmptyRecycleBin"
+    );
     expect(found).toBeUndefined();
   });
 
   it("getChildren should return the correct documents in order", async () => {
     const rootName = "_Test getChildren Root";
-    const childNames = ["_Test getChildren Child 1", "_Test getChildren Child 2"];
+    const childNames = [
+      "_Test getChildren Child 1",
+      "_Test getChildren Child 2",
+    ];
     // Create root
     const rootBuilder = await new DocumentBuilder()
       .withName(rootName)
@@ -133,7 +152,7 @@ describe("DocumentTestHelper", () => {
     }
     // Assert getChildren returns the correct documents in order
     const fetchedDocs = await DocumentTestHelper.getChildren(rootId, 10);
-    expect(fetchedDocs.map(doc => doc.id)).toEqual(childIds);
+    expect(fetchedDocs.map((doc) => doc.id)).toEqual(childIds);
     // Cleanup
     await DocumentTestHelper.cleanup(rootName);
     for (const name of childNames) {
@@ -141,4 +160,78 @@ describe("DocumentTestHelper", () => {
     }
   });
 
+  describe("normalizeErrorResponse", () => {
+    it("should normalize error response with traceId", () => {
+      const error: CallToolResult = {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify({
+              response: {
+                traceId:
+                  "00-61467b6f9832b9115a4ee4c9692d196d-e0f12c3c9d867e23-00",
+                status: 400,
+                errors: {
+                  $: ["Some error"],
+                },
+              },
+            }),
+          },
+        ],
+      };
+
+      const normalized = DocumentTestHelper.normalizeErrorResponse(error);
+      const parsed = JSON.parse(normalized.content[0].text as string);
+      expect(parsed.response.traceId).toBe("normalized-trace-id");
+      expect(parsed.response.status).toBe(400);
+      expect(parsed.response.errors.$).toEqual(["Some error"]);
+    });
+
+    it("should not modify error response without traceId", () => {
+      const error: CallToolResult = {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify({
+              response: {
+                status: 400,
+                errors: {
+                  $: ["Some error"],
+                },
+              },
+            }),
+          },
+        ],
+      };
+
+      const normalized = DocumentTestHelper.normalizeErrorResponse(error);
+      expect(normalized).toEqual(error);
+    });
+
+    it("should handle null or undefined error", () => {
+      const nullError: CallToolResult = {
+        content: [
+          {
+            type: "text" as const,
+            text: "null",
+          },
+        ],
+      };
+      const undefinedError: CallToolResult = {
+        content: [
+          {
+            type: "text" as const,
+            text: "undefined",
+          },
+        ],
+      };
+
+      expect(DocumentTestHelper.normalizeErrorResponse(nullError)).toEqual(
+        nullError
+      );
+      expect(DocumentTestHelper.normalizeErrorResponse(undefinedError)).toEqual(
+        undefinedError
+      );
+    });
+  });
 }); 

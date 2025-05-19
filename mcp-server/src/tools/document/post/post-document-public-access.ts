@@ -8,31 +8,22 @@ const PostDocumentPublicAccessTool = CreateUmbracoTool(
   "Adds public access settings to a document by Id.",
   {
     id: postDocumentByIdPublicAccessParams.shape.id,
-    data: z.object(postDocumentByIdPublicAccessBody.shape)
+    data: z.object(postDocumentByIdPublicAccessBody.shape),
   },
   async (model: { id: string; data: any }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postDocumentByIdPublicAccess(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error adding document public access:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postDocumentByIdPublicAccess(
+      model.id,
+      model.data
+    );
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

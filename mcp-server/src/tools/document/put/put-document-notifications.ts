@@ -8,31 +8,22 @@ const PutDocumentNotificationsTool = CreateUmbracoTool(
   "Updates the notifications for a document by Id.",
   {
     id: putDocumentByIdNotificationsParams.shape.id,
-    data: z.object(putDocumentByIdNotificationsBody.shape)
+    data: z.object(putDocumentByIdNotificationsBody.shape),
   },
   async (model: { id: string; data: any }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentByIdNotifications(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating document notifications:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentByIdNotifications(
+      model.id,
+      model.data
+    );
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
