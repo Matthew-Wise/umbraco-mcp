@@ -1,3 +1,4 @@
+import { normalizeErrorResponse } from "@/helpers/test-utils.js";
 import ValidateDocumentTypePostTool from "../post/validate-document-type.js";
 import { DocumentTypeBuilder } from "./helpers/document-type-builder.js";
 import { jest } from "@jest/globals";
@@ -17,10 +18,10 @@ describe("validate-document-type-post", () => {
   });
 
   it("should validate a valid document type (POST)", async () => {
-    const model = new DocumentTypeBuilder()
-      .withName(TEST_DOCTYPE_NAME)
-      .build();
-    const result = await ValidateDocumentTypePostTool().handler(model, { signal: new AbortController().signal });
+    const model = new DocumentTypeBuilder().withName(TEST_DOCTYPE_NAME).build();
+    const result = await ValidateDocumentTypePostTool().handler(model, {
+      signal: new AbortController().signal,
+    });
     expect(result).toMatchSnapshot();
   });
 
@@ -39,9 +40,11 @@ describe("validate-document-type-post", () => {
       allowedTemplates: [],
       cleanup: { preventCleanup: false },
       allowedDocumentTypes: [],
-      compositions: []
+      compositions: [],
     };
-    const result = await ValidateDocumentTypePostTool().handler(invalidModel, { signal: new AbortController().signal });
-    expect(result).toMatchSnapshot();
+    const result = await ValidateDocumentTypePostTool().handler(invalidModel, {
+      signal: new AbortController().signal,
+    });
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
-}); 
+});

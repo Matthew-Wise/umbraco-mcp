@@ -81,7 +81,10 @@ UmbracoAxios.interceptors.response.use(
   (error) => {
     if (error.response) {
       // Server responded with a status code outside the 2xx range
-      console.log(`HTTP Error: ${error.response.status}`, error.response.data);
+      console.error(
+        `HTTP Error: ${error.response.status}`,
+        error.response.data
+      );
     } else if (error.request) {
       // Request was made but no response was received
       console.error("No response received:", error.request);

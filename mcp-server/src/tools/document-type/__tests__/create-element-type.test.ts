@@ -1,7 +1,8 @@
+import { normalizeErrorResponse } from "@/helpers/test-utils.js";
 import CreateElementTypeTool from "../post/create-element-type.js";
 import { DocumentTypeTestHelper } from "./helpers/document-type-test-helper.js";
 import { jest } from "@jest/globals";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const TEST_ELEMENT_NAME = "_Test ElementType Created";
 const EXISTING_ELEMENT_NAME = "_Existing ElementType";
@@ -24,22 +25,24 @@ describe("create-element-type", () => {
   it("should create an element type", async () => {
     const elementModel = {
       name: TEST_ELEMENT_NAME,
-      alias: TEST_ELEMENT_NAME.toLowerCase().replace(/\s+/g, ''),
+      alias: TEST_ELEMENT_NAME.toLowerCase().replace(/\s+/g, ""),
       icon: "icon-document",
       compositions: [],
-      properties: []
+      properties: [],
     };
 
     // Create the element type
-    const result = await CreateElementTypeTool().handler(elementModel, { 
-      signal: new AbortController().signal 
+    const result = await CreateElementTypeTool().handler(elementModel, {
+      signal: new AbortController().signal,
     });
 
     // Verify the handler response using snapshot
     expect(result).toMatchSnapshot();
 
     // Verify the created item exists and matches expected values
-    const item = await DocumentTypeTestHelper.findDocumentType(TEST_ELEMENT_NAME);
+    const item = await DocumentTypeTestHelper.findDocumentType(
+      TEST_ELEMENT_NAME
+    );
     expect(item).toBeDefined();
     expect(DocumentTypeTestHelper.normaliseIds(item!)).toMatchSnapshot();
   });
@@ -47,31 +50,31 @@ describe("create-element-type", () => {
   it("should handle existing element type", async () => {
     const elementModel = {
       name: EXISTING_ELEMENT_NAME,
-      alias: EXISTING_ELEMENT_NAME.toLowerCase().replace(/\s+/g, ''),
+      alias: EXISTING_ELEMENT_NAME.toLowerCase().replace(/\s+/g, ""),
       icon: "icon-document",
       compositions: [],
-      properties: []
+      properties: [],
     };
 
     // First create the element type
-    await CreateElementTypeTool().handler(elementModel, { 
-      signal: new AbortController().signal 
+    const rsp = await CreateElementTypeTool().handler(elementModel, {
+      signal: new AbortController().signal,
     });
 
+
     // Try to create it again
-    const result = await CreateElementTypeTool().handler(elementModel, { 
-      signal: new AbortController().signal 
+    const result = await CreateElementTypeTool().handler(elementModel, {
+      signal: new AbortController().signal,
     });
 
     // Verify the error response using snapshot
-    expect(result).toMatchSnapshot();
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
 
   it("should create an element type with properties", async () => {
-
     const elementModel = {
       name: TEST_ELEMENT_NAME,
-      alias: TEST_ELEMENT_NAME.toLowerCase().replace(/\s+/g, ''),
+      alias: TEST_ELEMENT_NAME.toLowerCase().replace(/\s+/g, ""),
       icon: "icon-document",
       description: "Test element type with properties",
       compositions: [],
@@ -81,21 +84,21 @@ describe("create-element-type", () => {
           alias: "testProperty",
           dataTypeId: "0cc0eba1-9960-42c9-bf9b-60e150b429ae",
           tab: "Content",
-          group: "General"
-        }
-      ]
+          group: "General",
+        },
+      ],
     };
 
-    const result = await CreateElementTypeTool().handler(elementModel, { 
-      signal: new AbortController().signal 
+    const result = await CreateElementTypeTool().handler(elementModel, {
+      signal: new AbortController().signal,
     });
 
     expect(result).toMatchSnapshot();
 
-    const item = await DocumentTypeTestHelper.findDocumentType(TEST_ELEMENT_NAME);
+    const item = await DocumentTypeTestHelper.findDocumentType(
+      TEST_ELEMENT_NAME
+    );
     expect(item).toBeDefined();
     expect(DocumentTypeTestHelper.normaliseIds(item!)).toMatchSnapshot();
   });
-
-
 });

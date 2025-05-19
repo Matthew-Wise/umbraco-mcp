@@ -1,3 +1,4 @@
+import { normalizeErrorResponse } from "@/helpers/test-utils.js";
 import ValidateDocumentTypeTool from "../put/validate-document-type.js";
 import { DocumentTypeBuilder } from "./helpers/document-type-builder.js";
 import { DocumentTypeTestHelper } from "./helpers/document-type-test-helper.js";
@@ -23,10 +24,13 @@ describe("validate-document-type", () => {
       .withName(TEST_DOCTYPE_NAME)
       .create();
     const model = builder.build();
-    const result = await ValidateDocumentTypeTool().handler({
-      id: builder.getId(),
-      data: model
-    }, { signal: new AbortController().signal });
+    const result = await ValidateDocumentTypeTool().handler(
+      {
+        id: builder.getId(),
+        data: model,
+      },
+      { signal: new AbortController().signal }
+    );
     expect(result).toMatchSnapshot();
   });
 
@@ -45,12 +49,15 @@ describe("validate-document-type", () => {
       allowedTemplates: [],
       cleanup: { preventCleanup: false },
       allowedDocumentTypes: [],
-      compositions: []
+      compositions: [],
     };
-    const result = await ValidateDocumentTypeTool().handler({
-      id: "00000000-0000-0000-0000-000000000000",
-      data: invalidModel
-    }, { signal: new AbortController().signal });
-    expect(result).toMatchSnapshot();
+    const result = await ValidateDocumentTypeTool().handler(
+      {
+        id: "00000000-0000-0000-0000-000000000000",
+        data: invalidModel,
+      },
+      { signal: new AbortController().signal }
+    );
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
-}); 
+});

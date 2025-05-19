@@ -3,7 +3,6 @@ import type { DocumentTreeItemResponseModel } from "@/umb-management-api/schemas
 import type { DocumentVariantItemResponseModel } from "@/umb-management-api/schemas/documentVariantItemResponseModel.js";
 import { BLANK_UUID } from "../../../constants.js";
 import { DocumentRecycleBinItemResponseModel } from "@/umb-management-api/schemas/documentRecycleBinItemResponseModel.js";
-import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 export class DocumentTestHelper {
   private static findByName<
@@ -143,20 +142,5 @@ export class DocumentTestHelper {
     const client = UmbracoManagementClient.getClient();
     const response = await client.getTreeDocumentChildren({ parentId, take });
     return response.items;
-  }
-
-  static normalizeErrorResponse(result: CallToolResult): CallToolResult {
-    if (
-      Array.isArray(result.content) &&
-      result.content[0]?.text &&
-      typeof result.content[0].text === "string"
-    ) {
-      // Replace any traceId in the text with a normalized version
-      result.content[0].text = result.content[0].text.replace(
-        /00-[0-9a-f]{32}-[0-9a-f]{16}-00/g,
-        "normalized-trace-id"
-      );
-    }
-    return result;
   }
 } 

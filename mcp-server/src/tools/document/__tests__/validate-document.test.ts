@@ -1,3 +1,4 @@
+import { normalizeErrorResponse } from "@/helpers/test-utils.js";
 import ValidateDocumentTool from "../post/validate-document.js";
 import { DocumentBuilder } from "./helpers/document-builder.js";
 import { DocumentTestHelper } from "./helpers/document-test-helper.js";
@@ -19,13 +20,13 @@ async function buildValidationModel() {
       {
         name: TEST_DOCUMENT_NAME,
         culture: null,
-        segment: null
-      }
+        segment: null,
+      },
     ],
     id: item.id,
     parent: item.parent ? { id: item.parent.id } : undefined,
     documentType: item.documentType,
-    template: null
+    template: null,
   };
 }
 
@@ -44,7 +45,9 @@ describe("validate-document", () => {
 
   it("should validate a valid document", async () => {
     const model = await buildValidationModel();
-    const result = await ValidateDocumentTool().handler(model, { signal: new AbortController().signal });
+    const result = await ValidateDocumentTool().handler(model, {
+      signal: new AbortController().signal,
+    });
     expect(result).toMatchSnapshot();
   });
 
@@ -54,9 +57,11 @@ describe("validate-document", () => {
       values: [],
       variants: [{ name: "", culture: null, segment: null }],
       documentType: undefined,
-      template: null
+      template: null,
     };
-    const result = await ValidateDocumentTool().handler(invalidModel as any, { signal: new AbortController().signal });
-    expect(DocumentTestHelper.normalizeErrorResponse(result)).toMatchSnapshot();
+    const result = await ValidateDocumentTool().handler(invalidModel as any, {
+      signal: new AbortController().signal,
+    });
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
-}); 
+});

@@ -50,10 +50,9 @@ exports[`create-element-type should handle existing element type 1`] = `
 {
   "content": [
     {
-      "text": "Error creating element type:
+      "text": "Error using create-element-type:
 {
   "message": "Request failed with status code 400",
-  "stack": "AxiosError: Request failed with status code 400\\n    at settle (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/node_modules/axios/lib/core/settle.js:19:12)\\n    at IncomingMessage.handleStreamEnd (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/node_modules/axios/lib/adapters/http.js:599:11)\\n    at IncomingMessage.emit (node:events:529:35)\\n    at IncomingMessage.emit (node:domain:489:12)\\n    at endReadableNT (node:internal/streams/readable:1368:12)\\n    at processTicksAndRejections (node:internal/process/task_queues:82:21)\\n    at Axios.request (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/node_modules/axios/lib/core/Axios.js:45:41)\\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\\n    at async /Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/src/tools/document-type/post/create-element-type.ts:108:24\\n    at async Object.handler (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/src/helpers/create-umbraco-tool.ts:18:16)\\n    at async Object.<anonymous> (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/src/tools/document-type/__tests__/create-element-type.test.ts:62:20)",
   "response": {
     "type": "Error",
     "title": "Duplicate alias",
