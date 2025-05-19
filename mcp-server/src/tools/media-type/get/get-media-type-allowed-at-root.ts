@@ -8,29 +8,17 @@ const GetMediaTypeAllowedAtRootTool = CreateUmbracoTool(
   "Get media types that are allowed at root level",
   getMediaTypeAllowedAtRootQueryParams.shape,
   async (model: GetMediaTypeAllowedAtRootParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getMediaTypeAllowedAtRoot(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getMediaTypeAllowedAtRoot(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error getting media types allowed at root:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

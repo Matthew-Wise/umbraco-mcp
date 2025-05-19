@@ -7,34 +7,22 @@ const GetMediaTypeByIdsTool = CreateUmbracoTool(
   "get-media-type-by-ids",
   "Gets media types by ids",
   {
-    ids: z.array(z.string())
+    ids: z.array(z.string()),
   },
   async ({ ids }: { ids: string[] }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const responses = await Promise.all(
-        ids.map((id: string) => client.getMediaTypeById(id))
-      );
+    const client = UmbracoManagementClient.getClient();
+    const responses = await Promise.all(
+      ids.map((id: string) => client.getMediaTypeById(id))
+    );
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(responses),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting media types:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(responses),
+        },
+      ],
+    };
   }
 );
 

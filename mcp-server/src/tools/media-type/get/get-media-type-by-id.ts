@@ -7,29 +7,17 @@ const GetMediaTypeByIdTool = CreateUmbracoTool(
   "Gets a media type by id",
   getMediaTypeByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getMediaTypeById(id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getMediaTypeById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting media type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

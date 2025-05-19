@@ -8,29 +8,17 @@ const GetMediaTypeRootTool = CreateUmbracoTool(
   "Gets the root level of the media type tree",
   getTreeMediaTypeRootQueryParams.shape,
   async (params: GetTreeMediaTypeRootParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getTreeMediaTypeRoot(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getTreeMediaTypeRoot(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting media type root:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

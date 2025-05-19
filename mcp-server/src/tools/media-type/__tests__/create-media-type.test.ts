@@ -1,6 +1,9 @@
 import { MediaTypeTestHelper } from "./helpers/media-type-helper.js";
 import CreateMediaTypeTool from "../post/create-media-type.js";
-import { createSnapshotResult } from "@/helpers/test-utils.js";
+import {
+  createSnapshotResult,
+  normalizeErrorResponse,
+} from "@/helpers/test-utils.js";
 import { jest } from "@jest/globals";
 import { MediaTypeBuilder } from "./helpers/media-type-builder.js";
 
@@ -24,14 +27,18 @@ describe("create-media-type", () => {
       .withDescription("Test media type description")
       .withAllowedAsRoot(true);
 
-    const result = await CreateMediaTypeTool().handler(builder.build(), { signal: new AbortController().signal });
+    const result = await CreateMediaTypeTool().handler(builder.build(), {
+      signal: new AbortController().signal,
+    });
 
     // Normalize and verify response
     const normalizedItems = createSnapshotResult(result);
     expect(normalizedItems).toMatchSnapshot();
 
     // Verify the media type was created
-    const items = await MediaTypeTestHelper.findMediaTypes(TEST_MEDIA_TYPE_NAME);
+    const items = await MediaTypeTestHelper.findMediaTypes(
+      TEST_MEDIA_TYPE_NAME
+    );
     expect(items.length).toBe(1);
     expect(items[0].name).toBe(TEST_MEDIA_TYPE_NAME);
   });
@@ -42,8 +49,10 @@ describe("create-media-type", () => {
       // Missing required fields
     };
 
-    const result = await CreateMediaTypeTool().handler(invalidModel as any, { signal: new AbortController().signal });
+    const result = await CreateMediaTypeTool().handler(invalidModel as any, {
+      signal: new AbortController().signal,
+    });
 
-    expect(result).toMatchSnapshot();
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
 }); 

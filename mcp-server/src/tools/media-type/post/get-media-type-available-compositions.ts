@@ -7,29 +7,17 @@ const GetMediaTypeAvailableCompositionsTool = CreateUmbracoTool(
   "Gets the available compositions for a media type",
   postMediaTypeAvailableCompositionsBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postMediaTypeAvailableCompositions(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postMediaTypeAvailableCompositions(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting available media type compositions:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
