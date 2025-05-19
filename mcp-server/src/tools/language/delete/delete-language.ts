@@ -7,28 +7,16 @@ const DeleteLanguageTool = CreateUmbracoTool(
   "Deletes a language by ISO code",
   deleteLanguageByIsoCodeParams.shape,
   async ({ isoCode }: { isoCode: string }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.deleteLanguageByIsoCode(isoCode);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error deleting language:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.deleteLanguageByIsoCode(isoCode);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

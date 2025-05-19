@@ -15,7 +15,10 @@ exports[`get-default-language should handle error from client 1`] = `
 {
   "content": [
     {
-      "text": "Error: Error: Simulated error",
+      "text": "Error using get-default-language:
+{
+  "message": "Simulated error"
+}",
       "type": "text",
     },
   ],
