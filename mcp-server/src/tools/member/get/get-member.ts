@@ -7,29 +7,17 @@ const GetMemberTool = CreateUmbracoTool(
   "Gets a member by Id",
   getMemberByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getMemberById(id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getMemberById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting member:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

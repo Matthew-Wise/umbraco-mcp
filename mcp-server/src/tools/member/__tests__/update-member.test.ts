@@ -85,6 +85,6 @@ describe("update-member", () => {
       { id: BLANK_UUID, data: updateData },
       { signal: new AbortController().signal }
     );
-    expect(result.content[0].text).toMatch(/error/i);
+    expect(result).toMatchSnapshot();
   });
 });

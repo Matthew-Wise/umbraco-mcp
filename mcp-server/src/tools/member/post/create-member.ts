@@ -8,28 +8,16 @@ const CreateMemberTool = CreateUmbracoTool(
   Use this endpoint to create new members with the specified properties and groups.`,
   postMemberBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postMember(model);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating member:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postMember(model);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

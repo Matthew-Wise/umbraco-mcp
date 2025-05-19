@@ -7,28 +7,16 @@ const GetMembersByIdArrayTool = CreateUmbracoTool(
   "Gets members by IDs (or empty array if no IDs are provided)",
   getItemMemberQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemMember(params);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting members:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemMember(params);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

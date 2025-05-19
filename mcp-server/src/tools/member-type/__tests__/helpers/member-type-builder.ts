@@ -2,6 +2,8 @@ import { UmbracoManagementClient } from "@/clients/umbraco-management-client.js"
 import { CreateMemberTypeRequestModel } from "@/umb-management-api/schemas/index.js";
 import { postMemberTypeBody } from "@/umb-management-api/umbracoManagementAPI.zod.js";
 import { MemberTypeTestHelper } from "./member-type-helper.js";
+import { TextString_DATA_TYPE_ID } from "../../../constants.js";
+import { v4 as uuidv4 } from "uuid";
 
 export class MemberTypeBuilder {
   private model: Partial<CreateMemberTypeRequestModel> = {
@@ -12,16 +14,57 @@ export class MemberTypeBuilder {
     properties: [],
     containers: [],
     compositions: [],
-    icon: "icon-user" // Default icon
+    icon: "icon-user", // Default icon
   };
   private id: string | null = null;
 
   withName(name: string): MemberTypeBuilder {
     this.model.name = name;
-    this.model.alias = name.toLowerCase().replace(/\s+/g, '');
+    this.model.alias = name.toLowerCase().replace(/\s+/g, "");
     return this;
   }
 
+  #withContainer() {
+    this.model.containers = this.model.containers || [];
+    this.model.containers.push({
+      id: uuidv4(),
+      sortOrder: 0,
+      name: "properties",
+      type: "Group",
+    });
+  }
+
+  withProperty(name: string): MemberTypeBuilder {
+    this.#withContainer();
+
+    this.model.properties = this.model.properties || [];
+    this.model.properties.push({
+      id: uuidv4(),
+      sortOrder: 0,
+      alias: name.toLowerCase().replace(/\s+/g, ""),
+      name: name,
+      container: {
+        id: this.model.containers![0].id,
+      },
+      dataType: {
+        id: TextString_DATA_TYPE_ID,
+      },
+      variesBySegment: false,
+      variesByCulture: false,
+      isSensitive: false,
+      visibility: {
+        memberCanView: true,
+        memberCanEdit: true,
+      },
+      validation: {
+        mandatory: false,
+      },
+      appearance: {
+        labelOnTop: false,
+      },
+    });
+    return this;
+  }
   withDescription(description: string): MemberTypeBuilder {
     this.model.description = description;
     return this;
@@ -48,7 +91,7 @@ export class MemberTypeBuilder {
     }
     this.model.compositions.push({
       memberType: { id: compositionId },
-      compositionType: "Composition"
+      compositionType: "Composition",
     });
     return this;
   }
@@ -57,11 +100,15 @@ export class MemberTypeBuilder {
     const client = UmbracoManagementClient.getClient();
     const validatedModel = postMemberTypeBody.parse(this.model);
     await client.postMemberType(validatedModel);
-    
+
     // Get the created member type by name using the helper
-    const items = await MemberTypeTestHelper.findMemberTypes(validatedModel.name);
+    const items = await MemberTypeTestHelper.findMemberTypes(
+      validatedModel.name
+    );
     if (items.length === 0) {
-      throw new Error(`Failed to find created member type with name: ${validatedModel.name}`);
+      throw new Error(
+        `Failed to find created member type with name: ${validatedModel.name}`
+      );
     }
     // Use the first matching item's ID
     this.id = items[0].id;
@@ -91,4 +138,4 @@ export class MemberTypeBuilder {
       await MemberTypeTestHelper.cleanup(this.model.name);
     }
   }
-} 
+}

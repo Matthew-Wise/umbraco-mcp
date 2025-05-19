@@ -19,6 +19,7 @@ describe("find-member", () => {
   afterEach(async () => {
     console.error = originalConsoleError;
     await MemberTestHelper.cleanup(TEST_MEMBER_USERNAME);
+    await MemberTestHelper.cleanup("findmember2@example.com");
   });
 
   it("should find a member by username filter", async () => {

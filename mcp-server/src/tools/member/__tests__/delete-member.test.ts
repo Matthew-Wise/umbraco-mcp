@@ -35,7 +35,7 @@ describe("delete-member", () => {
       { id },
       { signal: new AbortController().signal }
     );
-    expect(result.content[0].text).not.toMatch(/error/i);
+    expect(result).toMatchSnapshot();
 
     // Verify the member is deleted
     const member = await MemberTestHelper.findMember("test@example.com");
@@ -47,6 +47,6 @@ describe("delete-member", () => {
       { id: BLANK_UUID },
       { signal: new AbortController().signal }
     );
-    expect(result.content[0].text).toMatch(/error/i);
+    expect(result).toMatchSnapshot();
   });
 });

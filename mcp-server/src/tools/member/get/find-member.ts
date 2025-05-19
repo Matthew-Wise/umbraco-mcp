@@ -8,29 +8,17 @@ const FindMemberTool = CreateUmbracoTool(
   `Finds members by various filter criteria`,
   getFilterMemberQueryParams.shape,
   async (model: GetFilterMemberParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getFilterMember(model);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getFilterMember(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error finding members:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -163,7 +163,6 @@ const FindDataTypeTool = CreateUmbracoTool(
   "Finds a data type by Id or Name",
   getFilterDataTypeQueryParams.shape,
   async (model: GetFilterDataTypeParams) => {
-    try {
       const client = UmbracoManagementClient.getClient();
       var response = await client.getFilterDataType(model);
 
@@ -175,17 +174,6 @@ const FindDataTypeTool = CreateUmbracoTool(
           },
         ],
       };
-    } catch (error) {
-      console.error("Error creating data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
   }
 );
 

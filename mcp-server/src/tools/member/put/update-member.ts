@@ -15,29 +15,17 @@ const UpdateMemberTool = CreateUmbracoTool(
     data: z.object(putMemberByIdBody.shape),
   },
   async (model: { id: string; data: UpdateMemberRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putMemberById(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putMemberById(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating member:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

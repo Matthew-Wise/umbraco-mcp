@@ -58,15 +58,6 @@ export class MemberBuilder {
     return this;
   }
 
-  withVariant(
-    name: string,
-    culture: string | null = null,
-    segment: string | null = null
-  ): MemberBuilder {
-    if (!this.model.variants) this.model.variants = [];
-    this.model.variants.push({ name, culture, segment });
-    return this;
-  }
 
   build(): CreateMemberRequestModel {
     return this.model as CreateMemberRequestModel;

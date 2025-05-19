@@ -16,7 +16,7 @@ describe("get-member", () => {
 
   afterEach(async () => {
     console.error = originalConsoleError;
-    await MemberTestHelper.cleanup(TEST_MEMBER_NAME);
+    await MemberTestHelper.cleanup("test@example.com");
   });
 
   it("should get a member by ID", async () => {

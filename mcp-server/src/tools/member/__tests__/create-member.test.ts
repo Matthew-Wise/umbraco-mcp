@@ -3,8 +3,11 @@ import { MemberBuilder } from "./helpers/member-builder.js";
 import { MemberTestHelper } from "./helpers/member-test-helper.js";
 import { jest } from "@jest/globals";
 import { Default_Memeber_TYPE_ID } from "../../constants.js";
+import { MemberTypeBuilder } from "../../member-type/__tests__/helpers/member-type-builder.js";
+import { MemberTypeTestHelper } from "../../member-type/__tests__/helpers/member-type-helper.js";
 
 const TEST_MEMBER_EMAIL = "test@example.com";
+const TEST_MEMBER_TYPE_NAME = "Test Member Type";
 
 describe("create-member", () => {
   let originalConsoleError: typeof console.error;
@@ -16,6 +19,7 @@ describe("create-member", () => {
 
   afterEach(async () => {
     console.error = originalConsoleError;
+    await MemberTypeTestHelper.cleanup(TEST_MEMBER_TYPE_NAME);
     await MemberTestHelper.cleanup(TEST_MEMBER_EMAIL);
   });
 
@@ -42,14 +46,21 @@ describe("create-member", () => {
   });
 
   it("should create a member with additional properties", async () => {
+    const memberType = await new MemberTypeBuilder()
+      .withName(TEST_MEMBER_TYPE_NAME)
+      .withProperty("Custom Field")
+      .create();
+
+    const memberTypeId = memberType.getId();
+
     // Create a more complex member with additional values
     const memberModel = new MemberBuilder()
       .withName("Test Member")
       .withEmail(TEST_MEMBER_EMAIL)
       .withUsername(TEST_MEMBER_EMAIL)
       .withPassword("test123@Longer")
-      .withMemberType(Default_Memeber_TYPE_ID)
-      .withValue("customField", "customValue")
+      .withMemberType(memberTypeId)
+      .withValue("customfield", "customValue")
       .build();
 
     const result = await CreateMemberTool().handler(memberModel, {

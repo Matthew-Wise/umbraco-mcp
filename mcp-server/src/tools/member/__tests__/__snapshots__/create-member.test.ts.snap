@@ -38,7 +38,7 @@ exports[`create-member should create a member with additional properties 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": """",
       "type": "text",
     },
   ],
@@ -66,7 +66,15 @@ exports[`create-member should create a member with additional properties 2`] = `
   },
   "updateDate": "<normalized>",
   "username": "test@example.com",
-  "values": [],
+  "values": [
+    {
+      "alias": "customfield",
+      "culture": null,
+      "editorAlias": "Umbraco.TextBox",
+      "segment": null,
+      "value": "customValue",
+    },
+  ],
   "variants": [
     {
       "createDate": "<normalized>",
