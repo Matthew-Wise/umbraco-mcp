@@ -7,29 +7,17 @@ const GetDocumentTypeFolderTool = CreateUmbracoTool(
   "Gets a document type folder by Id",
   getDocumentTypeFolderByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getDocumentTypeFolderById(id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getDocumentTypeFolderById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document type folder:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

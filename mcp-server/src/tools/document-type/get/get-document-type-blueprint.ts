@@ -7,29 +7,17 @@ const GetDocumentTypeBlueprintTool = CreateUmbracoTool(
   "Gets the blueprints for a document type",
   getDocumentTypeByIdBlueprintParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getDocumentTypeByIdBlueprint(id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getDocumentTypeByIdBlueprint(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document type blueprints:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

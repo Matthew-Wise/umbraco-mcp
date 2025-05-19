@@ -8,29 +8,17 @@ const GetDocumentTypeRootTool = CreateUmbracoTool(
   "Gets the root level of the document type tree",
   getTreeDocumentTypeRootQueryParams.shape,
   async (params: GetTreeDocumentTypeRootParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getTreeDocumentTypeRoot(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getTreeDocumentTypeRoot(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document type root:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

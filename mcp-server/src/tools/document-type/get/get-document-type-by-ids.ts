@@ -7,29 +7,17 @@ const GetDocumentTypeByIdTool = CreateUmbracoTool(
   "Gets a document type by id",
   getDocumentTypeByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getDocumentTypeById(id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getDocumentTypeById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

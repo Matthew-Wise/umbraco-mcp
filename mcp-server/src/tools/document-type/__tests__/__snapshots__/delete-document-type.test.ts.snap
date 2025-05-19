@@ -15,7 +15,17 @@ exports[`delete-document-type should handle non-existent document type 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using delete-document-type:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "Not Found",
+    "status": 404,
+    "detail": "The specified document type was not found",
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

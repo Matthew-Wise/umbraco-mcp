@@ -50,7 +50,7 @@ exports[`create-document-type should handle existing document type 1`] = `
 {
   "content": [
     {
-      "text": "Error creating document type:
+      "text": "Error using create-document-type:
 {
   "message": "Request failed with status code 400",
   "response": {

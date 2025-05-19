@@ -8,29 +8,17 @@ const GetDocumentTypeChildrenTool = CreateUmbracoTool(
   "Gets the children of a document type",
   getTreeDocumentTypeChildrenQueryParams.shape,
   async (params: GetTreeDocumentTypeChildrenParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getTreeDocumentTypeChildren(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getTreeDocumentTypeChildren(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document type children:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

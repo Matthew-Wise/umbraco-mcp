@@ -9,32 +9,20 @@ const MoveDocumentTypeTool = CreateUmbracoTool(
   "Move a document type to a new location",
   {
     id: z.string().uuid(),
-    data: z.object(putDocumentTypeByIdMoveBody.shape)
+    data: z.object(putDocumentTypeByIdMoveBody.shape),
   },
   async (model: { id: string; data: MoveDocumentTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentTypeByIdMove(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentTypeByIdMove(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error moving document type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -8,29 +8,17 @@ const GetDocumentTypeAncestorsTool = CreateUmbracoTool(
   "Gets the ancestors of a document type",
   getTreeDocumentTypeAncestorsQueryParams.shape,
   async (params: GetTreeDocumentTypeAncestorsParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getTreeDocumentTypeAncestors(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getTreeDocumentTypeAncestors(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document type ancestors:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

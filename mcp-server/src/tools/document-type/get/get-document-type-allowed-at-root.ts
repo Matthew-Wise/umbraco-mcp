@@ -8,29 +8,17 @@ const GetDocumentTypeAllowedAtRootTool = CreateUmbracoTool(
   "Get document types that are allowed at root level",
   getDocumentTypeAllowedAtRootQueryParams.shape,
   async (model: GetDocumentTypeAllowedAtRootParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getDocumentTypeAllowedAtRoot(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getDocumentTypeAllowedAtRoot(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error getting document types allowed at root:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

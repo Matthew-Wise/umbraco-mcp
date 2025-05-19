@@ -7,29 +7,17 @@ const GetDocumentTypesByIdArrayTool = CreateUmbracoTool(
   "Gets document types by IDs (or empty array if no IDs are provided)",
   getItemDocumentTypeQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemDocumentType(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemDocumentType(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting item document types:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
