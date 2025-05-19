@@ -1,7 +1,7 @@
 import CreateDocumentTypeTool from "../post/create-document-type.js";
-import { DocumentTypeBuilder } from "./helpers/document-type-builder.js";
 import { DocumentTypeTestHelper } from "./helpers/document-type-test-helper.js";
 import { jest } from "@jest/globals";
+import type { CreateDocumentTypeModel } from "../post/create-document-type.js";
 
 const TEST_DOCTYPE_NAME = "_Test DocumentType Created";
 const EXISTING_DOCTYPE_NAME = "_Existing DocumentType";
@@ -23,11 +23,15 @@ describe("create-document-type", () => {
 
   it("should create a document type", async () => {
     // Create document type model using builder
-    const docTypeModel = new DocumentTypeBuilder()
-      .withName(TEST_DOCTYPE_NAME)
-      .withIcon("icon-document")
-      .allowAsRoot()
-      .build();
+    const docTypeModel: CreateDocumentTypeModel = {
+      name: TEST_DOCTYPE_NAME,
+      alias: TEST_DOCTYPE_NAME.toLowerCase().replace(/\s+/g, ''),
+      icon: "icon-document",
+      allowedAsRoot: false,
+      compositions: [],
+      allowedDocumentTypes: [],
+      properties: []
+    };
 
     // Create the document type
     const result = await CreateDocumentTypeTool().handler(docTypeModel, { 
@@ -44,11 +48,15 @@ describe("create-document-type", () => {
   });
 
   it("should handle existing document type", async () => {
-    // Create document type model
-    const docTypeModel = new DocumentTypeBuilder()
-      .withName(EXISTING_DOCTYPE_NAME)
-      .withIcon("icon-document")
-      .build();
+    const docTypeModel: CreateDocumentTypeModel = {
+      name: EXISTING_DOCTYPE_NAME,
+      alias: EXISTING_DOCTYPE_NAME.toLowerCase().replace(/\s+/g, ''),
+      icon: "icon-document",
+      allowedAsRoot: false,
+      compositions: [],
+      allowedDocumentTypes: [],
+      properties: []
+    };
 
     // First create the document type
     await CreateDocumentTypeTool().handler(docTypeModel, { 
@@ -66,14 +74,23 @@ describe("create-document-type", () => {
 
   it("should create a document type with properties", async () => {
     // Create a more complex document type with properties
-    const docTypeModel = new DocumentTypeBuilder()
-      .withName(TEST_DOCTYPE_NAME)
-      .withIcon("icon-document")
-      .withDescription("Test document type with properties")
-      .variesByCulture()
-      .allowAsRoot()
-      // Add some test properties here if needed
-      .build();
+    const docTypeModel: CreateDocumentTypeModel = {
+      name: TEST_DOCTYPE_NAME,
+      alias: TEST_DOCTYPE_NAME.toLowerCase().replace(/\s+/g, ''),
+      icon: "icon-document",
+      allowedAsRoot: false,
+      compositions: [],
+      allowedDocumentTypes: [],
+      properties: [
+        {
+          name: "Property 1",
+          alias: "property1",
+          dataTypeId: "0cc0eba1-9960-42c9-bf9b-60e150b429ae",
+          tab: "Tab 1",
+          group: "Group 1"
+        }
+      ]
+    };
 
     const result = await CreateDocumentTypeTool().handler(docTypeModel, { 
       signal: new AbortController().signal 

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-element-type should create an element type 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-element-type should create an element type 2`] = `
+{
+  "hasChildren": false,
+  "icon": "icon-document",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "isElement": true,
+  "isFolder": false,
+  "name": "_Test ElementType Created",
+  "parent": null,
+}
+`;
+
+exports[`create-element-type should create an element type with properties 1`] = `
+{
+  "content": [
+    {
+      "text": """",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-element-type should create an element type with properties 2`] = `
+{
+  "hasChildren": false,
+  "icon": "icon-document",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "isElement": true,
+  "isFolder": false,
+  "name": "_Test ElementType Created",
+  "parent": null,
+}
+`;
+
+exports[`create-element-type should handle existing element type 1`] = `
+{
+  "content": [
+    {
+      "text": "Error creating element type:
+{
+  "message": "Request failed with status code 400",
+  "stack": "AxiosError: Request failed with status code 400\\n    at settle (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/node_modules/axios/lib/core/settle.js:19:12)\\n    at IncomingMessage.handleStreamEnd (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/node_modules/axios/lib/adapters/http.js:599:11)\\n    at IncomingMessage.emit (node:events:529:35)\\n    at IncomingMessage.emit (node:domain:489:12)\\n    at endReadableNT (node:internal/streams/readable:1368:12)\\n    at processTicksAndRejections (node:internal/process/task_queues:82:21)\\n    at Axios.request (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/node_modules/axios/lib/core/Axios.js:45:41)\\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\\n    at async /Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/src/tools/document-type/post/create-element-type.ts:108:24\\n    at async Object.handler (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/src/helpers/create-umbraco-tool.ts:18:16)\\n    at async Object.<anonymous> (/Users/philw/Projects/Umbraco/umbraco-mcp/umbraco-mcp/mcp-server/src/tools/document-type/__tests__/create-element-type.test.ts:62:20)",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate alias",
+    "status": 400,
+    "detail": "The specified document type alias is already in use",
+    "operationStatus": "DuplicateAlias"
+  }
+}",
+      "type": "text",
+    },
+  ],
+}
+`;

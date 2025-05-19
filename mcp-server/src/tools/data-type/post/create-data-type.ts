@@ -15,6 +15,8 @@ const CreateDataTypeTool = CreateUmbracoTool(
   4. If a similar data type exists, inform the user and suggest using this one instead.
 
   When creating a new data type you will need to assign a propety editor. 
+  
+  Always create new element types in the root, if you need to create a new element type in a specific folder then move the element type to the correct folder after it has been created.
 
   Below is the list of property editor available by default in Umbraco. Each property editor is followed by an example.
   IMPORTANT: Amend these examples to match the requirements of the data type you are creating. DO NOT STRAY FROM THE EXAMPLES BUT USE THEM AS TEMPLATES.
@@ -55,6 +57,9 @@ const CreateDataTypeTool = CreateUmbracoTool(
   *** Lists Property Editors ***
 
   BlockList 
+
+  IMPORTANT - when creating new block list data types always create the reuired element types first before creating the data type
+
   {"id":"aff61371-d3d3-4dde-9c85-7c01ff330ede","parent":{"id":"6e92aaa2-89b0-48f5-9e68-abff56010e8a"},"name":"Example","editorAlias":"Umbraco.BlockList","editorUiAlias":"Umb.PropertyEditorUi.BlockList","values":[{"alias":"blocks","value":[{"contentElementTypeKey":"c80027e5-7e87-49c1-9b4f-1b9d3fbc2e90","settingsElementTypeKey":"2e1a4fd4-b695-4033-8626-1a45b54e04cb","backgroundColor":"#c05454","iconColor":"#00ff6f"}]},{"alias":"validationLimit","value":{"max":3}},{"alias":"useLiveEditing","value":true},{"alias":"useInlineEditingAsDefault","value":true},{"alias":"maxPropertyWidth","value":"100px"}]}
 
   CheckBoxList 
@@ -118,6 +123,9 @@ const CreateDataTypeTool = CreateUmbracoTool(
   *** Rich Text Property Editors ***
 
   BlockGrid
+
+  IMPORTANT - when creating new block grid data types always create the reuired element types first before creating the data type
+
   {"id":"cfdd79d9-6f18-4b2b-a502-c67b0fb3929c","parent":{"id":"6e92aaa2-89b0-48f5-9e68-abff56010e8a"},"name":"Example","editorAlias":"Umbraco.BlockGrid","editorUiAlias":"Umb.PropertyEditorUi.BlockGrid","values":[{"alias":"gridColumns","value":12},{"alias":"blocks","value":[{"contentElementTypeKey":"c80027e5-7e87-49c1-9b4f-1b9d3fbc2e90","allowAtRoot":true,"allowInAreas":true,"settingsElementTypeKey":"93638715-f76c-4a11-86b1-6a9d66504901","columnSpanOptions":[{"columnSpan":12}],"rowMinSpan":0,"rowMaxSpan":3}]}]}
 
   CodeEditor | Umb.PropertyEditorUi.CodeEditor | Umbraco.Plain.String
