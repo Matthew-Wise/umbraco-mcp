@@ -3,17 +3,12 @@ import type { DocumentTreeItemResponseModel } from "@/umb-management-api/schemas
 import type { DocumentVariantItemResponseModel } from "@/umb-management-api/schemas/documentVariantItemResponseModel.js";
 import { BLANK_UUID } from "../../../constants.js";
 import { DocumentRecycleBinItemResponseModel } from "@/umb-management-api/schemas/documentRecycleBinItemResponseModel.js";
-import { ProblemDetails } from "@/umb-management-api/schemas/problemDetails.js";
-import {
-  CallToolRequest,
-  CallToolResult,
-} from "@modelcontextprotocol/sdk/types.js";
+import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 export class DocumentTestHelper {
-  private static findByName(
-    items: DocumentTreeItemResponseModel[],
-    name: string
-  ): DocumentTreeItemResponseModel | undefined {
+  private static findByName<
+    T extends { variants?: DocumentVariantItemResponseModel[] }
+  >(items: T[], name: string): T | undefined {
     return items.find(
       (item) =>
         Array.isArray(item.variants) &&
