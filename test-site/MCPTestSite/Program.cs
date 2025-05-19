@@ -1,5 +1,10 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+if (!builder.Environment.IsProduction())
+{
+    builder.Configuration.AddJsonFile("appsettings.Local.json", false, true);
+}
+
 builder.CreateUmbracoBuilder()
     .AddBackOffice()
     .AddWebsite()

@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create-member should create a member 1`] = `
+{
+  "createDate": "<normalized>",
+  "email": "test@example.com",
+  "failedPasswordAttempts": 0,
+  "groups": [],
+  "id": "normalized-id",
+  "isApproved": false,
+  "isLockedOut": false,
+  "isTwoFactorEnabled": false,
+  "kind": "Default",
+  "lastLockoutDate": null,
+  "lastLoginDate": null,
+  "lastPasswordChangeDate": null,
+  "memberType": {
+    "collection": null,
+    "icon": "icon-user",
+    "id": "normalized-member-type-id",
+  },
+  "updateDate": "<normalized>",
+  "username": "test@example.com",
+  "values": [],
+  "variants": [
+    {
+      "createDate": "<normalized>",
+      "culture": null,
+      "name": "Test Member",
+      "segment": null,
+      "updateDate": "<normalized>",
+    },
+  ],
+}
+`;
+
+exports[`create-member should create a member with additional properties 1`] = `
+{
+  "content": [
+    {
+      "text": "Error: AxiosError: Request failed with status code 404",
+      "type": "text",
+    },
+  ],
+}
+`;
+
+exports[`create-member should create a member with additional properties 2`] = `
+{
+  "createDate": "<normalized>",
+  "email": "test@example.com",
+  "failedPasswordAttempts": 0,
+  "groups": [],
+  "id": "normalized-id",
+  "isApproved": false,
+  "isLockedOut": false,
+  "isTwoFactorEnabled": false,
+  "kind": "Default",
+  "lastLockoutDate": null,
+  "lastLoginDate": null,
+  "lastPasswordChangeDate": null,
+  "memberType": {
+    "collection": null,
+    "icon": "icon-user",
+    "id": "normalized-member-type-id",
+  },
+  "updateDate": "<normalized>",
+  "username": "test@example.com",
+  "values": [],
+  "variants": [
+    {
+      "createDate": "<normalized>",
+      "culture": null,
+      "name": "Test Member",
+      "segment": null,
+      "updateDate": "<normalized>",
+    },
+  ],
+}
+`;
