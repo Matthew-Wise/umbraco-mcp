@@ -7,32 +7,20 @@ const GetPropertyTypeIsUsedTool = CreateUmbracoTool(
   "Checks if a property type is used within Umbraco",
   getPropertyTypeIsUsedQueryParams.shape,
   async ({ contentTypeId, propertyAlias }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getPropertyTypeIsUsed({
-        contentTypeId,
-        propertyAlias,
-      });
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getPropertyTypeIsUsed({
+      contentTypeId,
+      propertyAlias,
+    });
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error checking property type usage:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
