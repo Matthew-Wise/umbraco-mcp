@@ -4,7 +4,16 @@ exports[`update-dictionary-item should handle non-existent dictionary item 1`] =
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using update-dictionary-item:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The dictionary item could not be found",
+    "status": 404,
+    "operationStatus": "ItemNotFound"
+  }
+}",
       "type": "text",
     },
   ],

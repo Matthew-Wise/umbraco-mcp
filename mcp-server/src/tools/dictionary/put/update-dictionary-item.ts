@@ -16,29 +16,17 @@ const UpdateDictionaryItemTool = CreateUmbracoTool(
     data: z.object(putDictionaryByIdBody.shape),
   },
   async (model: { id: string; data: UpdateDictionaryItemRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.putDictionaryById(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.putDictionaryById(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

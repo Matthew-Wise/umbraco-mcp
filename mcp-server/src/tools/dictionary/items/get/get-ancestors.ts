@@ -7,28 +7,16 @@ const GetDictionaryAncestorsTool = CreateUmbracoTool(
   "Gets the ancestors of a dictionary item by Id",
   getTreeDictionaryAncestorsQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getTreeDictionaryAncestors(params);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting dictionary ancestors:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getTreeDictionaryAncestors(params);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
