@@ -7,29 +7,17 @@ const GetUserGroupsTool = CreateUmbracoTool(
   "Gets all user groups",
   getUserGroupQueryParams.shape,
   async ({ skip, take }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getUserGroup({ skip, take });
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getUserGroup({ skip, take });
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting user groups:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response, null, 2),
+        },
+      ],
+    };
   }
 );
 
