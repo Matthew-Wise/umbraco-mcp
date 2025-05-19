@@ -44,6 +44,6 @@ describe("create-temporary-file", () => {
       File: createReadStream("nonexistent.jpg")
     }, { signal: new AbortController().signal });
 
-    expect(result).toMatchSnapshot();
+    expect(TemporaryFileTestHelper.cleanFilePaths(result)).toMatchSnapshot();
   });
 }); 
