@@ -4,32 +4,20 @@ import { getDataTypeByIdReferencesParams } from "@/umb-management-api/umbracoMan
 
 const GetReferencesDataTypeTool = CreateUmbracoTool(
   "get-references-data-type",
-  "Gets a data type by Id",
+  "Gets where a data type is used by Id",
   getDataTypeByIdReferencesParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getDataTypeByIdReferences(id);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getDataTypeByIdReferences(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

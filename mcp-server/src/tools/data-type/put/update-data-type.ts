@@ -16,29 +16,17 @@ const UpdateDataTypeTool = CreateUmbracoTool(
     data: z.object(putDataTypeByIdBody.shape),
   },
   async (model: { id: string; data: UpdateDataTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.putDataTypeById(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.putDataTypeById(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

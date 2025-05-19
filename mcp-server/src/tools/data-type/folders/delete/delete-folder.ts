@@ -7,29 +7,17 @@ const DeleteDataTypeFolderTool = CreateUmbracoTool(
   "Deletes a data type folder by Id",
   deleteDataTypeFolderByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.deleteDataTypeFolderById(id);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.deleteDataTypeFolderById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -15,29 +15,17 @@ const CopyDataTypeTool = CreateUmbracoTool(
     body: z.object(postDataTypeByIdCopyBody.shape),
   },
   async ({ id, body }: { id: string; body: CopyDataTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.postDataTypeByIdCopy(id, body);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.postDataTypeByIdCopy(id, body);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error copying data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -8,29 +8,17 @@ const CreateDataTypeFolderTool = CreateUmbracoTool(
   "Creates a new data type folder",
   postDataTypeFolderBody.shape,
   async (model: CreateFolderRequestModel) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.postDataTypeFolder(model);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.postDataTypeFolder(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

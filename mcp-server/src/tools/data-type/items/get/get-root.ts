@@ -8,28 +8,16 @@ const GetDataTypeRootTool = CreateUmbracoTool(
   "Gets the root level of the data type and data type folders in the tree.",
   getTreeDataTypeRootQueryParams.shape,
   async (params: GetTreeDataTypeRootParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getTreeDataTypeRoot(params);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting data type root:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getTreeDataTypeRoot(params);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

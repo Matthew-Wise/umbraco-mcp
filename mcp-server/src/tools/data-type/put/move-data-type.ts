@@ -10,35 +10,23 @@ import { z } from "zod";
 
 const MoveDataTypeTool = CreateUmbracoTool(
   "move-data-type",
-  "Updates a data type by Id",
+  "Move a data type by Id",
   {
     id: putDataTypeByIdMoveParams.shape.id,
-    data: z.object(putDataTypeByIdMoveBody.shape),
+    body: z.object(putDataTypeByIdMoveBody.shape),
   },
-  async (model: { id: string; data: MoveDataTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.putDataTypeByIdMove(model.id, model.data);
+  async ({ id, body }: { id: string; body: MoveDataTypeRequestModel }) => {
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.putDataTypeByIdMove(id, body);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating data type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

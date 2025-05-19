@@ -23,8 +23,9 @@ describe("move-data-type", () => {
 
   it("should move a data type", async () => {
     // Create a folder
-    const folderBuilder = await new DataTypeFolderBuilder(TEST_FOLDER_NAME)
-      .create();
+    const folderBuilder = await new DataTypeFolderBuilder(
+      TEST_FOLDER_NAME
+    ).create();
 
     // Create a data type to move
     const builder = await new DataTypeBuilder()
@@ -33,14 +34,17 @@ describe("move-data-type", () => {
       .create();
 
     // Move the data type
-    const result = await MoveDataTypeTool().handler({
-      id: builder.getId(),
-      data: {
-        target: {
-          id: folderBuilder.getId()
-        }
-      }
-    }, { signal: new AbortController().signal });
+    const result = await MoveDataTypeTool().handler(
+      {
+        id: builder.getId(),
+        body: {
+          target: {
+            id: folderBuilder.getId(),
+          },
+        },
+      },
+      { signal: new AbortController().signal }
+    );
 
     // Verify the handler response using snapshot
     expect(result).toMatchSnapshot();
@@ -58,28 +62,34 @@ describe("move-data-type", () => {
       .withTextbox()
       .create();
 
-    const result = await MoveDataTypeTool().handler({
-      id: builder.getId(),
-      data: {
-        target: {
-          id: BLANK_UUID
-        }
-      }
-    }, { signal: new AbortController().signal });
+    const result = await MoveDataTypeTool().handler(
+      {
+        id: builder.getId(),
+        body: {
+          target: {
+            id: BLANK_UUID,
+          },
+        },
+      },
+      { signal: new AbortController().signal }
+    );
 
     // Verify the error response using snapshot
     expect(result).toMatchSnapshot();
   });
 
   it("should handle moving non-existent data type", async () => {
-    const result = await MoveDataTypeTool().handler({
-      id: BLANK_UUID,
-      data: {
-        target: {
-          id: BLANK_UUID
-        }
-      }
-    }, { signal: new AbortController().signal });
+    const result = await MoveDataTypeTool().handler(
+      {
+        id: BLANK_UUID,
+        body: {
+          target: {
+            id: BLANK_UUID,
+          },
+        },
+      },
+      { signal: new AbortController().signal }
+    );
 
     // Verify the error response using snapshot
     expect(result).toMatchSnapshot();

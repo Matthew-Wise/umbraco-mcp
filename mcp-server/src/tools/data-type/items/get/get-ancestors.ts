@@ -7,28 +7,17 @@ const GetDataTypeAncestorsTool = CreateUmbracoTool(
   "Gets the ancestors of a data type by Id",
   getTreeDataTypeAncestorsQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getTreeDataTypeAncestors(params);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting data type ancestors:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getTreeDataTypeAncestors(params);
+
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
