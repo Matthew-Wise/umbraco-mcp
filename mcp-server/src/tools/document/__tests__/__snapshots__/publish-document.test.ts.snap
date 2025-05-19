@@ -4,7 +4,16 @@ exports[`publish-document should handle publishing a non-existent document 1`] =
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using publish-document:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The requested document could not be found",
+    "status": 404,
+    "operationStatus": "ContentNotFound"
+  }
+}",
       "type": "text",
     },
   ],

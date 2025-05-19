@@ -9,28 +9,16 @@ const CreateDocumentTool = CreateUmbracoTool(
   For most cases, the Copy document endpoint is recommended due to the complexity of the document schema.`,
   postDocumentBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postDocument(model);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating document:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postDocument(model);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

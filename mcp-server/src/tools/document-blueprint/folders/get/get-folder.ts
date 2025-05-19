@@ -7,28 +7,16 @@ const GetDocumentBlueprintFolderTool = CreateUmbracoTool(
   "Gets a document blueprint folder by Id",
   getDocumentBlueprintFolderByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getDocumentBlueprintFolderById(id);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document blueprint folder:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getDocumentBlueprintFolderById(id);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

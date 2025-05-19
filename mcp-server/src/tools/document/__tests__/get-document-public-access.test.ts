@@ -50,7 +50,5 @@ describe("get-document-public-access", () => {
   it("should handle non-existent document", async () => {
     const result = await GetDocumentPublicAccessTool().handler({ id: BLANK_UUID }, { signal: new AbortController().signal });
     expect(result).toMatchSnapshot();
-    const text = result.content[0].text as string;
-    expect(text.startsWith("Error:")).toBe(true);
   });
 }); 

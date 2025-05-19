@@ -8,31 +8,19 @@ const MoveDocumentTool = CreateUmbracoTool(
   "Move a document to a new location",
   {
     id: z.string().uuid(),
-    data: z.object(putDocumentByIdMoveBody.shape)
+    data: z.object(putDocumentByIdMoveBody.shape),
   },
   async (model: { id: string; data: any }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentByIdMove(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error moving document:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentByIdMove(model.id, model.data);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

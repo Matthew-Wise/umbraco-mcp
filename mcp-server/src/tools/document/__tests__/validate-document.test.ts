@@ -57,6 +57,6 @@ describe("validate-document", () => {
       template: null
     };
     const result = await ValidateDocumentTool().handler(invalidModel as any, { signal: new AbortController().signal });
-    expect(result).toMatchSnapshot();
+    expect(DocumentTestHelper.normalizeErrorResponse(result)).toMatchSnapshot();
   });
 }); 

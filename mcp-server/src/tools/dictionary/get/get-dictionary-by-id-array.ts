@@ -7,28 +7,16 @@ const GetDictionaryByIdArrayTool = CreateUmbracoTool(
   "Gets dictionary items by IDs (or empty array if no IDs are provided)",
   getItemDictionaryQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemDictionary(params);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting dictionary items:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemDictionary(params);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

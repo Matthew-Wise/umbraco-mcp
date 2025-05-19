@@ -9,28 +9,16 @@ const GetDocumentByIdTool = CreateUmbracoTool(
   first get an existing document of similar type, then use the Copy document endpoint.`,
   getDocumentByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getDocumentById(id);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getDocumentById(id);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

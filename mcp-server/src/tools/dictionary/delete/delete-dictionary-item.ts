@@ -7,29 +7,17 @@ const DeleteDictionaryItemTool = CreateUmbracoTool(
   "Deletes a dictionary item by Id",
   deleteDictionaryByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.deleteDictionaryById(id);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.deleteDictionaryById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating dictionary item:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

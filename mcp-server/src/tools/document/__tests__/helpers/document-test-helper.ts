@@ -1,13 +1,20 @@
 import { UmbracoManagementClient } from "@/clients/umbraco-management-client.js";
-import type { DocumentTreeItemResponseModel } from "../../../../api/umbraco/management/schemas/documentTreeItemResponseModel.js";
-import type { DocumentVariantItemResponseModel } from "../../../../api/umbraco/management/schemas/documentVariantItemResponseModel.js";
+import type { DocumentTreeItemResponseModel } from "@/umb-management-api/schemas/documentTreeItemResponseModel.js";
+import type { DocumentVariantItemResponseModel } from "@/umb-management-api/schemas/documentVariantItemResponseModel.js";
 import { BLANK_UUID } from "../../../constants.js";
 import { DocumentRecycleBinItemResponseModel } from "@/umb-management-api/schemas/documentRecycleBinItemResponseModel.js";
+import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 export class DocumentTestHelper {
-  private static findByName(items: DocumentTreeItemResponseModel[], name: string): DocumentTreeItemResponseModel | undefined {
-    return items.find((item) =>
-      Array.isArray(item.variants) && item.variants.some((variant: DocumentVariantItemResponseModel) => variant.name === name)
+  private static findByName<
+    T extends { variants?: DocumentVariantItemResponseModel[] }
+  >(items: T[], name: string): T | undefined {
+    return items.find(
+      (item) =>
+        Array.isArray(item.variants) &&
+        item.variants.some(
+          (variant: DocumentVariantItemResponseModel) => variant.name === name
+        )
     );
   }
 
@@ -18,9 +25,11 @@ export class DocumentTestHelper {
     return "";
   }
 
-  static normaliseIds(items: DocumentTreeItemResponseModel | DocumentTreeItemResponseModel[]): DocumentTreeItemResponseModel | DocumentTreeItemResponseModel[] {
+  static normaliseIds(
+    items: DocumentTreeItemResponseModel | DocumentTreeItemResponseModel[]
+  ): DocumentTreeItemResponseModel | DocumentTreeItemResponseModel[] {
     if (Array.isArray(items)) {
-      return items.map(item => ({ ...item, id: BLANK_UUID }));
+      return items.map((item) => ({ ...item, id: BLANK_UUID }));
     }
     return { ...items, id: BLANK_UUID };
   }
@@ -41,7 +50,9 @@ export class DocumentTestHelper {
     }
   }
 
-  static async findDocument(name: string): Promise<DocumentTreeItemResponseModel | undefined> {
+  static async findDocument(
+    name: string
+  ): Promise<DocumentTreeItemResponseModel | undefined> {
     try {
       const client = UmbracoManagementClient.getClient();
       // First check root level
@@ -54,13 +65,18 @@ export class DocumentTestHelper {
       for (const item of rootResponse.items) {
         if (item.hasChildren) {
           try {
-            const childrenResponse = await client.getTreeDocumentChildren({ parentId: item.id });
+            const childrenResponse = await client.getTreeDocumentChildren({
+              parentId: item.id,
+            });
             const childMatch = this.findByName(childrenResponse.items, name);
             if (childMatch) {
               return childMatch;
             }
           } catch (error) {
-            console.log(`Error getting children for document ${item.id}:`, error);
+            console.log(
+              `Error getting children for document ${item.id}:`,
+              error
+            );
           }
         }
       }
@@ -71,7 +87,9 @@ export class DocumentTestHelper {
     }
   }
 
-  static async findDocumentInRecycleBin(name: string): Promise<DocumentRecycleBinItemResponseModel | undefined> {
+  static async findDocumentInRecycleBin(
+    name: string
+  ): Promise<DocumentRecycleBinItemResponseModel | undefined> {
     try {
       const client = UmbracoManagementClient.getClient();
       // Check recycle bin root level
@@ -84,19 +102,27 @@ export class DocumentTestHelper {
       for (const item of recycleBinResponse.items) {
         if (item.hasChildren) {
           try {
-            const childrenResponse = await client.getRecycleBinDocumentChildren({ parentId: item.id });
+            const childrenResponse = await client.getRecycleBinDocumentChildren(
+              { parentId: item.id }
+            );
             const childMatch = this.findByName(childrenResponse.items, name);
             if (childMatch) {
               return childMatch;
             }
           } catch (error) {
-            console.log(`Error getting children for document ${item.id}:`, error);
+            console.log(
+              `Error getting children for document ${item.id}:`,
+              error
+            );
           }
         }
       }
       return undefined;
     } catch (error) {
-      console.log(`Error finding documents with name '${name}' in recycle bin:`, error);
+      console.log(
+        `Error finding documents with name '${name}' in recycle bin:`,
+        error
+      );
       return undefined;
     }
   }
@@ -110,9 +136,27 @@ export class DocumentTestHelper {
     }
   }
 
-  static async getChildren(parentId: string, take: number = 10): Promise<DocumentTreeItemResponseModel[]> {
+  static async getChildren(
+    parentId: string,
+    take: number = 10
+  ): Promise<DocumentTreeItemResponseModel[]> {
     const client = UmbracoManagementClient.getClient();
     const response = await client.getTreeDocumentChildren({ parentId, take });
     return response.items;
+  }
+
+  static normalizeErrorResponse(result: CallToolResult): CallToolResult {
+    if (
+      Array.isArray(result.content) &&
+      result.content[0]?.text &&
+      typeof result.content[0].text === "string"
+    ) {
+      // Replace any traceId in the text with a normalized version
+      result.content[0].text = result.content[0].text.replace(
+        /00-[0-9a-f]{32}-[0-9a-f]{16}-00/g,
+        "normalized-trace-id"
+      );
+    }
+    return result;
   }
 } 

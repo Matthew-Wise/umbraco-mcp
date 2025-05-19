@@ -7,28 +7,16 @@ const MoveDocumentToRecycleBinTool = CreateUmbracoTool(
   "Move a document to the recycle bin",
   putDocumentByIdMoveToRecycleBinParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentByIdMoveToRecycleBin(id);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error moving document to recycle bin:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentByIdMoveToRecycleBin(id);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

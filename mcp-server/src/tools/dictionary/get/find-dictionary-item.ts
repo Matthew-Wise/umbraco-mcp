@@ -8,29 +8,17 @@ const FindDictionaryItemTool = CreateUmbracoTool(
   "Finds a dictionary by Id or name",
   getDictionaryQueryParams.shape,
   async (model: GetDictionaryParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getDictionary(model);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getDictionary(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting dictionary item:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

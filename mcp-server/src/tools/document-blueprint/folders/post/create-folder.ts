@@ -7,28 +7,16 @@ const CreateDocumentBlueprintFolderTool = CreateUmbracoTool(
   "Creates a new document blueprint folder",
   postDocumentBlueprintFolderBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.postDocumentBlueprintFolder(model);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating document blueprint folder:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.postDocumentBlueprintFolder(model);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

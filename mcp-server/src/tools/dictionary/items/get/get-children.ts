@@ -7,28 +7,16 @@ const GetDictionaryChildrenTool = CreateUmbracoTool(
   "Gets the children of a dictionary item by Id",
   getTreeDictionaryChildrenQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.getTreeDictionaryChildren(params);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting dictionary children:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.getTreeDictionaryChildren(params);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

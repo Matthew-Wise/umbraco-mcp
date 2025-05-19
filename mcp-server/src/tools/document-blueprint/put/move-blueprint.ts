@@ -9,31 +9,22 @@ const MoveDocumentBlueprintTool = CreateUmbracoTool(
   "Moves a document blueprint by Id",
   {
     id: putDocumentBlueprintByIdMoveParams.shape.id,
-    data: z.object(putDocumentBlueprintByIdMoveBody.shape)
+    data: z.object(putDocumentBlueprintByIdMoveBody.shape),
   },
-  async (model: { id: string; data: MoveDocumentBlueprintRequestModel}) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.putDocumentBlueprintByIdMove(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error moving document blueprint:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+  async (model: { id: string; data: MoveDocumentBlueprintRequestModel }) => {
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.putDocumentBlueprintByIdMove(
+      model.id,
+      model.data
+    );
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -28,7 +28,17 @@ exports[`create-dictionary-item should handle existing dictionary item 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 409",
+      "text": "Error using create-dictionary:
+{
+  "message": "Request failed with status code 409",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate dictionary item name detected",
+    "status": 409,
+    "detail": "Another dictionary item exists with the same name. Dictionary item names must be unique.",
+    "operationStatus": "DuplicateItemKey"
+  }
+}",
       "type": "text",
     },
   ],

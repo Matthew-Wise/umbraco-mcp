@@ -9,31 +9,19 @@ const PutDocumentDomainsTool = CreateUmbracoTool(
   Domain isoCode in the domains array should be in the format of 'en-US' amd be a valid domain name from the Umbraco instance.`,
   {
     id: putDocumentByIdDomainsParams.shape.id,
-    data: z.object(putDocumentByIdDomainsBody.shape)
+    data: z.object(putDocumentByIdDomainsBody.shape),
   },
   async (model: { id: string; data: any }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentByIdDomains(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating document domains:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentByIdDomains(model.id, model.data);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

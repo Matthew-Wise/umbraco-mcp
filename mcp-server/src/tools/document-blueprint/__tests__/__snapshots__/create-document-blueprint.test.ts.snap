@@ -30,7 +30,17 @@ exports[`create-document-blueprint should handle existing document blueprint 1`]
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using create-document-blueprint:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate name",
+    "status": 400,
+    "detail": "The supplied name is already in use for the same content type.",
+    "operationStatus": "DuplicateName"
+  }
+}",
       "type": "text",
     },
   ],

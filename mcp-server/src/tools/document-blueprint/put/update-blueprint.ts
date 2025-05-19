@@ -9,31 +9,19 @@ const UpdateDocumentBlueprintTool = CreateUmbracoTool(
   "Updates a document blueprint by Id",
   {
     id: putDocumentBlueprintByIdParams.shape.id,
-    data: z.object(putDocumentBlueprintByIdBody.shape)
+    data: z.object(putDocumentBlueprintByIdBody.shape),
   },
   async (model: { id: string; data: UpdateDocumentBlueprintRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.putDocumentBlueprintById(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating document blueprint:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.putDocumentBlueprintById(model.id, model.data);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

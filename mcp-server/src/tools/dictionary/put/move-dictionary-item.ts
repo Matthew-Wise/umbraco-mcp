@@ -9,31 +9,19 @@ const MoveDictionaryItemTool = CreateUmbracoTool(
   "Moves a dictionary item by Id",
   {
     id: putDictionaryByIdMoveParams.shape.id,
-    data: z.object(putDictionaryByIdMoveBody.shape)
+    data: z.object(putDictionaryByIdMoveBody.shape),
   },
-  async (model: { id: string; data: MoveDictionaryRequestModel}) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.putDictionaryByIdMove(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error moving dictionary item:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+  async (model: { id: string; data: MoveDictionaryRequestModel }) => {
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.putDictionaryByIdMove(model.id, model.data);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
