@@ -8,27 +8,19 @@ const UpdateDocumentBlueprintFolderTool = CreateUmbracoTool(
   "Updates a document blueprint folder",
   {
     id: putDocumentBlueprintFolderByIdParams.shape.id,
-    data: z.object(putDocumentBlueprintFolderByIdBody.shape)
+    data: z.object(putDocumentBlueprintFolderByIdBody.shape),
   },
   async ({ id, data }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentBlueprintFolderById(id, data);
-      return {
-        content: [{
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentBlueprintFolderById(id, data);
+    return {
+      content: [
+        {
           type: "text" as const,
-          text: JSON.stringify(response)
-        }]
-      };
-    } catch (error) {
-      console.error("Error updating document blueprint folder:", error);
-      return {
-        content: [{
-          type: "text" as const,
-          text: `Error: ${error}`
-        }]
-      };
-    }
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
