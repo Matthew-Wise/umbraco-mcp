@@ -4,7 +4,16 @@ exports[`update-member-group should handle non-existent member group 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using update-member-group:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The requested member group could not be found",
+    "status": 404,
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

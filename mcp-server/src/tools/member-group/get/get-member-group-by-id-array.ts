@@ -7,30 +7,18 @@ const GetMemberGroupByIdArrayTool = CreateUmbracoTool(
   "Gets member groups by an array of IDs",
   getItemMemberGroupQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemMemberGroup(params);
-      // Validate response shape
-      getItemMemberGroupResponse.parse(response);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting member groups by id array:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemMemberGroup(params);
+    // Validate response shape
+    getItemMemberGroupResponse.parse(response);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
