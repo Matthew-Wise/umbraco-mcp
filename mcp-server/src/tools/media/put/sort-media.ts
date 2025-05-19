@@ -7,28 +7,16 @@ const SortMediaTool = CreateUmbracoTool(
   "Sorts the order of media items under a parent.",
   putMediaSortBody.shape,
   async (model: any) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putMediaSort(model);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error sorting media:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putMediaSort(model);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

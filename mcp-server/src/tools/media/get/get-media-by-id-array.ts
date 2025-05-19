@@ -7,30 +7,18 @@ const GetMediaByIdArrayTool = CreateUmbracoTool(
   "Gets media items by an array of IDs",
   getItemMediaQueryParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemMedia(params);
-      // Validate response shape
-      getItemMediaResponse.parse(response);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting media by id array:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemMedia(params);
+    // Validate response shape
+    getItemMediaResponse.parse(response);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

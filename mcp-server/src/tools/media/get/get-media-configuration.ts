@@ -7,30 +7,18 @@ const GetMediaConfigurationTool = CreateUmbracoTool(
   "Gets the media configuration for the Umbraco instance.",
   {},
   async () => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getMediaConfiguration();
-      // Optionally validate response
-      getMediaConfigurationResponse.parse(response);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting media configuration:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getMediaConfiguration();
+    // Optionally validate response
+    getMediaConfigurationResponse.parse(response);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

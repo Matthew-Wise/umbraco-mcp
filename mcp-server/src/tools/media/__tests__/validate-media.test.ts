@@ -3,7 +3,7 @@ import { MediaBuilder } from "./helpers/media-builder.js";
 import { MediaTestHelper } from "./helpers/media-test-helper.js";
 import { jest } from "@jest/globals";
 import { TemporaryFileBuilder } from "../../temporary-file/__tests__/helpers/temporary-file-builder.js";
-
+import { normalizeErrorResponse } from "@/helpers/test-utils.js";
 const TEST_MEDIA_NAME = "_Test ValidateMedia";
 
 // Helper to build a valid validation model from a created media
@@ -25,12 +25,12 @@ async function buildValidationModel() {
       {
         name: TEST_MEDIA_NAME,
         culture: null,
-        segment: null
-      }
+        segment: null,
+      },
     ],
     id: model.id,
     parent: model.parent ? { id: model.parent.id } : undefined,
-    mediaType: model.mediaType
+    mediaType: model.mediaType,
   };
 }
 
@@ -49,7 +49,9 @@ describe("validate-media", () => {
 
   it("should validate a valid media", async () => {
     const model = await buildValidationModel();
-    const result = await ValidateMediaTool().handler(model, { signal: new AbortController().signal });
+    const result = await ValidateMediaTool().handler(model, {
+      signal: new AbortController().signal,
+    });
     expect(result).toMatchSnapshot();
   });
 
@@ -58,9 +60,11 @@ describe("validate-media", () => {
     const invalidModel = {
       values: [],
       variants: [{ name: "", culture: null, segment: null }],
-      mediaType: undefined
+      mediaType: undefined,
     };
-    const result = await ValidateMediaTool().handler(invalidModel as any, { signal: new AbortController().signal });
-    expect(result).toMatchSnapshot();
+    const result = await ValidateMediaTool().handler(invalidModel as any, {
+      signal: new AbortController().signal,
+    });
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
 }); 

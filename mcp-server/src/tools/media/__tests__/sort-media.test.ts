@@ -47,33 +47,40 @@ describe("sort-media", () => {
       .withParent(folderBuilder.getId())
       .create();
 
-    const result = await SortMediaTool().handler({
-      parent: {
-        id: folderBuilder.getId()
-      },
-      sorting: [
-        { id: media2Builder.getId(), sortOrder: 0 },
-        { id: media1Builder.getId(), sortOrder: 1 }
-      ]
-    }, { signal: new AbortController().signal });
+    var folderOrder = await folderBuilder.getChildren();
 
-    expect(result).toBeDefined();
-    expect(result.content).toBeDefined();
-    expect(result.content.length).toBeGreaterThan(0);
+    const result = await SortMediaTool().handler(
+      {
+        parent: {
+          id: folderBuilder.getId(),
+        },
+        sorting: [{ id: media2Builder.getId(), sortOrder: 0 }],
+      },
+      {
+        signal: new AbortController().signal,
+      }
+    );
+
+    var folderReOrdered = await folderBuilder.getChildren();
+
+    expect(folderReOrdered.items).toEqual(folderOrder.items.reverse());
     expect(result).toMatchSnapshot();
   });
 
   it("should handle non-existent parent", async () => {
-    const result = await SortMediaTool().handler({
-      parent: {
-        id: BLANK_UUID
+    const result = await SortMediaTool().handler(
+      {
+        parent: {
+          id: BLANK_UUID,
+        },
+        sorting: [],
       },
-      sorting: []
-    }, { signal: new AbortController().signal });
+      { signal: new AbortController().signal }
+    );
 
     expect(result).toBeDefined();
     expect(result.content).toBeDefined();
     expect(result.content.length).toBeGreaterThan(0);
     expect(result).toMatchSnapshot();
   });
-}); 
+});
