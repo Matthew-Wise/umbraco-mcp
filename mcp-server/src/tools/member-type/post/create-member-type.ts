@@ -8,29 +8,17 @@ const CreateMemberTypeTool = CreateUmbracoTool(
   "Creates a new member type",
   postMemberTypeBody.shape,
   async (model: CreateMemberTypeRequestModel) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.postMemberType(model);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.postMemberType(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating member type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

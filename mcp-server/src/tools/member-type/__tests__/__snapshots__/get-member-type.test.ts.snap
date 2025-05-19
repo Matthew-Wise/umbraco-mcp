@@ -15,7 +15,17 @@ exports[`get-member-type should handle non-existent member type 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using get-member-type:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "Not Found",
+    "status": 404,
+    "detail": "The specified member type was not found",
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

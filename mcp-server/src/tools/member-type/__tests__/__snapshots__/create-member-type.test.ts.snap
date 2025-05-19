@@ -15,7 +15,24 @@ exports[`create-member-type should handle invalid member type data 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using create-member-type:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+    "title": "One or more validation errors occurred.",
+    "status": 400,
+    "errors": {
+      "Icon": [
+        "The Icon field is required."
+      ],
+      "Alias": [
+        "The Alias field is required."
+      ]
+    },
+    "traceId": "normalized-trace-id"
+  }
+}",
       "type": "text",
     },
   ],

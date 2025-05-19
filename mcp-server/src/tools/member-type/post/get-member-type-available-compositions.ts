@@ -7,29 +7,17 @@ const GetMemberTypeAvailableCompositionsTool = CreateUmbracoTool(
   "Gets the available compositions for a member type",
   postMemberTypeAvailableCompositionsBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postMemberTypeAvailableCompositions(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postMemberTypeAvailableCompositions(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting available member type compositions:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
