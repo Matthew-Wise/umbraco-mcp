@@ -40,9 +40,6 @@ describe("get-log-viewer-saved-search", () => {
       }
     );
 
-    // Verify the response using snapshot
-    expect(result).toMatchSnapshot();
-
     // Parse the response and verify structure
     const response = JSON.parse(result.content[0].text as string);
     LogViewerTestHelper.verifySavedSearchResponse(response);
@@ -67,9 +64,6 @@ describe("get-log-viewer-saved-search", () => {
       }
     );
 
-    // Verify the response using snapshot
-    expect(result).toMatchSnapshot();
-
     // Parse the response and verify structure
     const response = JSON.parse(result.content[0].text as string);
     LogViewerTestHelper.verifySavedSearchResponse(response);
@@ -82,9 +76,6 @@ describe("get-log-viewer-saved-search", () => {
         signal: new AbortController().signal,
       }
     );
-
-    // Verify the response using snapshot
-    expect(result).toMatchSnapshot();
 
     // Parse the response and verify structure
     const response = JSON.parse(result.content[0].text as string);

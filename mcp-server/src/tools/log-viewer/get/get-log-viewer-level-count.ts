@@ -8,29 +8,17 @@ const GetLogViewerLevelCountTool = CreateUmbracoTool(
   "Get log viewer level counts",
   getLogViewerLevelCountQueryParams.shape,
   async (model: GetLogViewerLevelCountParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getLogViewerLevelCount(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getLogViewerLevelCount(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting log viewer level counts:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

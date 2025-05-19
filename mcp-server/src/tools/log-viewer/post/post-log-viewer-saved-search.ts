@@ -8,29 +8,17 @@ const PostLogViewerSavedSearchTool = CreateUmbracoTool(
   "Create a new log viewer saved search",
   postLogViewerSavedSearchBody.shape,
   async (model: SavedLogSearchRequestModel) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      await client.postLogViewerSavedSearch(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postLogViewerSavedSearch(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify({ success: true }),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating log viewer saved search:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

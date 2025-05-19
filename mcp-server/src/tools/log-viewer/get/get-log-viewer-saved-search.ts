@@ -8,29 +8,17 @@ const GetLogViewerSavedSearchTool = CreateUmbracoTool(
   "Get log viewer saved searches",
   getLogViewerSavedSearchQueryParams.shape,
   async (model: GetLogViewerSavedSearchParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getLogViewerSavedSearch(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getLogViewerSavedSearch(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting log viewer saved searches:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

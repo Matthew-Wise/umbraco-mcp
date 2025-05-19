@@ -4,7 +4,7 @@ exports[`delete-log-viewer-saved-search-by-name should delete a saved search by 
 {
   "content": [
     {
-      "text": "{"success":true}",
+      "text": """",
       "type": "text",
     },
   ],
@@ -15,7 +15,11 @@ exports[`delete-log-viewer-saved-search-by-name should handle empty name paramet
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using delete-log-viewer-saved-search-by-name:
+{
+  "message": "Request failed with status code 404",
+  "response": ""
+}",
       "type": "text",
     },
   ],
@@ -26,7 +30,16 @@ exports[`delete-log-viewer-saved-search-by-name should handle non-existent saved
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using delete-log-viewer-saved-search-by-name:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The log search could not be found",
+    "status": 404,
+    "operationStatus": "NotFoundLogSearch"
+  }
+}",
       "type": "text",
     },
   ],

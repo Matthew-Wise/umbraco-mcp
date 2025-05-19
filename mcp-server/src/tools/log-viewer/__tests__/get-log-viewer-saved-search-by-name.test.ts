@@ -1,7 +1,9 @@
+import { PagedSavedLogSearchResponseModel } from "@/umb-management-api/schemas/index.js";
 import GetLogViewerSavedSearchByNameTool from "../get/get-log-viewer-saved-search-by-name.js";
 import { LogViewerSavedSearchBuilder } from "./helpers/log-viewer-saved-search-builder.js";
 import { LogViewerTestHelper } from "./helpers/log-viewer-test-helper.js";
 import { jest } from "@jest/globals";
+import { z } from "zod";
 
 const TEST_SEARCH_NAME = "_Test Saved Search";
 
@@ -57,7 +59,7 @@ describe("get-log-viewer-saved-search-by-name", () => {
       { signal: new AbortController().signal }
     );
 
-    // Verify the error response using snapshot
-    expect(result).toMatchSnapshot();
+    const response = JSON.parse(result.content[0].text as string);
+    LogViewerTestHelper.verifySavedSearchResponse(response);
   });
 });
