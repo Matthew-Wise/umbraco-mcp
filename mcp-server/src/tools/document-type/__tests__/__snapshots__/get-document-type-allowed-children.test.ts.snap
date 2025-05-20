@@ -26,7 +26,17 @@ exports[`get-document-type-allowed-children should handle non-existent document 
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using get-document-type-allowed-children:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "Not Found",
+    "status": 404,
+    "detail": "The specified document type was not found",
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

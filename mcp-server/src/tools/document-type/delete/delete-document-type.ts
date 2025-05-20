@@ -7,29 +7,17 @@ const DeleteDocumentTypeTool = CreateUmbracoTool(
   "Deletes a document type by Id",
   deleteDocumentTypeByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.deleteDocumentTypeById(id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.deleteDocumentTypeById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error deleting document type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -4,7 +4,17 @@ exports[`move-media-type should handle non-existent media type 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using move-media-type:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "Not Found",
+    "status": 404,
+    "detail": "The specified media type was not found",
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

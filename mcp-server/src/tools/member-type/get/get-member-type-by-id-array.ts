@@ -7,29 +7,17 @@ const GetMemberTypesByIdArrayTool = CreateUmbracoTool(
   "Gets member types by IDs (or empty array if no IDs are provided)",
   getItemMemberTypeQueryParams.shape,
   async (params: { id?: string[] }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemMemberType(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemMemberType(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting item member types:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

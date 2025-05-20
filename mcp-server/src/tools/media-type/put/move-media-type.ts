@@ -9,32 +9,20 @@ const MoveMediaTypeTool = CreateUmbracoTool(
   "Move a media type to a new location",
   {
     id: z.string().uuid(),
-    data: z.object(putMediaTypeByIdMoveBody.shape)
+    data: z.object(putMediaTypeByIdMoveBody.shape),
   },
   async (model: { id: string; data: MoveMediaTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putMediaTypeByIdMove(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putMediaTypeByIdMove(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error moving media type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

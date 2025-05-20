@@ -8,29 +8,17 @@ const CreateUserGroupTool = CreateUmbracoTool(
   "Creates a new user group",
   postUserGroupBody.shape,
   async (model: CreateUserGroupRequestModel) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.postUserGroup(model);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.postUserGroup(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating user group:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

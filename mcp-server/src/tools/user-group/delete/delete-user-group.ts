@@ -7,29 +7,17 @@ const DeleteUserGroupTool = CreateUmbracoTool(
   "Deletes a user group by Id",
   deleteUserGroupByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      var response = await client.deleteUserGroupById(id);
+    const client = UmbracoManagementClient.getClient();
+    var response = await client.deleteUserGroupById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error deleting user group:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

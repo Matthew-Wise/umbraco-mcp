@@ -8,29 +8,17 @@ const GetLogViewerMessageTemplateTool = CreateUmbracoTool(
   "Get log viewer message templates",
   getLogViewerMessageTemplateQueryParams.shape,
   async (model: GetLogViewerMessageTemplateParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getLogViewerMessageTemplate(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getLogViewerMessageTemplate(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting log viewer message templates:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

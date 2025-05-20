@@ -7,28 +7,16 @@ const MoveMediaToRecycleBinTool = CreateUmbracoTool(
   "Move a media item to the recycle bin",
   putMediaByIdMoveToRecycleBinParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putMediaByIdMoveToRecycleBin(id);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error moving media to recycle bin:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putMediaByIdMoveToRecycleBin(id);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

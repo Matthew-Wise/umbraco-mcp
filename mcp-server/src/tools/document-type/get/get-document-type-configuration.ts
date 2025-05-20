@@ -6,28 +6,16 @@ const GetDocumentTypeConfigurationTool = CreateUmbracoTool(
   "Gets the global configuration for document types",
   {},
   async () => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getDocumentTypeConfiguration();
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting document type configuration:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getDocumentTypeConfiguration();
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -14,28 +14,16 @@ const UpdateMediaTool = CreateUmbracoTool(
     data: z.object(putMediaByIdBody.shape),
   },
   async (model: { id: string; data: any }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putMediaById(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating media:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putMediaById(model.id, model.data);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

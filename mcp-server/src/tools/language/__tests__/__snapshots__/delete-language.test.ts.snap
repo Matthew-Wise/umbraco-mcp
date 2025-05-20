@@ -15,7 +15,16 @@ exports[`delete-language should handle non-existent language 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using delete-language:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The language could not be found",
+    "status": 404,
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

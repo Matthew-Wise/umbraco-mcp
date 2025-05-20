@@ -40,100 +40,82 @@ IMPORTANT: IMPLEMENTATION REQUIREMENTS
    - The tool will automatically create the container hierarchy`,
   createElementTypeSchema.shape,
   async (model: CreateElementTypeModel) => {
-    try {
-      // Generate UUIDs for the element type and its components
-      const elementTypeId = uuidv4();
-      
-      // Create the container hierarchy
-      const { containers, containerIds } = createContainerHierarchy(model.properties);
+    // Generate UUIDs for the element type and its components
+    const elementTypeId = uuidv4();
 
-      // Create properties with their container references
-      const properties = model.properties.map((prop, index) => {
-        // Determine which container to use
-        let containerId: string | undefined;
-        if (prop.group) {
-          containerId = containerIds.get(prop.group);
-        } else if (prop.tab) {
-          containerId = containerIds.get(prop.tab);
-        }
+    // Create the container hierarchy
+    const { containers, containerIds } = createContainerHierarchy(
+      model.properties
+    );
 
-        return {
-          id: uuidv4(),
-          name: prop.name,
-          alias: prop.alias,
-          dataType: { 
-            id: prop.dataTypeId
-          },
-          sortOrder: index,
-          appearance: {
-            labelOnTop: false
-          },
-          validation: {
-            regEx: null,
-            mandatory: false,
-            regExMessage: null,
-            mandatoryMessage: null
-          },
-          variesByCulture: false,
-          variesBySegment: false,
-          container: containerId ? { id: containerId } : undefined
-        };
-      });
-      
-      // Create the element type payload
-      const payload = {
-        id: elementTypeId,
-        icon: model.icon,
-        name: model.name,
-        alias: model.alias,
-        description: model.description || "",
-        cleanup: {
-          preventCleanup: false
+    // Create properties with their container references
+    const properties = model.properties.map((prop, index) => {
+      // Determine which container to use
+      let containerId: string | undefined;
+      if (prop.group) {
+        containerId = containerIds.get(prop.group);
+      } else if (prop.tab) {
+        containerId = containerIds.get(prop.tab);
+      }
+
+      return {
+        id: uuidv4(),
+        name: prop.name,
+        alias: prop.alias,
+        dataType: {
+          id: prop.dataTypeId,
         },
-        isElement: true,
-        containers,
-        properties,
-        compositions: model.compositions.map(id => ({
-          documentType: { id },
-          compositionType: "Composition" as const
-        })),
-        allowedAsRoot: false,
+        sortOrder: index,
+        appearance: {
+          labelOnTop: false,
+        },
+        validation: {
+          regEx: null,
+          mandatory: false,
+          regExMessage: null,
+          mandatoryMessage: null,
+        },
         variesByCulture: false,
         variesBySegment: false,
-        allowedTemplates: [],
-        allowedDocumentTypes: []
+        container: containerId ? { id: containerId } : undefined,
       };
+    });
 
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postDocumentType(payload);
+    // Create the element type payload
+    const payload = {
+      id: elementTypeId,
+      icon: model.icon,
+      name: model.name,
+      alias: model.alias,
+      description: model.description || "",
+      cleanup: {
+        preventCleanup: false,
+      },
+      isElement: true,
+      containers,
+      properties,
+      compositions: model.compositions.map((id) => ({
+        documentType: { id },
+        compositionType: "Composition" as const,
+      })),
+      allowedAsRoot: false,
+      variesByCulture: false,
+      variesBySegment: false,
+      allowedTemplates: [],
+      allowedDocumentTypes: [],
+    };
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response, null, 2),
-          },
-        ],
-      };
-    } catch (error) {
-      const errorDetails = error instanceof Error 
-        ? {
-            message: error.message,
-            stack: error.stack,
-            cause: error.cause,
-            response: (error as any).response?.data
-          }
-        : error;
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postDocumentType(payload);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error creating element type:\n${JSON.stringify(errorDetails, null, 2)}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response, null, 2),
+        },
+      ],
+    };
   }
 );
 

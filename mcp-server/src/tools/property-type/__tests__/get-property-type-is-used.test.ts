@@ -1,6 +1,9 @@
 import { getPropertyTypeIsUsedQueryParams } from "@/umb-management-api/umbracoManagementAPI.zod.js";
 import GetPropertyTypeIsUsedTool from "../get/get-property-type-is-used.js";
-import { createSnapshotResult } from "@/helpers/test-utils.js";
+import {
+  createSnapshotResult,
+  normalizeErrorResponse,
+} from "@/helpers/test-utils.js";
 import { jest } from "@jest/globals";
 import { PropertyTypeTestHelper } from "./helpers/property-type-test-helper.js";
 
@@ -37,6 +40,6 @@ describe("get-property-type-is-used", () => {
     const result = await GetPropertyTypeIsUsedTool().handler(params, {
       signal: new AbortController().signal,
     });
-    expect(result).toMatchSnapshot();
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
 });

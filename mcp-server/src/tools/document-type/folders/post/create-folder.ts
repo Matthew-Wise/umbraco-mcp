@@ -8,29 +8,17 @@ const CreateDocumentTypeFolderTool = CreateUmbracoTool(
   "Creates a new document type folder",
   postDocumentTypeFolderBody.shape,
   async (model: CreateFolderRequestModel) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postDocumentTypeFolder(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postDocumentTypeFolder(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating document type folder:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

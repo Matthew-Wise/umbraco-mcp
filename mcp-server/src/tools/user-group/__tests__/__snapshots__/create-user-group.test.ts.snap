@@ -39,7 +39,17 @@ exports[`create-user-group should handle existing user group 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 409",
+      "text": "Error using create-user-group:
+{
+  "message": "Request failed with status code 409",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate alias",
+    "status": 409,
+    "detail": "A user group already exists with the attempted alias.",
+    "operationStatus": "DuplicateAlias"
+  }
+}",
       "type": "text",
     },
   ],

@@ -8,29 +8,17 @@ const GetLogViewerValidateLogsSizeTool = CreateUmbracoTool(
   "Validates the size of the logs, for the given start and end date, or the lase day if not provided",
   getLogViewerValidateLogsSizeQueryParams.shape,
   async (model: GetLogViewerValidateLogsSizeParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getLogViewerValidateLogsSize(model);
+    const client = UmbracoManagementClient.getClient();
+    await client.getLogViewerValidateLogsSize(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: "allowed access",
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error validating logs size:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: "allowed access",
+        },
+      ],
+    };
   }
 );
 

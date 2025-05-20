@@ -7,28 +7,16 @@ const ValidateMediaTool = CreateUmbracoTool(
   "Validates a media item using the Umbraco API.",
   postMediaValidateBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postMediaValidate(model);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error validating media:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postMediaValidate(model);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

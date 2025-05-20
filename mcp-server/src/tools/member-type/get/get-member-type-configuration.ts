@@ -6,29 +6,17 @@ const GetMemberTypeConfigurationTool = CreateUmbracoTool(
   "Gets the configuration for member types",
   {},
   async () => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getMemberTypeConfiguration();
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getMemberTypeConfiguration();
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting member type configuration:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

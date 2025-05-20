@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`update-member should return error for non-existent ID 1`] = `
+{
+  "content": [
+    {
+      "text": "Error using update-member:
+{
+  "message": "Request failed with status code 500",
+  "response": {
+    "type": "Error",
+    "title": "Unknown error. Please see the log for more details.",
+    "status": 500,
+    "operationStatus": "Unknown"
+  }
+}",
+      "type": "text",
+    },
+  ],
+}
+`;

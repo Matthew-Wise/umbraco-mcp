@@ -29,7 +29,8 @@ You are an expert in TypeScript and Jest and testing Model Context Protocol impl
 - test the tool handlers not MCP itself
 - any api params should use the zod schema to parse objects
 - always remove any UUID's for id's and parent id's as these cause snapshots to fail. Use the helper provider to convert these into blank id's
-- for the act phase of testing alsways use the call to the tool handle. For the arrange always use the helper or the builder.
+- for the act phase of testing always use the call to the tool handle. For the arrange always use the helper or the builder.
+- any password field will need to be at least 10 characters and contain at least one number and one symbol.
 
 The Dictionary entity is the gold standard for testing. Use this as a reference for creating new feature testing suites. This is both in terms of the splitting between logical api endpoints and the number of tests created.
 

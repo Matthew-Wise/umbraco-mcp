@@ -15,29 +15,17 @@ const UpdateDocumentTypeTool = CreateUmbracoTool(
     data: z.object(putDocumentTypeByIdBody.shape),
   },
   async (model: { id: string; data: UpdateDocumentTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentTypeById(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentTypeById(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating document type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

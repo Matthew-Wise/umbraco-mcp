@@ -1,6 +1,9 @@
 import { MemberTypeTestHelper } from "./helpers/member-type-helper.js";
 import CreateMemberTypeTool from "../post/create-member-type.js";
-import { createSnapshotResult } from "@/helpers/test-utils.js";
+import {
+  createSnapshotResult,
+  normalizeErrorResponse,
+} from "@/helpers/test-utils.js";
 import { jest } from "@jest/globals";
 import { MemberTypeBuilder } from "./helpers/member-type-builder.js";
 
@@ -24,14 +27,18 @@ describe("create-member-type", () => {
       .withDescription("Test member type description")
       .withAllowedAsRoot(true);
 
-    const result = await CreateMemberTypeTool().handler(builder.build(), { signal: new AbortController().signal });
+    const result = await CreateMemberTypeTool().handler(builder.build(), {
+      signal: new AbortController().signal,
+    });
 
     // Normalize and verify response
     const normalizedItems = createSnapshotResult(result);
     expect(normalizedItems).toMatchSnapshot();
 
     // Verify the member type was created
-    const items = await MemberTypeTestHelper.findMemberTypes(TEST_MEMBER_TYPE_NAME);
+    const items = await MemberTypeTestHelper.findMemberTypes(
+      TEST_MEMBER_TYPE_NAME
+    );
     expect(items.length).toBe(1);
     expect(items[0].name).toBe(TEST_MEMBER_TYPE_NAME);
   });
@@ -42,8 +49,10 @@ describe("create-member-type", () => {
       // Missing required fields
     };
 
-    const result = await CreateMemberTypeTool().handler(invalidModel as any, { signal: new AbortController().signal });
+    const result = await CreateMemberTypeTool().handler(invalidModel as any, {
+      signal: new AbortController().signal,
+    });
 
-    expect(result).toMatchSnapshot();
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
 }); 

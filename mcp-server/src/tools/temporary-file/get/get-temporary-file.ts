@@ -7,29 +7,17 @@ const GetTemporaryFileTool = CreateUmbracoTool(
   "Gets a temporary file by id",
   getTemporaryFileByIdParams.shape,
   async (params) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getTemporaryFileById(params.id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getTemporaryFileById(params.id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting temporary file:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

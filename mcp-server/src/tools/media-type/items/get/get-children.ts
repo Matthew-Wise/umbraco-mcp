@@ -8,29 +8,17 @@ const GetMediaTypeChildrenTool = CreateUmbracoTool(
   "Gets the children of a media type",
   getTreeMediaTypeChildrenQueryParams.shape,
   async (params: GetTreeMediaTypeChildrenParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getTreeMediaTypeChildren(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getTreeMediaTypeChildren(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting media type children:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

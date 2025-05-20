@@ -7,29 +7,17 @@ const SearchDocumentTypeTool = CreateUmbracoTool(
   "Search for document types by name",
   getItemDocumentTypeSearchQueryParams.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getItemDocumentTypeSearch(model);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getItemDocumentTypeSearch(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error searching document types:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

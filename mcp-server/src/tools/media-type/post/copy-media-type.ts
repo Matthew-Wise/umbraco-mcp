@@ -5,36 +5,24 @@ import { z } from "zod";
 import { CopyMediaTypeRequestModel } from "@/umb-management-api/schemas/copyMediaTypeRequestModel.js";
 
 const CopyMediaTypeTool = CreateUmbracoTool(
-  "copy-media-type", 
+  "copy-media-type",
   "Copy a media type to a new location",
   {
     id: z.string().uuid(),
-    data: z.object(postMediaTypeByIdCopyBody.shape)
+    data: z.object(postMediaTypeByIdCopyBody.shape),
   },
   async (model: { id: string; data: CopyMediaTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postMediaTypeByIdCopy(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postMediaTypeByIdCopy(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error copying media type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

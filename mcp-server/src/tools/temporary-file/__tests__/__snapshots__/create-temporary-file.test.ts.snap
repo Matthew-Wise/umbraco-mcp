@@ -25,7 +25,17 @@ exports[`create-temporary-file should handle file not found 1`] = `
 {
   "content": [
     {
-      "text": "Error: Error: ENOENT: no such file or directory, open 'nonexistent.jpg'",
+      "text": "Error using create-temporary-file:
+{
+  "message": "ENOENT: no such file or directory, open <image path>",
+  "cause": {
+    "errno": -4058,
+    "code": "ENOENT",
+    "syscall": "open",
+    "path": "<image path>"
+  },
+  "path": "<image path>"
+}",
       "type": "text",
     },
   ],

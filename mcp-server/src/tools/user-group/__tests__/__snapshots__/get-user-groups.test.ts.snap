@@ -4,7 +4,160 @@ exports[`GetUserGroupsTool should handle empty result 1`] = `
 {
   "content": [
     {
-      "text": "{"total":5,"items":[{"id":"e5e7f6c8-7f9c-4b5b-8d5d-9e1e5a4f7e4d","isDeletable":false,"aliasCanBeChanged":false,"name":"Administrators","alias":"admin","icon":"icon-medal","sections":["Umb.Section.Content","Umb.Section.Forms","Umb.Section.Media","Umb.Section.Members","Umb.Section.Packages","Umb.Section.Settings","Umb.Section.Translation","Umb.Section.Users"],"languages":[],"hasAccessToAllLanguages":true,"documentStartNode":null,"documentRootAccess":true,"mediaStartNode":null,"mediaRootAccess":true,"fallbackPermissions":["Umb.Document.Create","Umb.Document.Update","Umb.Document.Delete","Umb.Document.Move","Umb.Document.Duplicate","Umb.Document.Sort","Umb.Document.Rollback","Umb.Document.PublicAccess","Umb.Document.CultureAndHostnames","Umb.Document.Publish","Umb.Document.Permissions","Umb.Document.Unpublish","Umb.Document.Read","Umb.Document.CreateBlueprint","Umb.Document.Notifications",":","5","7","T"],"permissions":[]},{"id":"44dc260e-b4d4-4dd9-9081-eec5598f1641","isDeletable":true,"aliasCanBeChanged":true,"name":"Editors","alias":"editor","icon":"icon-tools","sections":["Umb.Section.Content","Umb.Section.Forms","Umb.Section.Media"],"languages":[],"hasAccessToAllLanguages":true,"documentStartNode":null,"documentRootAccess":true,"mediaStartNode":null,"mediaRootAccess":true,"fallbackPermissions":["Umb.Document.Create","Umb.Document.Update","Umb.Document.Delete","Umb.Document.Move","Umb.Document.Duplicate","Umb.Document.Sort","Umb.Document.Rollback","Umb.Document.PublicAccess","Umb.Document.Publish","Umb.Document.Unpublish","Umb.Document.Read","Umb.Document.CreateBlueprint","Umb.Document.Notifications",":","5","T"],"permissions":[]},{"id":"8c6ad70f-d307-4e4a-af58-72c2e4e9439d","isDeletable":false,"aliasCanBeChanged":false,"name":"Sensitive data","alias":"sensitiveData","icon":"icon-lock","sections":[],"languages":[],"hasAccessToAllLanguages":false,"documentStartNode":null,"documentRootAccess":false,"mediaStartNode":null,"mediaRootAccess":false,"fallbackPermissions":[],"permissions":[]},{"id":"f2012e4c-d232-4bd1-8eae-4384032d97d8","isDeletable":false,"aliasCanBeChanged":false,"name":"Translators","alias":"translator","icon":"icon-globe","sections":["Umb.Section.Translation"],"languages":[],"hasAccessToAllLanguages":true,"documentStartNode":null,"documentRootAccess":true,"mediaStartNode":null,"mediaRootAccess":true,"fallbackPermissions":["Umb.Document.Update","Umb.Document.Read"],"permissions":[]},{"id":"9fc2a16f-528c-46d6-a014-75bf4ec2480c","isDeletable":true,"aliasCanBeChanged":true,"name":"Writers","alias":"writer","icon":"icon-edit","sections":["Umb.Section.Content"],"languages":[],"hasAccessToAllLanguages":true,"documentStartNode":null,"documentRootAccess":true,"mediaStartNode":null,"mediaRootAccess":true,"fallbackPermissions":["Umb.Document.Create","Umb.Document.Update","Umb.Document.Read","Umb.Document.Notifications",":"],"permissions":[]}]}",
+      "text": "{
+  "total": 5,
+  "items": [
+    {
+      "id": "e5e7f6c8-7f9c-4b5b-8d5d-9e1e5a4f7e4d",
+      "isDeletable": false,
+      "aliasCanBeChanged": false,
+      "name": "Administrators",
+      "alias": "admin",
+      "icon": "icon-medal",
+      "sections": [
+        "Umb.Section.Content",
+        "Umb.Section.Forms",
+        "Umb.Section.Media",
+        "Umb.Section.Members",
+        "Umb.Section.Packages",
+        "Umb.Section.Settings",
+        "Umb.Section.Translation",
+        "Umb.Section.Workflow",
+        "Umb.Section.Users"
+      ],
+      "languages": [],
+      "hasAccessToAllLanguages": true,
+      "documentStartNode": null,
+      "documentRootAccess": true,
+      "mediaStartNode": null,
+      "mediaRootAccess": true,
+      "fallbackPermissions": [
+        "Umb.Document.Create",
+        "Umb.Document.Update",
+        "Umb.Document.Delete",
+        "Umb.Document.Move",
+        "Umb.Document.Duplicate",
+        "Umb.Document.Sort",
+        "Umb.Document.Rollback",
+        "Umb.Document.PublicAccess",
+        "Umb.Document.CultureAndHostnames",
+        "Umb.Document.Publish",
+        "Umb.Document.Permissions",
+        "Umb.Document.Unpublish",
+        "Umb.Document.Read",
+        "Umb.Document.CreateBlueprint",
+        "Umb.Document.Notifications",
+        ":",
+        "5",
+        "7",
+        "T"
+      ],
+      "permissions": []
+    },
+    {
+      "id": "44dc260e-b4d4-4dd9-9081-eec5598f1641",
+      "isDeletable": true,
+      "aliasCanBeChanged": true,
+      "name": "Editors",
+      "alias": "editor",
+      "icon": "icon-tools",
+      "sections": [
+        "Umb.Section.Content",
+        "Umb.Section.Forms",
+        "Umb.Section.Media"
+      ],
+      "languages": [],
+      "hasAccessToAllLanguages": true,
+      "documentStartNode": null,
+      "documentRootAccess": true,
+      "mediaStartNode": null,
+      "mediaRootAccess": true,
+      "fallbackPermissions": [
+        "Umb.Document.Create",
+        "Umb.Document.Update",
+        "Umb.Document.Delete",
+        "Umb.Document.Move",
+        "Umb.Document.Duplicate",
+        "Umb.Document.Sort",
+        "Umb.Document.Rollback",
+        "Umb.Document.PublicAccess",
+        "Umb.Document.Publish",
+        "Umb.Document.Unpublish",
+        "Umb.Document.Read",
+        "Umb.Document.CreateBlueprint",
+        "Umb.Document.Notifications",
+        ":",
+        "5",
+        "T"
+      ],
+      "permissions": []
+    },
+    {
+      "id": "8c6ad70f-d307-4e4a-af58-72c2e4e9439d",
+      "isDeletable": false,
+      "aliasCanBeChanged": false,
+      "name": "Sensitive data",
+      "alias": "sensitiveData",
+      "icon": "icon-lock",
+      "sections": [],
+      "languages": [],
+      "hasAccessToAllLanguages": false,
+      "documentStartNode": null,
+      "documentRootAccess": false,
+      "mediaStartNode": null,
+      "mediaRootAccess": false,
+      "fallbackPermissions": [],
+      "permissions": []
+    },
+    {
+      "id": "f2012e4c-d232-4bd1-8eae-4384032d97d8",
+      "isDeletable": false,
+      "aliasCanBeChanged": false,
+      "name": "Translators",
+      "alias": "translator",
+      "icon": "icon-globe",
+      "sections": [
+        "Umb.Section.Translation"
+      ],
+      "languages": [],
+      "hasAccessToAllLanguages": true,
+      "documentStartNode": null,
+      "documentRootAccess": true,
+      "mediaStartNode": null,
+      "mediaRootAccess": true,
+      "fallbackPermissions": [
+        "Umb.Document.Update",
+        "Umb.Document.Read"
+      ],
+      "permissions": []
+    },
+    {
+      "id": "9fc2a16f-528c-46d6-a014-75bf4ec2480c",
+      "isDeletable": true,
+      "aliasCanBeChanged": true,
+      "name": "Writers",
+      "alias": "writer",
+      "icon": "icon-edit",
+      "sections": [
+        "Umb.Section.Content"
+      ],
+      "languages": [],
+      "hasAccessToAllLanguages": true,
+      "documentStartNode": null,
+      "documentRootAccess": true,
+      "mediaStartNode": null,
+      "mediaRootAccess": true,
+      "fallbackPermissions": [
+        "Umb.Document.Create",
+        "Umb.Document.Update",
+        "Umb.Document.Read",
+        "Umb.Document.Notifications",
+        ":"
+      ],
+      "permissions": []
+    }
+  ]
+}",
       "type": "text",
     },
   ],

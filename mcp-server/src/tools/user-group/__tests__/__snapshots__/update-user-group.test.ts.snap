@@ -4,7 +4,16 @@ exports[`update-user-group should handle non-existent user group 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using update-user-group:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The user group could not be found",
+    "status": 404,
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

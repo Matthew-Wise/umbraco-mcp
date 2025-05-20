@@ -63,29 +63,17 @@ const GetServerTroubleshootingTool = CreateUmbracoTool(
   }`,
   {},
   async () => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getServerTroubleshooting();
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getServerTroubleshooting();
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting server troubleshooting information:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

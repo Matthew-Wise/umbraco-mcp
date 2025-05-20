@@ -3,6 +3,7 @@ import CreateWebhookTool from "../post/create-webhook.js";
 import { jest } from "@jest/globals";
 import { WebhookBuilder } from "./helpers/webhook-builder.js";
 import { CONTENT_PUBLISHED_EVENT, TEST_WEBHOOOK_URL } from "./webhook-constants.js";
+import { normalizeErrorResponse } from "@/helpers/test-utils.js";
 
 describe("create-webhook", () => {
   const TEST_WEBHOOK_NAME = "_Test Webhook";
@@ -22,9 +23,11 @@ describe("create-webhook", () => {
     const builder = new WebhookBuilder()
       .withName(TEST_WEBHOOK_NAME)
       .withUrl(TEST_WEBHOOOK_URL)
-      .withEvents([CONTENT_PUBLISHED_EVENT])
+      .withEvents([CONTENT_PUBLISHED_EVENT]);
 
-    const result = await CreateWebhookTool().handler(builder.build(), { signal: new AbortController().signal });
+    const result = await CreateWebhookTool().handler(builder.build(), {
+      signal: new AbortController().signal,
+    });
 
     // Normalize and verify response
     expect(result).toMatchSnapshot();
@@ -41,9 +44,10 @@ describe("create-webhook", () => {
       // Missing required URL field
     };
 
-    const result = await CreateWebhookTool().handler(invalidModel as any, { signal: new AbortController().signal });
+    const result = await CreateWebhookTool().handler(invalidModel as any, {
+      signal: new AbortController().signal,
+    });
 
-    expect(result).toMatchSnapshot();
+    expect(normalizeErrorResponse(result)).toMatchSnapshot();
   });
-
 }); 

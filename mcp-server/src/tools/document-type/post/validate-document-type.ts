@@ -7,29 +7,16 @@ const ValidateDocumentTypePostTool = CreateUmbracoTool(
   "Validates a document type using the Umbraco API (POST, does not persist changes).",
   postDocumentTypeBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      // This will validate the model, but not persist if the API supports dry-run/validation only
-      const response = await client.postDocumentType(model);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error validating document type (POST):", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postDocumentType(model);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

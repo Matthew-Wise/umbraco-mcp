@@ -1,6 +1,5 @@
 import { MemberTypeTestHelper } from "./helpers/member-type-helper.js";
 import UpdateMemberTypeTool from "../put/update-member-type.js";
-import { createSnapshotResult } from "@/helpers/test-utils.js";
 import { jest } from "@jest/globals";
 import { MemberTypeBuilder } from "./helpers/member-type-builder.js";
 import { BLANK_UUID } from "../../constants.js";

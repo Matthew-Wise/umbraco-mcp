@@ -1,5 +1,6 @@
-import { createSnapshotResult } from "../test-utils.js";
+import { createSnapshotResult, normalizeErrorResponse } from "../test-utils.js";
 import { BLANK_UUID } from "../../tools/constants.js";
+import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 describe("createSnapshotResult", () => {
   const TEST_UUID = "12345678-1234-1234-1234-123456789012";
@@ -19,9 +20,7 @@ describe("createSnapshotResult", () => {
     it("should handle non-text content items unchanged", () => {
       // Arrange
       const input = {
-        content: [
-          { type: "image", url: "test.jpg" }
-        ]
+        content: [{ type: "image", url: "test.jpg" }],
       };
 
       // Act
@@ -37,11 +36,11 @@ describe("createSnapshotResult", () => {
       // Arrange
       const input = {
         content: [
-          { 
+          {
             type: "text",
-            text: `Some text with UUID: ${TEST_UUID}`
-          }
-        ]
+            text: `Some text with UUID: ${TEST_UUID}`,
+          },
+        ],
       };
 
       // Act
@@ -60,10 +59,10 @@ describe("createSnapshotResult", () => {
             text: JSON.stringify({
               id: "some-uuid",
               createDate: "2025-05-03T20:51:08.36+00:00",
-              parent: { id: "parent-uuid" }
-            })
-          }
-        ]
+              parent: { id: "parent-uuid" },
+            }),
+          },
+        ],
       };
       const result = createSnapshotResult(input, "some-uuid");
       const parsed = JSON.parse(result.content[0].text);
@@ -84,16 +83,16 @@ describe("createSnapshotResult", () => {
               {
                 id: TEST_UUID,
                 name: "Item 1",
-                parent: { id: TEST_UUID, name: "Parent" }
+                parent: { id: TEST_UUID, name: "Parent" },
               },
               {
                 id: TEST_UUID,
                 name: "Item 2",
-                parent: null
-              }
-            ])
-          }
-        ]
+                parent: null,
+              },
+            ]),
+          },
+        ],
       };
 
       // Act
@@ -119,18 +118,18 @@ describe("createSnapshotResult", () => {
                 {
                   id: TEST_UUID,
                   name: "Item 1",
-                  parent: { id: TEST_UUID, name: "Parent" }
+                  parent: { id: TEST_UUID, name: "Parent" },
                 },
                 {
                   id: TEST_UUID,
                   name: "Item 2",
-                  parent: null
-                }
+                  parent: null,
+                },
               ],
-              totalItems: 2
-            })
-          }
-        ]
+              totalItems: 2,
+            }),
+          },
+        ],
       };
 
       // Act
@@ -156,17 +155,17 @@ describe("createSnapshotResult", () => {
                 {
                   id: "item-uuid-1",
                   createDate: "2025-05-03T20:51:08.36+00:00",
-                  parent: { id: "parent-uuid-1" }
+                  parent: { id: "parent-uuid-1" },
                 },
                 {
                   id: "item-uuid-2",
                   createDate: "2025-05-03T20:51:09.36+00:00",
-                  parent: { id: "parent-uuid-2" }
-                }
-              ]
-            })
-          }
-        ]
+                  parent: { id: "parent-uuid-2" },
+                },
+              ],
+            }),
+          },
+        ],
       };
       const result = createSnapshotResult(input);
       const parsed = JSON.parse(result.content[0].text);
@@ -187,16 +186,16 @@ describe("createSnapshotResult", () => {
               {
                 id: "ancestor-uuid-1",
                 createDate: "2025-05-03T20:51:08.36+00:00",
-                parent: null
+                parent: null,
               },
               {
                 id: "ancestor-uuid-2",
                 createDate: "2025-05-03T20:51:09.36+00:00",
-                parent: { id: "ancestor-parent-uuid-2" }
-              }
-            ])
-          }
-        ]
+                parent: { id: "ancestor-parent-uuid-2" },
+              },
+            ]),
+          },
+        ],
       };
       const result = createSnapshotResult(input);
       const parsed = JSON.parse(result.content[0].text);
@@ -220,10 +219,10 @@ describe("createSnapshotResult", () => {
               createDate: "2025-05-03T20:51:08.36+00:00",
               publishDate: "2025-05-04T10:00:00.00+00:00",
               updateDate: "2025-05-05T12:00:00.00+00:00",
-              parent: { id: "parent-uuid" }
-            })
-          }
-        ]
+              parent: { id: "parent-uuid" },
+            }),
+          },
+        ],
       };
       const result = createSnapshotResult(input, "some-uuid");
       const parsed = JSON.parse(result.content[0].text);
@@ -244,17 +243,17 @@ describe("createSnapshotResult", () => {
                 {
                   createDate: "2025-05-03T20:51:08.36+00:00",
                   publishDate: "2025-05-04T10:00:00.00+00:00",
-                  updateDate: "2025-05-05T12:00:00.00+00:00"
+                  updateDate: "2025-05-05T12:00:00.00+00:00",
                 },
                 {
                   createDate: "2025-06-03T20:51:08.36+00:00",
                   publishDate: "2025-06-04T10:00:00.00+00:00",
-                  updateDate: "2025-06-05T12:00:00.00+00:00"
-                }
-              ]
-            })
-          }
-        ]
+                  updateDate: "2025-06-05T12:00:00.00+00:00",
+                },
+              ],
+            }),
+          },
+        ],
       };
       const result = createSnapshotResult(input, "some-uuid");
       const parsed = JSON.parse(result.content[0].text);
@@ -274,13 +273,98 @@ describe("createSnapshotResult", () => {
         content: [
           {
             type: "text",
-            text: "Invalid JSON"
-          }
-        ]
+            text: "Invalid JSON",
+          },
+        ],
       };
 
       // Act & Assert
       expect(() => createSnapshotResult(input)).toThrow();
     });
   });
-}); 
+});
+
+describe("normalizeErrorResponse", () => {
+  it("should normalize trace IDs in error response", () => {
+    // Arrange
+    const input: CallToolResult = {
+      content: [
+        {
+          type: "text",
+          text: "Error with trace ID: 00-1234567890abcdef1234567890abcdef-1234567890abcdef-00",
+        },
+      ],
+    };
+
+    // Act
+    const result = normalizeErrorResponse(input);
+
+    // Assert
+    expect(result.content[0].text).toBe(
+      "Error with trace ID: normalized-trace-id"
+    );
+  });
+
+  it("should handle response without content array", () => {
+    // Arrange
+    const input: CallToolResult = {
+      content: [],
+    };
+
+    // Act
+    const result = normalizeErrorResponse(input);
+
+    // Assert
+    expect(result).toEqual(input);
+  });
+
+  it("should handle response with empty content array", () => {
+    // Arrange
+    const input: CallToolResult = {
+      content: [],
+    };
+
+    // Act
+    const result = normalizeErrorResponse(input);
+
+    // Assert
+    expect(result).toEqual(input);
+  });
+
+  it("should handle response with non-text content", () => {
+    // Arrange
+    const input: CallToolResult = {
+      content: [
+        {
+          type: "image",
+          data: "base64data",
+          mimeType: "image/jpeg",
+        },
+      ],
+    };
+
+    // Act
+    const result = normalizeErrorResponse(input);
+
+    // Assert
+    expect(result).toEqual(input);
+  });
+
+  it("should handle response with text content but no trace ID", () => {
+    // Arrange
+    const input: CallToolResult = {
+      content: [
+        {
+          type: "text",
+          text: "Error without trace ID",
+        },
+      ],
+    };
+
+    // Act
+    const result = normalizeErrorResponse(input);
+
+    // Assert
+    expect(result).toEqual(input);
+  });
+});

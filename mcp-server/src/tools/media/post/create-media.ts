@@ -11,28 +11,16 @@ const CreateMediaTool = CreateUmbracoTool(
   - Use the temporary file id when creating a media item using this endpoint`,
   postMediaBody.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postMedia(model);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating media:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postMedia(model);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

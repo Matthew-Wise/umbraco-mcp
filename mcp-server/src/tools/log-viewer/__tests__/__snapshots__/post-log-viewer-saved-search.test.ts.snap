@@ -4,7 +4,7 @@ exports[`post-log-viewer-saved-search should create a saved search 1`] = `
 {
   "content": [
     {
-      "text": "{"success":true}",
+      "text": """",
       "type": "text",
     },
   ],
@@ -15,7 +15,7 @@ exports[`post-log-viewer-saved-search should create a saved search with complex 
 {
   "content": [
     {
-      "text": "{"success":true}",
+      "text": """",
       "type": "text",
     },
   ],
@@ -26,7 +26,17 @@ exports[`post-log-viewer-saved-search should handle existing saved search 1`] = 
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using post-log-viewer-saved-search:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate log search name",
+    "status": 400,
+    "detail": "Another log search already exists with the attempted name.",
+    "operationStatus": "DuplicateLogSearch"
+  }
+}",
       "type": "text",
     },
   ],

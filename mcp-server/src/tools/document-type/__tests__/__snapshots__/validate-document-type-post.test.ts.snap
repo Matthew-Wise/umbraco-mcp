@@ -4,7 +4,27 @@ exports[`validate-document-type-post should handle invalid document type model (
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using validate-document-type-post:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+    "title": "One or more validation errors occurred.",
+    "status": 400,
+    "errors": {
+      "Icon": [
+        "The Icon field is required."
+      ],
+      "Name": [
+        "The Name field is required."
+      ],
+      "Alias": [
+        "The Alias field is required."
+      ]
+    },
+    "traceId": "normalized-trace-id"
+  }
+}",
       "type": "text",
     },
   ],
@@ -15,7 +35,17 @@ exports[`validate-document-type-post should validate a valid document type (POST
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using validate-document-type-post:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate alias",
+    "status": 400,
+    "detail": "The specified document type alias is already in use",
+    "operationStatus": "DuplicateAlias"
+  }
+}",
       "type": "text",
     },
   ],

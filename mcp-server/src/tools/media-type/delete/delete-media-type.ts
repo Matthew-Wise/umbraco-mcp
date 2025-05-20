@@ -7,29 +7,17 @@ const DeleteMediaTypeTool = CreateUmbracoTool(
   "Deletes a media type by Id",
   deleteMediaTypeByIdParams.shape,
   async ({ id }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.deleteMediaTypeById(id);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.deleteMediaTypeById(id);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error deleting media type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

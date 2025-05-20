@@ -18,7 +18,17 @@ exports[`create-language should handle existing language 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using create-language:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate ISO code",
+    "status": 400,
+    "detail": "Another language already exists with the attempted ISO code.",
+    "operationStatus": "DuplicateIsoCode"
+  }
+}",
       "type": "text",
     },
   ],

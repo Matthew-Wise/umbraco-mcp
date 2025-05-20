@@ -4,7 +4,16 @@ exports[`sort-media should handle non-existent parent 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using sort-media:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The content could not be found",
+    "status": 404,
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],
@@ -15,7 +24,7 @@ exports[`sort-media should sort media items 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": """",
       "type": "text",
     },
   ],

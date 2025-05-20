@@ -8,31 +8,19 @@ const MoveMediaTool = CreateUmbracoTool(
   "Move a media item to a new location",
   {
     id: z.string().uuid(),
-    data: z.object(putMediaByIdMoveBody.shape)
+    data: z.object(putMediaByIdMoveBody.shape),
   },
   async (model: { id: string; data: any }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putMediaByIdMove(model.id, model.data);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response)
-          }
-        ]
-      };
-    } catch (error) {
-      console.error("Error moving media:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`
-          }
-        ]
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putMediaByIdMove(model.id, model.data);
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

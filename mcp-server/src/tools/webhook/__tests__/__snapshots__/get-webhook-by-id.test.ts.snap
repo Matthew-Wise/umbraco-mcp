@@ -15,7 +15,15 @@ exports[`get-webhook-by-id should handle non-existent webhook 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using get-webhook-by-id:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The webhook could not be found",
+    "status": 404
+  }
+}",
       "type": "text",
     },
   ],

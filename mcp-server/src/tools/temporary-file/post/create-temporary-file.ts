@@ -15,29 +15,17 @@ const CreateTemporaryFileTool = CreateUmbracoTool(
   `,
   postTemporaryFileBody.shape,
   async (model: PostTemporaryFileBody) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      await client.postTemporaryFile(model);
+    const client = UmbracoManagementClient.getClient();
+    await client.postTemporaryFile(model);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify({ id: model.Id }),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error creating temporary file:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify({ id: model.Id }),
+        },
+      ],
+    };
   }
 );
 

@@ -15,29 +15,17 @@ const UpdateMemberTypeTool = CreateUmbracoTool(
     data: z.object(putMemberTypeByIdBody.shape),
   },
   async (model: { id: string; data: UpdateMemberTypeRequestModel }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putMemberTypeById(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putMemberTypeById(model.id, model.data);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating member type:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -46,103 +46,86 @@ IMPORTANT: IMPLEMENTATION REQUIREMENTS
    - The tool will automatically create the container hierarchy`,
   createDocumentTypeSchema.shape,
   async (model: CreateDocumentTypeModel) => {
-    try {
-      // Generate UUIDs for the document type and its components
-      const documentTypeId = uuidv4();
-      
-      // Create the container hierarchy
-      const { containers, containerIds } = createContainerHierarchy(model.properties);
+    // Generate UUIDs for the document type and its components
+    const documentTypeId = uuidv4();
 
-      // Create properties with their container references
-      const properties = model.properties.map((prop, index) => {
-        // Determine which container to use
-        let containerId: string | undefined;
-        if (prop.group) {
-          containerId = containerIds.get(prop.group);
-        } else if (prop.tab) {
-          containerId = containerIds.get(prop.tab);
-        }
+    // Create the container hierarchy
+    const { containers, containerIds } = createContainerHierarchy(
+      model.properties
+    );
 
-        return {
-          id: uuidv4(),
-          name: prop.name,
-          alias: prop.alias,
-          dataType: { 
-            id: prop.dataTypeId
-          },
-          sortOrder: index,
-          appearance: {
-            labelOnTop: false
-          },
-          validation: {
-            regEx: null,
-            mandatory: false,
-            regExMessage: null,
-            mandatoryMessage: null
-          },
-          variesByCulture: false,
-          variesBySegment: false,
-          container: containerId ? { id: containerId } : undefined
-        };
-      });
-      
-      // Create the document type payload
-      const payload = {
-        id: documentTypeId,
-        icon: model.icon,
-        name: model.name,
-        alias: model.alias,
-        description: model.description || "",
-        cleanup: {
-          preventCleanup: false
+    // Create properties with their container references
+    const properties = model.properties.map((prop, index) => {
+      // Determine which container to use
+      let containerId: string | undefined;
+      if (prop.group) {
+        containerId = containerIds.get(prop.group);
+      } else if (prop.tab) {
+        containerId = containerIds.get(prop.tab);
+      }
+
+      return {
+        id: uuidv4(),
+        name: prop.name,
+        alias: prop.alias,
+        dataType: {
+          id: prop.dataTypeId,
         },
-        isElement: false,
-        containers,
-        properties,
-        compositions: model.compositions.map(id => ({
-          documentType: { id },
-          compositionType: "Composition" as const
-        })),
-        allowedAsRoot: model.allowedAsRoot,
+        sortOrder: index,
+        appearance: {
+          labelOnTop: false,
+        },
+        validation: {
+          regEx: null,
+          mandatory: false,
+          regExMessage: null,
+          mandatoryMessage: null,
+        },
         variesByCulture: false,
         variesBySegment: false,
-        allowedTemplates: [],
-        allowedDocumentTypes: model.allowedDocumentTypes.map((id, index) => ({
-          documentType: { id },
-          sortOrder: index
-        })),
-        collection: model.collection ? { id: model.collection } : undefined
+        container: containerId ? { id: containerId } : undefined,
       };
+    });
 
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.postDocumentType(payload);
+    // Create the document type payload
+    const payload = {
+      id: documentTypeId,
+      icon: model.icon,
+      name: model.name,
+      alias: model.alias,
+      description: model.description || "",
+      cleanup: {
+        preventCleanup: false,
+      },
+      isElement: false,
+      containers,
+      properties,
+      compositions: model.compositions.map((id) => ({
+        documentType: { id },
+        compositionType: "Composition" as const,
+      })),
+      allowedAsRoot: model.allowedAsRoot,
+      variesByCulture: false,
+      variesBySegment: false,
+      allowedTemplates: [],
+      allowedDocumentTypes: model.allowedDocumentTypes.map((id, index) => ({
+        documentType: { id },
+        sortOrder: index,
+      })),
+      collection: model.collection ? { id: model.collection } : undefined,
+    };
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response, null, 2),
-          },
-        ],
-      };
-    } catch (error) {
-      const errorDetails = error instanceof Error 
-        ? {
-            message: error.message,
-            cause: error.cause,
-            response: (error as any).response?.data
-          }
-        : error;
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.postDocumentType(payload);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error creating document type:\n${JSON.stringify(errorDetails, null, 2)}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response, null, 2),
+        },
+      ],
+    };
   }
 );
 

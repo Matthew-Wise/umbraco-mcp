@@ -15,7 +15,16 @@ exports[`create-member-group should handle existing member group 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 400",
+      "text": "Error using create-member-group:
+{
+  "message": "Request failed with status code 400",
+  "response": {
+    "type": "Error",
+    "title": "Duplicate name",
+    "status": 400,
+    "detail": "Another group with the same name already exists."
+  }
+}",
       "type": "text",
     },
   ],

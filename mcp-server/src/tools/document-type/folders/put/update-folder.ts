@@ -14,29 +14,20 @@ const UpdateDocumentTypeFolderTool = CreateUmbracoTool(
     data: z.object(putDocumentTypeFolderByIdBody.shape),
   },
   async (model: { id: string; data: { name: string } }) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.putDocumentTypeFolderById(model.id, model.data);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.putDocumentTypeFolderById(
+      model.id,
+      model.data
+    );
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error updating document type folder:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

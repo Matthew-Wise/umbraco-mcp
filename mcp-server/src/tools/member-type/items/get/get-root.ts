@@ -8,29 +8,17 @@ const GetMemberTypeRootTool = CreateUmbracoTool(
   "Gets the root level of the member type tree",
   getTreeMemberTypeRootQueryParams.shape,
   async (params: GetTreeMemberTypeRootParams) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getTreeMemberTypeRoot(params);
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getTreeMemberTypeRoot(params);
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting member type root:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -15,7 +15,16 @@ exports[`delete-temporary-file should handle non-existent temporary file 1`] = `
 {
   "content": [
     {
-      "text": "Error: AxiosError: Request failed with status code 404",
+      "text": "Error using delete-temporary-file:
+{
+  "message": "Request failed with status code 404",
+  "response": {
+    "type": "Error",
+    "title": "The temporary file could not be found",
+    "status": 404,
+    "operationStatus": "NotFound"
+  }
+}",
       "type": "text",
     },
   ],

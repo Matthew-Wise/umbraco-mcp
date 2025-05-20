@@ -6,28 +6,16 @@ const EmptyRecycleBinTool = CreateUmbracoTool(
   "Empties the media recycle bin.",
   {},
   async () => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.deleteRecycleBinMedia();
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error emptying media recycle bin:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.deleteRecycleBinMedia();
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 

@@ -1,4 +1,5 @@
 import { BLANK_UUID } from "../tools/constants.js";
+import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 export function createSnapshotResult(result: any, idToReplace?: string) {
   if (!result?.content) {
@@ -46,7 +47,8 @@ export function createSnapshotResult(result: any, idToReplace?: string) {
             if (parsed.variants && Array.isArray(parsed.variants)) {
               parsed.variants = parsed.variants.map((variant: any) => {
                 if (variant.createDate) variant.createDate = "NORMALIZED_DATE";
-                if (variant.publishDate) variant.publishDate = "NORMALIZED_DATE";
+                if (variant.publishDate)
+                  variant.publishDate = "NORMALIZED_DATE";
                 if (variant.updateDate) variant.updateDate = "NORMALIZED_DATE";
                 return variant;
               });
@@ -55,7 +57,7 @@ export function createSnapshotResult(result: any, idToReplace?: string) {
           } catch {}
           return {
             ...item,
-            text
+            text,
           };
         } else {
           // For list responses
@@ -64,7 +66,7 @@ export function createSnapshotResult(result: any, idToReplace?: string) {
             // Handle ancestors API response
             return {
               ...item,
-              text: JSON.stringify(parsed.map(normalizeItem))
+              text: JSON.stringify(parsed.map(normalizeItem)),
             };
           }
           // Handle other list responses
@@ -81,11 +83,26 @@ export function createSnapshotResult(result: any, idToReplace?: string) {
           }
           return {
             ...item,
-            text: JSON.stringify(parsed)
+            text: JSON.stringify(parsed),
           };
         }
       }
       return item;
-    })
+    }),
   };
+}
+
+export function normalizeErrorResponse(result: CallToolResult): CallToolResult {
+  if (
+    Array.isArray(result.content) &&
+    result.content[0]?.text &&
+    typeof result.content[0].text === "string"
+  ) {
+    // Replace any traceId in the text with a normalized version
+    result.content[0].text = result.content[0].text.replace(
+      /00-[0-9a-f]{32}-[0-9a-f]{16}-00/g,
+      "normalized-trace-id"
+    );
+  }
+  return result;
 } 

@@ -10,32 +10,20 @@ const GetMediaTypeAllowedChildrenTool = CreateUmbracoTool(
   "Gets the media types that are allowed as children of a media type",
   paramSchema.shape,
   async (model) => {
-    try {
-      const client = UmbracoManagementClient.getClient();
-      const response = await client.getMediaTypeByIdAllowedChildren(model.id, {
-        skip: model.skip,
-        take: model.take
-      });
+    const client = UmbracoManagementClient.getClient();
+    const response = await client.getMediaTypeByIdAllowedChildren(model.id, {
+      skip: model.skip,
+      take: model.take,
+    });
 
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error("Error getting allowed media type children:", error);
-      return {
-        content: [
-          {
-            type: "text" as const,
-            text: `Error: ${error}`,
-          },
-        ],
-      };
-    }
+    return {
+      content: [
+        {
+          type: "text" as const,
+          text: JSON.stringify(response),
+        },
+      ],
+    };
   }
 );
 
