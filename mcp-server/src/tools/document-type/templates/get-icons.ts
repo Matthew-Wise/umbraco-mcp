@@ -1,5 +1,7 @@
 import { CreateUmbracoTool } from "@/helpers/create-umbraco-tool.js";
 
+//TODO: THhis really should be an endpoint
+
 const GetIconsTool = CreateUmbracoTool(
   "get-icons",
   "Returns a list of all available Umbraco icons that can be used in document types and element types",

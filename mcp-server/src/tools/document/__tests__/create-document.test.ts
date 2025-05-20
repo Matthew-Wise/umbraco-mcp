@@ -1,5 +1,4 @@
 import CreateDocumentTool from "../post/create-document.js";
-import { DocumentBuilder } from "./helpers/document-builder.js";
 import { DocumentTestHelper } from "./helpers/document-test-helper.js";
 import { jest } from "@jest/globals";
 import { ROOT_DOCUMENT_TYPE_ID } from "../../constants.js";
@@ -20,11 +19,12 @@ describe("create-document", () => {
   });
 
   it("should create a document", async () => {
-    // Create document model using builder
-    const docModel = new DocumentBuilder()
-      .withName(TEST_DOCUMENT_NAME)
-      .withDocumentType(ROOT_DOCUMENT_TYPE_ID)
-      .build();
+    // Create document model
+    const docModel = {
+      documentTypeId: ROOT_DOCUMENT_TYPE_ID,
+      name: TEST_DOCUMENT_NAME,
+      values: []
+    };
 
     // Create the document
     const result = await CreateDocumentTool().handler(docModel, {
@@ -42,12 +42,20 @@ describe("create-document", () => {
   });
 
   it("should create a document with additional properties", async () => {
-    // Create a more complex document with additional values/variants if supported
-    const docModel = new DocumentBuilder()
-      .withName(TEST_DOCUMENT_NAME)
-      .withDocumentType(ROOT_DOCUMENT_TYPE_ID)
-      .withVariant("Another Variant")
-      .build();
+    // Create a more complex document with additional values
+    const docModel = {
+      documentTypeId: ROOT_DOCUMENT_TYPE_ID,
+      name: TEST_DOCUMENT_NAME,
+      values: [
+        {
+          editorAlias: "Umbraco.TextBox",
+          culture: null,
+          segment: null,
+          alias: "title",
+          value: "Test Value"
+        }
+      ]
+    };
 
     const result = await CreateDocumentTool().handler(docModel, {
       signal: new AbortController().signal
