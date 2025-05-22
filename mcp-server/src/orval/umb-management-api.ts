@@ -17,6 +17,7 @@ export const UmbManagementApiOrvalConfig = defineConfig({
         mutator: {
           path: "./src/orval/client/mutators/umbraco-management.ts",
           name: "UmbracoManagementClient",
+          extension: ".js",
         },
       },
     },

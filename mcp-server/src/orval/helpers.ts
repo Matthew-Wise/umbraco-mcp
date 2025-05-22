@@ -22,14 +22,14 @@ const fixSchemaDirectory = (dir: any) => {
   });
 };
 
-//TODO: Remove  PR for Orval has been merged - https://github.com/orval-labs/orval/pull/1797
 const fixApiFile = (file: any) => {
   const content = fs.readFileSync(file, "utf8");
 
   // Fix TypeScript errors by ensuring proper type annotations and imports
-  const fixedContent = content
-    .replace(/from\s+['"](\.\.\/schemas)['"]/g, "from '$1/index.js'")
-    .replace(/(\.\.\/\.\.\/\.\.\/orval\/client\/mutators\/)(.*)'/g, "$1$2.js'");
+  const fixedContent = content.replace(
+    /from\s+['"](\.\.\/schemas)['"]/g,
+    "from '$1/index.js'"
+  );
 
   fs.writeFileSync(file, fixedContent, "utf8");
 };

@@ -18,6 +18,7 @@ export const UmbWorkflowApiOrvalConfig = defineConfig({
         mutator: {
           path: "./src/orval/client/mutators/umbraco-workflow.ts",
           name: "UmbracoWorkflowClient",
+          extension: ".js",
         },
       },
     },
