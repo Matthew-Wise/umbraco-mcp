@@ -5,7 +5,7 @@ import { getTreeDocumentTypeChildrenQueryParams } from "@/umb-management-api/umb
 
 const GetDocumentTypeChildrenTool = CreateUmbracoTool(
   "get-document-type-children",
-  "Gets the children of a document type",
+  "Gets the children of a document type. Use get-all-document-types instead unless you specifically need only chid level items for a specific folder.",
   getTreeDocumentTypeChildrenQueryParams.shape,
   async (params: GetTreeDocumentTypeChildrenParams) => {
     const client = UmbracoManagementClient.getClient();

@@ -1,11 +1,13 @@
 import { DocumentTypeTestHelper } from "./helpers/document-type-test-helper.js";
 import GetDocumentTypeAncestorsTool from "../items/get/get-ancestors.js";
 import GetDocumentTypeChildrenTool from "../items/get/get-children.js";
+import GetAllDocumentTypesTool from "../items/get/get-all.js";
 import { createSnapshotResult } from "@/test-helpers/create-snapshot-result.js";
 import { jest } from "@jest/globals";
 import { DocumentTypeFolderBuilder } from "./helpers/document-type-folder-builder.js";
 import { DocumentTypeBuilder } from "./helpers/document-type-builder.js";
 import { BLANK_UUID } from "@/constants/constants.js";
+import { DocumentTypeTreeItemResponseModel } from "@/umb-management-api/schemas/index.js";
 
 describe("document-type-tree", () => {
   const TEST_ROOT_NAME = "_Test Root DocumentType";
@@ -99,6 +101,49 @@ describe("document-type-tree", () => {
       );
 
       expect(result).toMatchSnapshot();
+    });
+  });
+
+  describe("get-all", () => {
+    it("should get all document types including nested children", async () => {
+      // Create a nested structure:
+      // Root Folder
+      //   └─ Child Folder
+      //       └─ Grandchild Document Type
+      const rootFolderBuilder = await new DocumentTypeFolderBuilder(
+        TEST_FOLDER_NAME
+      ).create();
+
+      const childFolderBuilder = await new DocumentTypeFolderBuilder(
+        TEST_CHILD_NAME
+      ).withParent(rootFolderBuilder.getId())
+      .create();
+
+      const grandchildBuilder = await new DocumentTypeBuilder()
+        .withName(TEST_ROOT_NAME)
+        .withParent(childFolderBuilder.getId())
+        .create();
+
+      const result = await GetAllDocumentTypesTool().handler(
+        {},
+        { signal: new AbortController().signal }
+      );
+
+      // Parse the response
+      const items = JSON.parse(result.content[0].text?.toString() ?? "[]") as DocumentTypeTreeItemResponseModel[];
+
+      // Verify our test structure exists
+      const rootFolder = items.find(item => item.name === TEST_FOLDER_NAME);
+      const childFolder = items.find(item => item.name === TEST_CHILD_NAME);
+      const grandchild = items.find(item => item.name === TEST_ROOT_NAME);
+
+      expect(rootFolder).toBeDefined();
+      expect(childFolder).toBeDefined();
+      expect(grandchild).toBeDefined();
+
+      // Verify the hierarchy
+      expect(childFolder?.parent?.id).toBe(rootFolder?.id);
+      expect(grandchild?.parent?.id).toBe(childFolder?.id);
     });
   });
 });

@@ -58,27 +58,38 @@ export class DocumentTypeTestHelper {
         return rootMatch;
       }
 
-      // Only check children if we haven't found the document type
-      for (const item of rootResponse.items) {
-        if (item.hasChildren) {
-          try {
-            const childrenResponse = await client.getTreeDocumentTypeChildren({
-              parentId: item.id,
-            });
-            const childMatch = this.findByName(childrenResponse.items, name);
-            if (childMatch) {
-              return childMatch;
+      // Recursively check children
+      async function checkChildren(items: DocumentTypeTreeItemResponseModel[]): Promise<DocumentTypeTreeItemResponseModel | undefined> {
+        for (const item of items) {
+          if (item.hasChildren) {
+            try {
+              const childrenResponse = await client.getTreeDocumentTypeChildren({
+                parentId: item.id,
+              });
+              
+              // Check these children
+              const childMatch = DocumentTypeTestHelper.findByName(childrenResponse.items, name);
+              if (childMatch) {
+                return childMatch;
+              }
+
+              // Recursively check their children
+              const deeperMatch = await checkChildren(childrenResponse.items);
+              if (deeperMatch) {
+                return deeperMatch;
+              }
+            } catch (error) {
+              console.error(
+                `Error getting children for document type ${item.id}:`,
+                error
+              );
             }
-          } catch (error) {
-            console.error(
-              `Error getting children for document type ${item.id}:`,
-              error
-            );
           }
         }
+        return undefined;
       }
 
-      return undefined;
+      return await checkChildren(rootResponse.items);
     } catch (error) {
       console.error(`Error finding document type ${name}:`, error);
       return undefined;

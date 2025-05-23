@@ -5,7 +5,7 @@ import { getTreeDocumentTypeRootQueryParams } from "@/umb-management-api/umbraco
 
 const GetDocumentTypeRootTool = CreateUmbracoTool(
   "get-document-type-root",
-  "Gets the root level of the document type tree",
+  "Gets the root level of the document type tree. Use get-all-document-types instead unless you specifically need only root level items.",
   getTreeDocumentTypeRootQueryParams.shape,
   async (params: GetTreeDocumentTypeRootParams) => {
     const client = UmbracoManagementClient.getClient();
