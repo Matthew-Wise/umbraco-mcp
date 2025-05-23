@@ -15,6 +15,7 @@ import UpdateDataTypeFolderTool from "./folders/put/update-folder.js";
 import GetDataTypeRootTool from "./items/get/get-root.js";
 import GetDataTypeChildrenTool from "./items/get/get-children.js";
 import GetDataTypeAncestorsTool from "./items/get/get-ancestors.js";
+import GetAllDataTypesTool from "./items/get/get-all.js";
 
 export const DataTypeTools = [
   GetDataTypeRootTool,
@@ -32,6 +33,7 @@ export const DataTypeTools = [
   DeleteDataTypeFolderTool,
   GetDataTypeFolderTool,
   UpdateDataTypeFolderTool,
+  GetAllDataTypesTool,
   GetDataTypeChildrenTool,
   GetDataTypeAncestorsTool,
 ];

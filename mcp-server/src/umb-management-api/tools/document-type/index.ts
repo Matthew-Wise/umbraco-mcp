@@ -19,6 +19,7 @@ import GetDocumentTypeConfigurationTool from "./get/get-document-type-configurat
 import GetDocumentTypesByIdArrayTool from "./get/get-document-type-by-id-array.js";
 import GetIconsTool from "./templates/get-icons.js";
 import CreateElementTypeTool from "./post/create-element-type.js";
+import GetAllDocumentTypesTool from "./items/get/get-all.js";
 
 export const DocumentTypeTools = [
   CreateDocumentTypeTool,
@@ -29,6 +30,7 @@ export const DocumentTypeTools = [
   UpdateDocumentTypeTool,
   CopyDocumentTypeTool,
   MoveDocumentTypeTool,
+  GetAllDocumentTypesTool,
   GetDocumentTypeRootTool,
   GetDocumentTypeChildrenTool,
   GetDocumentTypeAncestorsTool,

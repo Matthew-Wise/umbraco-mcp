@@ -1,17 +1,20 @@
 import { UmbracoManagementClient } from "@umb-management-client";
 import { DataTypeTreeItemResponseModel } from "@/umb-management-api/schemas/dataTypeTreeItemResponseModel.js";
-import { BLANK_UUID } from "@/constants/constants.js";
+
+export const BLANK_UUID = "00000000-0000-0000-0000-000000000000";
 
 export class DataTypeTestHelper {
-  private static findByName(
+  static findByName(
     items: DataTypeTreeItemResponseModel[],
     name: string
   ): DataTypeTreeItemResponseModel | undefined {
-    return items.find((item: any) => item.name === name);
+    return items.find((item) => item.name === name);
   }
 
   static normaliseIds(
-    items: DataTypeTreeItemResponseModel | DataTypeTreeItemResponseModel[]
+    items:
+      | DataTypeTreeItemResponseModel
+      | DataTypeTreeItemResponseModel[]
   ): DataTypeTreeItemResponseModel | DataTypeTreeItemResponseModel[] {
     if (Array.isArray(items)) {
       return items.map((item) => ({ ...item, id: BLANK_UUID }));
@@ -21,10 +24,9 @@ export class DataTypeTestHelper {
 
   static async cleanup(name: string): Promise<void> {
     try {
-      const client = UmbracoManagementClient.getClient();
       const item = await this.findDataType(name);
-
       if (item) {
+        const client = UmbracoManagementClient.getClient();
         try {
           if (item.isFolder) {
             await client.deleteDataTypeFolderById(item.id);
@@ -32,11 +34,14 @@ export class DataTypeTestHelper {
             await client.deleteDataTypeById(item.id);
           }
         } catch (deleteError) {
-          console.log(`Error deleting data type ${item.id}:`, deleteError);
+          console.error(
+            `Error deleting data type ${item.id}:`,
+            deleteError
+          );
         }
       }
     } catch (error) {
-      console.log(`Error cleaning up data type '${name}':`, error);
+      console.error(`Error cleaning up data type ${name}:`, error);
     }
   }
 
@@ -53,29 +58,40 @@ export class DataTypeTestHelper {
         return rootMatch;
       }
 
-      // Only check children if we haven't found the data type
-      for (const item of rootResponse.items) {
-        if (item.hasChildren) {
-          try {
-            const childrenResponse = await client.getTreeDataTypeChildren({
-              parentId: item.id,
-            });
-            const childMatch = this.findByName(childrenResponse.items, name);
-            if (childMatch) {
-              return childMatch;
+      // Recursively check children
+      async function checkChildren(items: DataTypeTreeItemResponseModel[]): Promise<DataTypeTreeItemResponseModel | undefined> {
+        for (const item of items) {
+          if (item.hasChildren) {
+            try {
+              const childrenResponse = await client.getTreeDataTypeChildren({
+                parentId: item.id,
+              });
+              
+              // Check these children
+              const childMatch = DataTypeTestHelper.findByName(childrenResponse.items, name);
+              if (childMatch) {
+                return childMatch;
+              }
+
+              // Recursively check their children
+              const deeperMatch = await checkChildren(childrenResponse.items);
+              if (deeperMatch) {
+                return deeperMatch;
+              }
+            } catch (error) {
+              console.error(
+                `Error getting children for data type ${item.id}:`,
+                error
+              );
             }
-          } catch (error) {
-            console.log(
-              `Error getting children for data type ${item.id}:`,
-              error
-            );
           }
         }
+        return undefined;
       }
 
-      return undefined;
+      return await checkChildren(rootResponse.items);
     } catch (error) {
-      console.log(`Error finding data types with name '${name}':`, error);
+      console.error(`Error finding data type ${name}:`, error);
       return undefined;
     }
   }
