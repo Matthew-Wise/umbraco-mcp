@@ -4,7 +4,7 @@ import { getTreeDataTypeChildrenQueryParams } from "@/umb-management-api/umbraco
 
 const GetDataTypeChildrenTool = CreateUmbracoTool(
   "get-data-type-children",
-  "Gets the children data types or data type folders by the parent id",
+  "Gets the children data types or data type folders by the parent id. Use get-all-data-types instead unless you specifically need only child level items for a specific folder.",
   getTreeDataTypeChildrenQueryParams.shape,
   async (params) => {
     const client = UmbracoManagementClient.getClient();
