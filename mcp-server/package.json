@@ -1,6 +1,6 @@
 {
-  "name": "umbraco-mcp",
-  "version": "1.0.0",
+  "name": "umbraco-mcp-hifi-2",
+  "version": "0.1.0-alpha.7",
   "type": "module",
   "description": "A model context protocol (MCP) server for Umbraco",
   "main": "index.js",
@@ -9,12 +9,13 @@
   },
   "scripts": {
     "clean": "rimraf build",
-    "build2": "npm run clean && tsc",
+    "prebuild": "cp ../README.md ../LICENSE ./",
     "build": "tsup --config tsup.config.ts",
     "watch": "tsup --config tsup.config.ts --watch",
     "generate": "orval --config orval.config.ts",
     "inspect": "npx @modelcontextprotocol/inspector node build/index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "patch-publish-alpha": "npm version prerelease --preid=alpha && npm publish --tag alpha"
   },
   "engines": {
     "node": ">=22.0.0"
