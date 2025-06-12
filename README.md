@@ -18,17 +18,14 @@ The level of access you provider this user will determine what your agent is abl
 
 ### Installation
 
-Currently project is not on npm so you need to use `npm build` to generate the server.
-
-
+First, install the Umbraco MCP server with your client. A typical configuration looks like this:
 
 ```json
 {
   "servers": {
     "umbraco-mcp": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["<path to project>/mcp-server/build/index.js"],
+      "command": "npx",
+      "args": ["@umbraco-mcp/umbraco-mcp-cms@alpha"],
       "env": {
         "UMBRACO_CLIENT_ID": "<API user name>",
         "UMBRACO_CLIENT_SECRET": "<API client secert>",
