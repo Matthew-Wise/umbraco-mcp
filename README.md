@@ -83,7 +83,9 @@ Once you have this information head back into Claude desktop app and head to Set
 }
 ```
 
-Restart Claude and try it out with a simple prompt such as `Tell me the GUID of the home page document type`. You'll need to allow each one of the tools as the Umbraco MCP starts to work its way through. If you receive a connection error with the Umbraco MCP click the button to open the logs and review the file `mcp-server-umbraco-mcp.log` for extra information on how to fix the issue.
+Restart Claude and try it out with a simple prompt such as `Tell me the GUID of the home page document type`. You'll need to allow each one of the tools as the Umbraco MCP starts to work its way through. If you receive a connection error with the Umbraco MCP click the button to open the logs and review the file `mcp-server-umbraco-mcp.log` for extra information on how to fix the issue.  
+
+*Please note* that you may need to update to a paid version of Claude.ai in order to have a large enough context window to run your prompts.
 
 ##  Umbraco Management API Tools
 <details>
