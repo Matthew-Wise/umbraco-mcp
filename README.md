@@ -58,7 +58,32 @@ Url of the site you want to connect to, it only needs to be the scheme and domai
 
 The allows you to specify tools by name if you wish to exclude them for the usable tools list. This is helpful as some Agents, cant handle so many tools. This is a commma seperated list of tools which can be found below.
 
+## Using the Umbraco MCP With Claude
 
+To get started with using the Umbraco MCP with Claude, first download and install the [Claude.ai desktop app](https://claude.ai/download).  
+
+Start up your Umbraco instance (currently working with version **15.latest**) and create new API user credentials. You can see instructions on how to do that on the [Umbraco docs](https://docs.umbraco.com/umbraco-cms/fundamentals/data/users/api-users).
+
+Once you have this information head back into Claude desktop app and head to Settings > Developer > Edit Config. Open the json file in a text editor of your choice and add the below, replacing the `UMBRACO_CLIENT_ID`, `UMBRACO_CLIENT_SECRET` and `UMBRACO_BASE_URL` with your local connection information. The addition of the `NODE_TLS_REJECT_UNAUTHORIZED` env flag is to allow Claude to connect to the MCP using a self-signed cert.
+
+```
+{
+  "mcpServers": {
+    "umbraco-mcp": {
+      "command": "npx",
+      "args": ["@umbraco-mcp/umbraco-mcp-cms@alpha"],
+      "env": {
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0",
+        "UMBRACO_CLIENT_ID": "umbraco-back-office-mcp",
+        "UMBRACO_CLIENT_SECRET": "1234567890",
+        "UMBRACO_BASE_URL": "https://localhost:44391"
+      }
+    }
+  }
+}
+```
+
+Restart Claude and try it out with a simple prompt such as `Tell me the GUID of the home page document type`. You'll need to allow each one of the tools as the Umbraco MCP starts to work its way through. If you receive a connection error with the Umbraco MCP click the button to open the logs and review the file `mcp-server-umbraco-mcp.log` for extra information on how to fix the issue.
 
 ##  Umbraco Management API Tools
 <details>
