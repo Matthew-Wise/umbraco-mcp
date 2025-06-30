@@ -85,7 +85,8 @@ Once you have this information head back into Claude desktop app and head to Set
 
 Restart Claude and try it out with a simple prompt such as `Tell me the GUID of the home page document type`. You'll need to allow each one of the tools as the Umbraco MCP starts to work its way through. If you receive a connection error with the Umbraco MCP click the button to open the logs and review the file `mcp-server-umbraco-mcp.log` for extra information on how to fix the issue.  
 
-*Please note* that you may need to update to a paid version of Claude.ai in order to have a large enough context window to run your prompts.
+> [!NOTE]
+> You may need to update to a paid version of Claude.ai in order to have a large enough context window to run your prompts.
 
 ##  Umbraco Management API Tools
 <details>
@@ -96,14 +97,14 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Culture</summary>
 <br>
 
-`get-culture` - gets all cultures avaliable to Umbraco
+`get-culture` - gets all cultures avaliable to Umbraco  
 </details>
 
 <details>
 <summary>Data Type</summary>
 <br>
 
-`get-data-type-search` - Search for data types
+`get-data-type-search` - Search for data types  
 `get-data-type` - Get a specific data type by ID  
 `get-data-type-references` - Get references to a data type  
 `is-used-data-type` - Check if a data type is in use  
@@ -126,7 +127,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Dictionary</summary>
 <br>
 
-`get-dictionary-search` - Search for dictionary items
+`get-dictionary-search` - Search for dictionary items  
 `get-dictionary-by-key` - Get a dictionary item by key  
 `create-dictionary` - Create a new dictionary item  
 `update-dictionary` - Update a dictionary item  
@@ -137,7 +138,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Document</summary>
 <br>
 
-`get-document-by-id` - Get a document by ID
+`get-document-by-id` - Get a document by ID  
 `get-document-publish` - Get document publish status  
 `get-document-configuration` - Get document configuration  
 `copy-document` - Copy a document  
@@ -175,7 +176,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Document Blueprint</summary>
 <br>
 
-`get-blueprint` - Get a document blueprint
+`get-blueprint` - Get a document blueprint  
 `delete-blueprint` - Delete a document blueprint  
 `update-blueprint` - Update a document blueprint  
 `create-blueprint` - Create a new document blueprint  
@@ -188,7 +189,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Document Type</summary>
 <br>
 
-`get-document-type` - Get a document type
+`get-document-type` - Get a document type  
 `get-document-type-configuration` - Get document type configuration  
 `get-document-type-blueprint` - Get document type blueprint  
 `get-document-type-by-id-array` - Get document types by IDs  
@@ -216,7 +217,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Language</summary>
 <br>
 
-`get-language-items` - Get all languages
+`get-language-items` - Get all languages  
 `get-default-language` - Get default language  
 `create-language` - Create a new language  
 `update-language` - Update a language  
@@ -228,7 +229,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Log Viewer</summary>
 <br>
 
-`get-log-viewer-saved-search-by-name` - Get saved search by name
+`get-log-viewer-saved-search-by-name` - Get saved search by name  
 `get-log-viewer-level-count` - Get log level counts  
 `post-log-viewer-saved-search` - Save a log search  
 `delete-log-viewer-saved-search-by-name` - Delete saved search  
@@ -243,7 +244,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Media</summary>
 <br>
 
-`get-media-by-id` - Get media by ID
+`get-media-by-id` - Get media by ID  
 `get-media-ancestors` - Get media ancestors  
 `get-media-children` - Get media children  
 `get-media-root` - Get root media items  
@@ -269,7 +270,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Media Type</summary>
 <br>
 
-`get-media-type-configuration` - Get media type configuration
+`get-media-type-configuration` - Get media type configuration  
 `get-media-type-by-id` - Get media type by ID  
 `get-media-type-by-ids` - Get media types by IDs  
 `get-allowed` - Get allowed media types  
@@ -295,7 +296,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Member</summary>
 <br>
 
-`get-member` - Get member by ID
+`get-member` - Get member by ID  
 `create-member` - Create a new member  
 `delete-member` - Delete a member  
 `update-member` - Update a member  
@@ -306,7 +307,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Member Group</summary>
 <br>
 
-`get-member-group` - Get member group
+`get-member-group` - Get member group  
 `get-member-group-by-id-array` - Get member groups by IDs  
 `create-member-group` - Create a new member group  
 `update-member-group` - Update a member group  
@@ -318,7 +319,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Member Type</summary>
 <br>
 
-`get-member-type-by-id` - Get member type by ID
+`get-member-type-by-id` - Get member type by ID  
 `create-member-type` - Create a new member type  
 `get-member-type-by-id-array` - Get member types by IDs  
 `delete-member-type` - Delete a member type  
@@ -334,7 +335,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Property Type</summary>
 <br>
 
-`get-property-type` - Get property type by ID
+`get-property-type` - Get property type by ID  
 `get-property-type-all-property-type-groups` - Get all property type groups  
 `create-property-type` - Create a new property type  
 `update-property-type` - Update a property type  
@@ -345,7 +346,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Redirect</summary>
 <br>
 
-`get-all-redirects` - Get all redirects
+`get-all-redirects` - Get all redirects  
 `get-redirect-by-id` - Get redirect by ID  
 `delete-redirect` - Delete a redirect  
 `get-redirect-status` - Get redirect status  
@@ -356,7 +357,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Server</summary>
 <br>
 
-`get-server-status` - Get server status
+`get-server-status` - Get server status  
 `get-server-log-file` - Get server log file  
 `tour-status` - Get tour status  
 `upgrade-status` - Get upgrade status
@@ -366,7 +367,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Temporary File</summary>
 <br>
 
-`create-temporary-file` - Create a temporary file
+`create-temporary-file` - Create a temporary file  
 `get-temporary-file` - Get a temporary file  
 `delete-temporary-file` - Delete a temporary file  
 `get-temporary-file-configuration` - Get temporary file configuration
@@ -376,7 +377,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>User Group</summary>
 <br>
 
-`get-user-group` - Get user group
+`get-user-group` - Get user group  
 `get-user-group-by-id-array` - Get user groups by IDs  
 `get-user-groups` - Get all user groups  
 `get-filter-user-group` - Filter user groups  
@@ -390,7 +391,7 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 <summary>Webhook</summary>
 <br>
 
-`get-webhook-by-id` - Get webhook by ID
+`get-webhook-by-id` - Get webhook by ID  
 `get-webhook-by-id-array` - Get webhooks by IDs  
 `delete-webhook` - Delete a webhook  
 `update-webhook` - Update a webhook  
@@ -404,4 +405,4 @@ Restart Claude and try it out with a simple prompt such as `Tell me the GUID of 
 
 If you have workflow installed, the AI will use this tool instead of directly publishing content
 
-`initiate-workflow-action` - Initiates a workflow approval process for content changes
+`initiate-workflow-action` - Initiates a workflow approval process for content changes  
