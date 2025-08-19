@@ -11,7 +11,7 @@ const UpdateMediaTool = CreateUmbracoTool(
   `Updates a media item by Id
   Always read the current media value first and only update the required values.
   Don't miss any properties from the original media that you are updating.
-  This cannot be used for moving media to a new foler. Use the move endpoint to do that`,
+  This cannot be used for moving media to a new folder. Use the move endpoint to do that`,
   {
     id: putMediaByIdParams.shape.id,
     data: z.object(putMediaByIdBody.shape),
